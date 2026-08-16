@@ -51,6 +51,51 @@ _CREMAD_MAP = {
 }
 
 
+# ---------------------------------------------------------------------------
+# Integrity constants
+# ---------------------------------------------------------------------------
+# Verified against the Kaggle mirrors on 2026-08-16.
+EXPECTED_COUNTS = {
+    "RAVDESS": 1440,
+    "TESS": 2800,
+    "SAVEE": 480,
+    "CREMA-D": 7442,
+}
+
+# The ONLY subdirectory of each Kaggle dataset that holds exactly one copy of
+# the corpus. RAVDESS and TESS both ship a second, duplicate tree.
+CANONICAL_SUBDIRS = {
+    "RAVDESS": "audio_speech_actors_01-24/",
+    "TESS": "TESS Toronto emotional speech set data/",
+    "SAVEE": "ALL/",
+    "CREMA-D": "AudioWAV/",
+}
+
+
+def check_no_duplicate_basenames(paths, corpus: str) -> None:
+    """Raise if any filename appears more than once within a corpus.
+
+    Duplicated recordings are catastrophic rather than merely wasteful: the
+    train/test split is random over utterances, so a clip and its twin can land
+    on opposite sides of the boundary, leaking test audio into training.
+    """
+    from collections import Counter
+
+    counts = Counter(os.path.basename(p) for p in paths)
+    dupes = {name: n for name, n in counts.items() if n > 1}
+    if not dupes:
+        return
+
+    examples = ", ".join(sorted(dupes)[:3])
+    raise ValueError(
+        f"{corpus}: found {len(dupes)} duplicate basenames among {len(paths)} "
+        f"files (e.g. {examples}). This mirror ships more than one copy of the "
+        f"corpus, which would leak identical audio across the train/test "
+        f"split. Scan only the canonical subdirectory "
+        f"'{CANONICAL_SUBDIRS.get(corpus, '<unknown>')}' instead."
+    )
+
+
 def _parse_ravdess(fname: str) -> str | None:
     parts = os.path.basename(fname).replace(".wav", "").split("-")
     if len(parts) < 3:
@@ -93,8 +138,12 @@ _CORPORA = [
 ]
 
 
-def build_metadata(verbose: bool = True) -> pd.DataFrame:
+def build_metadata(verbose: bool = True, strict: bool = True) -> pd.DataFrame:
     """Scan the four dataset folders recursively and return the fused metadata.
+
+    strict=True (default) enforces two integrity checks per corpus:
+      * no duplicate basenames (duplicate-copy mirrors)
+      * the sample count matches EXPECTED_COUNTS
 
     Raises a helpful error if no audio is found so the coding agent knows the
     datasets still need to be downloaded into ``data/``.
@@ -102,6 +151,9 @@ def build_metadata(verbose: bool = True) -> pd.DataFrame:
     rows = []
     for corpus, root, parser in _CORPORA:
         files = glob.glob(os.path.join(root, "**", "*.wav"), recursive=True)
+        if strict and files:
+            check_no_duplicate_basenames(files, corpus)
+
         kept = 0
         for f in files:
             emotion = parser(f)
@@ -113,6 +165,14 @@ def build_metadata(verbose: bool = True) -> pd.DataFrame:
         if verbose:
             print(f"[data] {corpus:8s}: found {len(files):5d} wav files, "
                   f"kept {kept:5d} labelled samples (root: {root})")
+
+        expected = EXPECTED_COUNTS.get(corpus)
+        if strict and files and expected is not None and kept != expected:
+            raise ValueError(
+                f"{corpus}: expected {expected} labelled samples but found "
+                f"{kept}. Check that '{root}' points at the canonical "
+                f"subdirectory '{CANONICAL_SUBDIRS.get(corpus, '?')}'."
+            )
 
     if not rows:
         raise FileNotFoundError(
