@@ -32,10 +32,16 @@ from utils import set_seed, StreamScalers, plot_history, save_json
 
 
 def run_experiment(use_afw: bool, use_eaaa: bool, use_mstc: bool,
-                   use_cadl: bool, tag: str, epochs: int = config.EPOCHS):
-    """Train one configuration and return its test metrics dict."""
+                   use_cadl: bool, tag: str, epochs: int = config.EPOCHS,
+                   metadata=None):
+    """Train one configuration and return its test metrics dict.
+
+    ``metadata`` lets callers inject an already-scanned corpus DataFrame -
+    tests use a small synthetic corpus, and the Kaggle notebook reuses one
+    scan across all six configurations. Leave it None to scan ``data/``.
+    """
     import tensorflow as tf
-    from model import build_model
+    from model import AdaptiveFeatureWeighting, build_model
     from losses import get_loss
     from evaluate import evaluate_predictions, afw_interpretability
 
@@ -46,7 +52,7 @@ def run_experiment(use_afw: bool, use_eaaa: bool, use_mstc: bool,
           f"MSTC={use_mstc} CADL={use_cadl} ===")
 
     # ---- steps 1-3: fuse, split (before augmentation - no leakage) --------
-    meta = build_metadata()
+    meta = build_metadata() if metadata is None else metadata
     train_df, val_df, test_df = split_metadata(meta)
 
     # ---- step 4: augmentation plan (training subset only) -----------------
@@ -80,8 +86,12 @@ def run_experiment(use_afw: bool, use_eaaa: bool, use_mstc: bool,
 
     ckpt_path = os.path.join(run_dir, "best_model.keras")
     callbacks = [
+        # NOTE: monitor val_loss here to match EarlyStopping's
+        # restore_best_weights, so the file on disk IS the model whose metrics
+        # get reported. Monitoring different quantities in the two callbacks
+        # makes evaluate.py disagree with test_metrics.json.
         tf.keras.callbacks.ModelCheckpoint(
-            ckpt_path, monitor="val_accuracy", save_best_only=True,
+            ckpt_path, monitor="val_loss", mode="min", save_best_only=True,
             verbose=1),
         tf.keras.callbacks.EarlyStopping(
             monitor="val_loss", patience=config.EARLY_STOPPING_PATIENCE,
@@ -103,6 +113,25 @@ def run_experiment(use_afw: bool, use_eaaa: bool, use_mstc: bool,
         verbose=2)
 
     plot_history(history.history, os.path.join(run_dir, "training_curves.png"))
+
+    # ---- reload the checkpointed best model --------------------------------
+    # Do NOT rely on EarlyStopping(restore_best_weights=True): Keras only
+    # restores the best weights when early stopping actually FIRES. A run that
+    # completes all its epochs keeps final-epoch weights in memory while
+    # best_model.keras holds the best epoch - so the reported metrics would
+    # describe a different model than the one saved to disk, and re-running
+    # evaluate.py on the run would print different numbers.
+    # Loading explicitly makes "the evaluated model" and "the saved model"
+    # the same thing unconditionally. weight_model shares its layer objects
+    # with model, so the AFW interpretability output follows automatically.
+    if os.path.exists(ckpt_path):
+        best = tf.keras.models.load_model(
+            ckpt_path,
+            custom_objects={
+                "AdaptiveFeatureWeighting": AdaptiveFeatureWeighting},
+            compile=False)
+        model.set_weights(best.get_weights())
+        print(f"[train] evaluating the checkpointed best model ({ckpt_path})")
 
     # ---- step 9: evaluation ------------------------------------------------
     y_prob = model.predict(x_test, batch_size=config.BATCH_SIZE, verbose=0)
