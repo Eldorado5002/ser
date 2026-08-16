@@ -52,3 +52,6 @@ runs/**/scalers.joblib
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Generated aggregation output (rebuilt by report.py from runs/)
+report/
