@@ -1,0 +1,54 @@
+# ---------------------------------------------------------------------------
+# Credentials - NEVER commit these
+# ---------------------------------------------------------------------------
+kaggle.json
+access_token
+.kaggle/
+*.pem
+*.key
+.env
+.env.*
+
+# Session capture from the remember plugin (contains conversation transcripts,
+# which may include pasted credentials).
+.remember/
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# ---------------------------------------------------------------------------
+# Project data - user-supplied corpora, never version-controlled (~2 GB)
+# ---------------------------------------------------------------------------
+data/
+
+# Generated feature caches (.npz, ~100 MB each, reproducible from data/)
+features_cache/
+
+# ---------------------------------------------------------------------------
+# Experiment artefacts
+# ---------------------------------------------------------------------------
+# Model weights and scalers are large binaries (~29 MB per run x 8 runs) and
+# are reproducible from the code + config. Metrics, reports, confusion
+# matrices and training curves ARE tracked - they are the deliverables.
+runs/**/best_model.keras
+runs/**/scalers.joblib
+*.keras
+*.h5
+*.joblib
+
+# ---------------------------------------------------------------------------
+# OS noise
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
