@@ -42,6 +42,20 @@ class AdaptiveFeatureWeighting(layers.Layer):
                                    name="afw_hidden")
         self.gate = layers.Dense(3, activation="softmax", name="afw_gate")
 
+    def build(self, input_shape):
+        """Build the sublayers explicitly.
+
+        Keras 3 tracks build state and would otherwise mark this layer built
+        while its Dense sublayers are still unbuilt, which can break weight
+        restoration when a saved model is reloaded - the path every run
+        depends on, since train.py evaluates the reloaded checkpoint.
+        Each stream contributes two summary statistics (mean, std).
+        """
+        n_streams = len(input_shape)
+        self.hidden.build((None, 2 * n_streams))
+        self.gate.build((None, self.hidden_units))
+        super().build(input_shape)
+
     def call(self, streams):
         summaries = []
         for s in streams:
