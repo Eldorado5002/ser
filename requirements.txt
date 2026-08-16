@@ -1,4 +1,7 @@
-tensorflow>=2.15
+# PINNED: 2.15.x is the last release shipping Keras 2. TensorFlow >=2.16 ships
+# Keras 3, which changes custom-layer serialization that model.py depends on
+# (AdaptiveFeatureWeighting is saved and reloaded by evaluate.py).
+tensorflow==2.15.1
 librosa>=0.10
 numpy>=1.26
 pandas>=2.0
@@ -7,3 +10,4 @@ matplotlib>=3.8
 soundfile>=0.12
 tqdm>=4.66
 joblib>=1.3
+tabulate>=0.9
