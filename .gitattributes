@@ -1,0 +1,23 @@
+# Default: let git normalise line endings for text files.
+* text=auto
+
+# ---------------------------------------------------------------------------
+# Binary files - NEVER apply line-ending conversion.
+# core.autocrlf=true would otherwise rewrite bytes inside these on checkout,
+# corrupting them. This matters most for the PDF report and the result figures.
+# ---------------------------------------------------------------------------
+*.pdf    binary
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.wav    binary
+*.npz    binary
+*.keras  binary
+*.joblib binary
+*.h5     binary
+*.zip    binary
+
+# Notebooks are JSON but are rewritten wholesale by tools; keep them byte-exact
+# so diffs stay meaningful.
+*.ipynb  -text
