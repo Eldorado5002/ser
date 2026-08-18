@@ -55,3 +55,7 @@ desktop.ini
 
 # Generated aggregation output (rebuilt by report.py from runs/)
 report/
+
+# Raw Kaggle model downloads (weights are re-exported as demo/models/*.npz)
+demo/models/runs/
+demo/models/*.log
