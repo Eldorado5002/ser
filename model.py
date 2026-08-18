@@ -74,10 +74,20 @@ class AdaptiveFeatureWeighting(layers.Layer):
         return cfg
 
 
-def _mstc_block(x, total_filters: int):
+def _reg(l2: float):
+    """L2 kernel regulariser, or None when disabled (the default)."""
+    if not l2:
+        return None
+    from tensorflow.keras import regularizers
+    return regularizers.l2(l2)
+
+
+def _mstc_block(x, total_filters: int, dropout: float | None = None,
+                l2: float = 0.0):
     """Multi-scale first stage (Novelty 3): parallel kernels 3/5/7, filter
     budget split across branches so parameters stay ~equal to the original
     single-scale stage."""
+    dropout = config.DROPOUT_CONV if dropout is None else dropout
     k = len(config.MSTC_KERNELS)
     base = total_filters // k
     branch_filters = [base] * k
@@ -85,27 +95,49 @@ def _mstc_block(x, total_filters: int):
     branches = []
     for ks, f in zip(config.MSTC_KERNELS, branch_filters):
         b = layers.Conv1D(f, kernel_size=ks, padding="same",
-                          activation="relu", name=f"mstc_k{ks}")(x)
+                          activation="relu", kernel_regularizer=_reg(l2),
+                          name=f"mstc_k{ks}")(x)
         branches.append(b)
     x = layers.Concatenate(axis=-1, name="mstc_concat")(branches)
     x = layers.BatchNormalization()(x)
     x = layers.MaxPooling1D(pool_size=2)(x)
-    x = layers.Dropout(config.DROPOUT_CONV)(x)
+    x = layers.Dropout(dropout)(x)
     return x
 
 
-def _conv_block(x, filters: int, name: str):
+def _conv_block(x, filters: int, name: str, dropout: float | None = None,
+                l2: float = 0.0):
     """Standard base-paper Conv1D stage: Conv -> BN -> MaxPool -> Dropout."""
+    dropout = config.DROPOUT_CONV if dropout is None else dropout
     x = layers.Conv1D(filters, kernel_size=config.BASE_KERNEL_SIZE,
-                      padding="same", activation="relu", name=name)(x)
+                      padding="same", activation="relu",
+                      kernel_regularizer=_reg(l2), name=name)(x)
     x = layers.BatchNormalization()(x)
     x = layers.MaxPooling1D(pool_size=2)(x)
-    x = layers.Dropout(config.DROPOUT_CONV)(x)
+    x = layers.Dropout(dropout)(x)
     return x
 
 
-def build_model(use_afw: bool, use_mstc: bool):
+def build_model(use_afw: bool, use_mstc: bool, head: str = "flatten",
+                l2: float = 0.0, dropout_conv: float | None = None,
+                dropout_dense: float | None = None,
+                dense_units: int | None = None):
     """Build the SER model.
+
+    The four keyword arguments are regularisation knobs used by the
+    overfitting study; their defaults reproduce the base-paper architecture
+    exactly, so existing runs and tests are unaffected.
+
+    head          : "flatten" (base paper) or "gap". The flatten head feeds
+                    74*128 = 9,472 activations into Dense(512), which is
+                    4,850,176 parameters - 66% of the whole model, and the
+                    main source of the 37-point train/validation gap.
+                    "gap" replaces it with GlobalAveragePooling1D, cutting
+                    that to 66,048.
+    l2            : L2 penalty on Conv1D and Dense kernels (0 = off).
+    dropout_conv  : override config.DROPOUT_CONV.
+    dropout_dense : override config.DROPOUT_DENSE.
+    dense_units   : override config.DENSE_UNITS.
 
     Returns
     -------
@@ -113,6 +145,9 @@ def build_model(use_afw: bool, use_mstc: bool):
     weight_model : tf.keras.Model producing the AFW weights (or None when
                    use_afw=False); used for the interpretability analysis.
     """
+    dropout_dense = (config.DROPOUT_DENSE if dropout_dense is None
+                     else dropout_dense)
+    dense_units = config.DENSE_UNITS if dense_units is None else dense_units
     in_mfcc = layers.Input(shape=(config.MFCC_LEN,), name="mfcc")
     in_zcr = layers.Input(shape=(config.ZCR_LEN,), name="zcr")
     in_rmse = layers.Input(shape=(config.RMSE_LEN,), name="rmse")
@@ -129,19 +164,25 @@ def build_model(use_afw: bool, use_mstc: bool):
     # ---- five-stage Conv1D backbone -------------------------------------
     first, *rest = config.CONV_FILTERS
     if use_mstc:
-        x = _mstc_block(x, first)
+        x = _mstc_block(x, first, dropout=dropout_conv, l2=l2)
     else:
-        x = _conv_block(x, first, name="conv1")
+        x = _conv_block(x, first, name="conv1", dropout=dropout_conv, l2=l2)
     for i, f in enumerate(rest, start=2):
-        x = _conv_block(x, f, name=f"conv{i}")
+        x = _conv_block(x, f, name=f"conv{i}", dropout=dropout_conv, l2=l2)
 
     # ---- classification head --------------------------------------------
-    x = layers.Flatten()(x)
-    x = layers.Dense(config.DENSE_UNITS, activation="relu", name="dense")(x)
+    if head == "gap":
+        x = layers.GlobalAveragePooling1D(name="gap")(x)
+    elif head == "flatten":
+        x = layers.Flatten()(x)
+    else:
+        raise ValueError(f"unknown head {head!r}; expected 'flatten' or 'gap'")
+    x = layers.Dense(dense_units, activation="relu",
+                     kernel_regularizer=_reg(l2), name="dense")(x)
     x = layers.BatchNormalization()(x)
-    x = layers.Dropout(config.DROPOUT_DENSE)(x)
+    x = layers.Dropout(dropout_dense)(x)
     out = layers.Dense(config.NUM_CLASSES, activation="softmax",
-                       name="softmax")(x)
+                       kernel_regularizer=_reg(l2), name="softmax")(x)
 
     model = models.Model(streams, out, name="ser_afw_mstc_1dcnn")
 
