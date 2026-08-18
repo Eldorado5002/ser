@@ -1,0 +1,101 @@
+[
+  {
+    "tag": "base",
+    "params": 7324295,
+    "val_accuracy": 0.5858170390129089,
+    "val_loss": 1.1136224269866943,
+    "train_accuracy": 0.6332478523254395,
+    "gap": 0.04743081331253052,
+    "best_epoch": 4,
+    "epochs_run": 14,
+    "data": "1x",
+    "lr": 0.001,
+    "kw": {}
+  },
+  {
+    "tag": "gap",
+    "params": 2540167,
+    "val_accuracy": 0.5878725647926331,
+    "val_loss": 1.098067283630371,
+    "train_accuracy": 0.5844444632530212,
+    "gap": -0.0034281015396118164,
+    "best_epoch": 4,
+    "epochs_run": 14,
+    "data": "1x",
+    "lr": 0.001,
+    "kw": {
+      "head": "gap"
+    }
+  },
+  {
+    "tag": "reg",
+    "params": 7324295,
+    "val_accuracy": 0.5940390825271606,
+    "val_loss": 1.4554027318954468,
+    "train_accuracy": 0.6012820601463318,
+    "gap": 0.007242977619171143,
+    "best_epoch": 6,
+    "epochs_run": 16,
+    "data": "1x",
+    "lr": 0.001,
+    "kw": {
+      "dropout_conv": "0.35",
+      "dropout_dense": "0.55",
+      "l2": "0.0001"
+    }
+  },
+  {
+    "tag": "gap_reg",
+    "params": 2540167,
+    "val_accuracy": 0.6032887697219849,
+    "val_loss": 1.3506544828414917,
+    "train_accuracy": 0.6451281905174255,
+    "gap": 0.041839420795440674,
+    "best_epoch": 9,
+    "epochs_run": 19,
+    "data": "1x",
+    "lr": 0.001,
+    "kw": {
+      "head": "gap",
+      "dropout_conv": "0.35",
+      "dropout_dense": "0.55",
+      "l2": "0.0001"
+    }
+  },
+  {
+    "tag": "gap_reg_aug3",
+    "params": 2540167,
+    "val_accuracy": 0.6084275245666504,
+    "val_loss": 1.3639518022537231,
+    "train_accuracy": 0.6250190138816833,
+    "gap": 0.01659148931503296,
+    "best_epoch": 5,
+    "epochs_run": 17,
+    "data": "3x",
+    "lr": 0.001,
+    "kw": {
+      "head": "gap",
+      "dropout_conv": "0.35",
+      "dropout_dense": "0.55",
+      "l2": "0.0001"
+    }
+  },
+  {
+    "tag": "gap_reg_aug3_lr",
+    "params": 2540167,
+    "val_accuracy": 0.5858170390129089,
+    "val_loss": 1.3447566032409668,
+    "train_accuracy": 0.6343079209327698,
+    "gap": 0.04849088191986084,
+    "best_epoch": 5,
+    "epochs_run": 20,
+    "data": "3x",
+    "lr": 0.0005,
+    "kw": {
+      "head": "gap",
+      "dropout_conv": "0.35",
+      "dropout_dense": "0.55",
+      "l2": "0.0001"
+    }
+  }
+]
