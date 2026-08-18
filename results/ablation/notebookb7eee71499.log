@@ -1,0 +1,612 @@
+[{"stream_name":"stderr","time":6.951498102,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":6.951564785,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":6.951569135,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":6.951572059,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":7.566571402,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.566608089,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.566612022,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.566658701,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":25.981468469,"data":"TF 2.20.0 | Keras 3.13.2\n"}
+,{"stream_name":"stdout","time":25.981547177,"data":"GPUs: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]\n"}
+,{"stream_name":"stdout","time":26.918035226,"data":"\u001b[33m329c069\u001b[m\u001b[33m (\u001b[m\u001b[1;36mHEAD -\u003e \u001b[m\u001b[1;32mmain\u001b[m\u001b[33m, \u001b[m\u001b[1;31morigin/main\u001b[m\u001b[33m, \u001b[m\u001b[1;31morigin/HEAD\u001b[m\u001b[33m)\u001b[m fix: discover the feature cache at any depth in notebook 02\r\n"}
+,{"stream_name":"stdout","time":27.118566105,"data":"--- /kaggle/input inventory ---\n"}
+,{"stream_name":"stdout","time":27.118621603,"data":"input\n"}
+,{"stream_name":"stdout","time":27.118648258,"data":"  datasets\n"}
+,{"stream_name":"stdout","time":27.118655556,"data":"    macbot000\n"}
+,{"stream_name":"stdout","time":27.118661234,"data":"    uwrfkaggler\n"}
+,{"stream_name":"stdout","time":28.22870802,"data":"    ejlok1\n"}
+,{"stream_name":"stdout","time":34.146819179,"data":"-------------------------------\n"}
+,{"stream_name":"stdout","time":34.146874087,"data":"\n"}
+,{"stream_name":"stdout","time":43.96738953,"data":"RAVDESS   -\u003e /kaggle/input/datasets/uwrfkaggler/ravdess-emotional-speech-audio/audio_speech_actors_01-24\n"}
+,{"stream_name":"stdout","time":49.059021216,"data":"TESS      -\u003e /kaggle/input/datasets/ejlok1/toronto-emotional-speech-set-tess/TESS Toronto emotional speech set data\n"}
+,{"stream_name":"stdout","time":49.059077526,"data":"SAVEE     -\u003e /kaggle/input/datasets/ejlok1/surrey-audiovisual-expressed-emotion-savee/ALL\n"}
+,{"stream_name":"stdout","time":49.090353759,"data":"CREMA-D   -\u003e /kaggle/input/datasets/ejlok1/cremad/AudioWAV\n"}
+,{"stream_name":"stdout","time":49.290844599,"data":"  staged val_3a68781e8c822fb9.npz  \u003c- /kaggle/input/datasets/macbot000/ser-feature-cache/features_cache\n"}
+,{"stream_name":"stdout","time":50.311523988,"data":"  staged train_uniform_2ee82c103fda6ee6.npz  \u003c- /kaggle/input/datasets/macbot000/ser-feature-cache/features_cache\n"}
+,{"stream_name":"stdout","time":50.311555651,"data":"  staged test_dc9f237867bc3c96.npz  \u003c- /kaggle/input/datasets/macbot000/ser-feature-cache/features_cache\n"}
+,{"stream_name":"stdout","time":51.21593662,"data":"  staged train_eaaa_f084c9d631dc998b.npz  \u003c- /kaggle/input/datasets/macbot000/ser-feature-cache/features_cache\n"}
+,{"stream_name":"stdout","time":51.51756379,"data":"staged 4 cache files\n"}
+,{"stream_name":"stdout","time":51.517608089,"data":"caches: ['test_dc9f237867bc3c96.npz', 'train_eaaa_f084c9d631dc998b.npz', 'train_uniform_2ee82c103fda6ee6.npz', 'val_3a68781e8c822fb9.npz']\n"}
+,{"stream_name":"stdout","time":51.517660544,"data":"already finished: []\n"}
+,{"stream_name":"stdout","time":51.60141658,"data":"[data] RAVDESS : found  1440 wav files, kept  1440 labelled samples (root: data/RAVDESS)\n"}
+,{"stream_name":"stdout","time":51.81966126,"data":"[data] TESS    : found  2800 wav files, kept  2800 labelled samples (root: data/TESS)\n"}
+,{"stream_name":"stdout","time":51.819730505,"data":"[data] SAVEE   : found   480 wav files, kept   480 labelled samples (root: data/SAVEE)\n"}
+,{"stream_name":"stdout","time":51.81973855,"data":"[data] CREMA-D : found  7442 wav files, kept  7442 labelled samples (root: data/CREMA-D)\n"}
+,{"stream_name":"stdout","time":51.819743326,"data":"[data] combined dataset: 12162 samples\n"}
+,{"stream_name":"stdout","time":51.819747926,"data":"emotion\n"}
+,{"stream_name":"stdout","time":51.819752111,"data":"angry       1923\n"}
+,{"stream_name":"stdout","time":51.819756165,"data":"disgust     1923\n"}
+,{"stream_name":"stdout","time":51.819760643,"data":"fear        1923\n"}
+,{"stream_name":"stdout","time":51.819765051,"data":"happy       1923\n"}
+,{"stream_name":"stdout","time":51.819768883,"data":"neutral     1895\n"}
+,{"stream_name":"stdout","time":51.819772596,"data":"sad         1923\n"}
+,{"stream_name":"stdout","time":51.819776351,"data":"surprise     652\n"}
+,{"stream_name":"stdout","time":51.954453116,"data":"[split] train=8756  val=973  test=2433 (target ratios 72:8:20)\n"}
+,{"stream_name":"stdout","time":51.954499559,"data":"[aug] policy=EAAA (emotion-aware)  originals=8756  augmented=2944  total=11700\n"}
+,{"stream_name":"stdout","time":51.954505597,"data":"[aug] policy=uniform (base paper)  originals=8756  augmented=2944  total=11700\n"}
+,{"stream_name":"stdout","time":51.954510221,"data":"All four caches HIT - no GPU time will be spent on extraction.\n"}
+,{"stream_name":"stdout","time":52.103412837,"data":"\n"}
+,{"stream_name":"stdout","time":52.103467455,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":52.10347332,"data":"[run] base   (0.0 h elapsed)\n"}
+,{"stream_name":"stdout","time":52.103478014,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":52.103482842,"data":"\n"}
+,{"stream_name":"stdout","time":52.103487628,"data":"=== experiment 'base'  AFW=False EAAA=False MSTC=False CADL=False ===\n"}
+,{"stream_name":"stdout","time":52.10349264,"data":"[split] train=8756  val=973  test=2433 (target ratios 72:8:20)\n"}
+,{"stream_name":"stdout","time":52.10349738,"data":"[aug] policy=uniform (base paper)  originals=8756  augmented=2944  total=11700\n"}
+,{"stream_name":"stdout","time":52.103502223,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/train_uniform_2ee82c103fda6ee6.npz\n"}
+,{"stream_name":"stdout","time":52.870685441,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/val_3a68781e8c822fb9.npz\n"}
+,{"stream_name":"stdout","time":52.870749697,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/test_dc9f237867bc3c96.npz\n"}
+,{"stream_name":"stderr","time":53.494678318,"data":"WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\n"}
+,{"stream_name":"stderr","time":53.494749975,"data":"I0000 00:00:1786989913.911404      23 gpu_device.cc:2020] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 15511 MB memory:  -\u003e device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:00:04.0, compute capability: 6.0\n"}
+,{"stream_name":"stderr","time":53.697839224,"data":"WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\n"}
+,{"stream_name":"stderr","time":53.697910944,"data":"I0000 00:00:1786989913.911404      23 gpu_device.cc:2020] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 15511 MB memory:  -\u003e device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:00:04.0, compute capability: 6.0\n"}
+,{"stream_name":"stderr","time":53.697918438,"data":"\n"}
+,{"stream_name":"stderr","time":53.697922173,"data":"WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\n"}
+,{"stream_name":"stderr","time":53.697925956,"data":"I0000 00:00:1786989913.911404      23 gpu_device.cc:2020] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 15511 MB memory:  -\u003e device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:00:04.0, compute capability: 6.0\n"}
+,{"stream_name":"stdout","time":55.346710913,"data":"Epoch 1/50\n"}
+,{"stream_name":"stderr","time":71.125676999,"data":"I0000 00:00:1786989931.561372      78 device_compiler.h:196] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.\n"}
+,{"stream_name":"stderr","time":71.328655078,"data":"I0000 00:00:1786989931.561372      78 device_compiler.h:196] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.\n"}
+,{"stream_name":"stderr","time":71.32869297,"data":"\n"}
+,{"stream_name":"stderr","time":71.328699655,"data":"I0000 00:00:1786989931.561372      78 device_compiler.h:196] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.\n"}
+,{"stream_name":"stdout","time":113.150914252,"data":"\n"}
+,{"stream_name":"stdout","time":113.150967646,"data":"Epoch 1: val_loss improved from None to 6.80589, saving model to /kaggle/working/runs/base/best_model.keras\n"}
+,{"stream_name":"stdout","time":113.601934314,"data":"\n"}
+,{"stream_name":"stdout","time":113.601966133,"data":"Epoch 1: finished saving model to /kaggle/working/runs/base/best_model.keras\n"}
+,{"stream_name":"stdout","time":113.672394504,"data":"366/366 - 58s - 159ms/step - accuracy: 0.4141 - loss: 1.6905 - val_accuracy: 0.0730 - val_loss: 6.8059 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":113.675037919,"data":"Epoch 2/50\n"}
+,{"stream_name":"stdout","time":143.250091503,"data":"\n"}
+,{"stream_name":"stdout","time":143.250133087,"data":"Epoch 2: val_loss improved from 6.80589 to 1.17582, saving model to /kaggle/working/runs/base/best_model.keras\n"}
+,{"stream_name":"stdout","time":143.724644222,"data":"\n"}
+,{"stream_name":"stdout","time":143.724674542,"data":"Epoch 2: finished saving model to /kaggle/working/runs/base/best_model.keras\n"}
+,{"stream_name":"stdout","time":143.757189665,"data":"366/366 - 30s - 82ms/step - accuracy: 0.5116 - loss: 1.3188 - val_accuracy: 0.5488 - val_loss: 1.1758 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":143.759230637,"data":"Epoch 3/50\n"}
+,{"stream_name":"stdout","time":173.302513473,"data":"\n"}
+,{"stream_name":"stdout","time":173.302551494,"data":"Epoch 3: val_loss improved from 1.17582 to 1.11937, saving model to /kaggle/working/runs/base/best_model.keras\n"}
+,{"stream_name":"stdout","time":173.751687885,"data":"\n"}
+,{"stream_name":"stdout","time":173.751724595,"data":"Epoch 3: finished saving model to /kaggle/working/runs/base/best_model.keras\n"}
+,{"stream_name":"stdout","time":173.779987497,"data":"366/366 - 30s - 82ms/step - accuracy: 0.5773 - loss: 1.1433 - val_accuracy: 0.5673 - val_loss: 1.1194 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":173.781517848,"data":"Epoch 4/50\n"}
+,{"stream_name":"stdout","time":203.313774005,"data":"\n"}
+,{"stream_name":"stdout","time":203.313809462,"data":"Epoch 4: val_loss improved from 1.11937 to 1.11362, saving model to /kaggle/working/runs/base/best_model.keras\n"}
+,{"stream_name":"stdout","time":203.788143804,"data":"\n"}
+,{"stream_name":"stdout","time":203.788174181,"data":"Epoch 4: finished saving model to /kaggle/working/runs/base/best_model.keras\n"}
+,{"stream_name":"stdout","time":203.818682417,"data":"366/366 - 30s - 82ms/step - accuracy: 0.6332 - loss: 0.9811 - val_accuracy: 0.5858 - val_loss: 1.1136 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":203.821073491,"data":"Epoch 5/50\n"}
+,{"stream_name":"stdout","time":233.397919877,"data":"\n"}
+,{"stream_name":"stdout","time":233.397985671,"data":"Epoch 5: val_loss did not improve from 1.11362\n"}
+,{"stream_name":"stdout","time":233.398981492,"data":"366/366 - 30s - 81ms/step - accuracy: 0.6790 - loss: 0.8506 - val_accuracy: 0.5457 - val_loss: 1.3033 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":233.399866738,"data":"Epoch 6/50\n"}
+,{"stream_name":"stdout","time":262.930868362,"data":"\n"}
+,{"stream_name":"stdout","time":262.930917029,"data":"Epoch 6: val_loss did not improve from 1.11362\n"}
+,{"stream_name":"stdout","time":262.934150818,"data":"366/366 - 30s - 81ms/step - accuracy: 0.7232 - loss: 0.7395 - val_accuracy: 0.5601 - val_loss: 1.2469 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":262.935358732,"data":"Epoch 7/50\n"}
+,{"stream_name":"stdout","time":292.491811635,"data":"\n"}
+,{"stream_name":"stdout","time":292.491852635,"data":"Epoch 7: val_loss did not improve from 1.11362\n"}
+,{"stream_name":"stdout","time":292.492704529,"data":"366/366 - 30s - 81ms/step - accuracy: 0.7816 - loss: 0.5897 - val_accuracy: 0.5601 - val_loss: 1.2802 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":292.493436437,"data":"Epoch 8/50\n"}
+,{"stream_name":"stdout","time":322.040018721,"data":"\n"}
+,{"stream_name":"stdout","time":322.040068769,"data":"Epoch 8: val_loss did not improve from 1.11362\n"}
+,{"stream_name":"stdout","time":322.043373898,"data":"\n"}
+,{"stream_name":"stdout","time":322.04340271,"data":"Epoch 8: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.\n"}
+,{"stream_name":"stdout","time":322.044655457,"data":"366/366 - 30s - 81ms/step - accuracy: 0.8196 - loss: 0.4989 - val_accuracy: 0.5704 - val_loss: 1.3870 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":322.047538449,"data":"Epoch 9/50\n"}
+,{"stream_name":"stdout","time":351.590220825,"data":"\n"}
+,{"stream_name":"stdout","time":351.590261997,"data":"Epoch 9: val_loss did not improve from 1.11362\n"}
+,{"stream_name":"stdout","time":351.59134582,"data":"366/366 - 30s - 81ms/step - accuracy: 0.8979 - loss: 0.3020 - val_accuracy: 0.5971 - val_loss: 1.3231 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":351.592487769,"data":"Epoch 10/50\n"}
+,{"stream_name":"stdout","time":381.146128692,"data":"\n"}
+,{"stream_name":"stdout","time":381.146173706,"data":"Epoch 10: val_loss did not improve from 1.11362\n"}
+,{"stream_name":"stdout","time":381.148702853,"data":"366/366 - 30s - 81ms/step - accuracy: 0.9432 - loss: 0.1851 - val_accuracy: 0.5827 - val_loss: 1.4936 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":381.150485889,"data":"Epoch 11/50\n"}
+,{"stream_name":"stdout","time":410.700211313,"data":"\n"}
+,{"stream_name":"stdout","time":410.70024813,"data":"Epoch 11: val_loss did not improve from 1.11362\n"}
+,{"stream_name":"stdout","time":410.701205058,"data":"366/366 - 30s - 81ms/step - accuracy: 0.9543 - loss: 0.1500 - val_accuracy: 0.6105 - val_loss: 1.4858 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":410.702091414,"data":"Epoch 12/50\n"}
+,{"stream_name":"stdout","time":440.240448812,"data":"\n"}
+,{"stream_name":"stdout","time":440.240498354,"data":"Epoch 12: val_loss did not improve from 1.11362\n"}
+,{"stream_name":"stdout","time":440.24400017,"data":"\n"}
+,{"stream_name":"stdout","time":440.24402636,"data":"Epoch 12: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.\n"}
+,{"stream_name":"stdout","time":440.245042138,"data":"366/366 - 30s - 81ms/step - accuracy: 0.9734 - loss: 0.0963 - val_accuracy: 0.6084 - val_loss: 1.5066 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":440.247224819,"data":"Epoch 13/50\n"}
+,{"stream_name":"stdout","time":469.789741078,"data":"\n"}
+,{"stream_name":"stdout","time":469.789787892,"data":"Epoch 13: val_loss did not improve from 1.11362\n"}
+,{"stream_name":"stdout","time":469.790981702,"data":"366/366 - 30s - 81ms/step - accuracy: 0.9802 - loss: 0.0735 - val_accuracy: 0.6187 - val_loss: 1.5056 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":469.79213405,"data":"Epoch 14/50\n"}
+,{"stream_name":"stdout","time":499.312240595,"data":"\n"}
+,{"stream_name":"stdout","time":499.312287561,"data":"Epoch 14: val_loss did not improve from 1.11362\n"}
+,{"stream_name":"stdout","time":499.314419751,"data":"366/366 - 30s - 81ms/step - accuracy: 0.9887 - loss: 0.0506 - val_accuracy: 0.6177 - val_loss: 1.6032 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":499.316116485,"data":"Epoch 14: early stopping\n"}
+,{"stream_name":"stdout","time":499.316972003,"data":"Restoring model weights from the end of the best epoch: 4.\n"}
+,{"stream_name":"stdout","time":500.331727423,"data":"[train] evaluating the checkpointed best model (/kaggle/working/runs/base/best_model.keras)\n"}
+,{"stream_name":"stdout","time":503.787243058,"data":"[eval] accuracy=0.5795  macroF1=0.5995  MCC=0.5059  kappa=0.5040  AUC=0.8932\n"}
+,{"stream_name":"stdout","time":503.787284167,"data":"[eval] confusion-pair errors: {'sad\u003c-\u003eneutral': 124, 'angry\u003c-\u003efear': 64}\n"}
+,{"stream_name":"stdout","time":503.787291718,"data":"[done] artefacts saved under /kaggle/working/runs/base/\n"}
+,{"stream_name":"stdout","time":503.787297223,"data":"\n"}
+,{"stream_name":"stdout","time":503.787302471,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":503.787308242,"data":"[run] afw   (0.1 h elapsed)\n"}
+,{"stream_name":"stdout","time":503.787313478,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":503.787318937,"data":"\n"}
+,{"stream_name":"stdout","time":503.787324073,"data":"=== experiment 'afw'  AFW=True EAAA=False MSTC=False CADL=False ===\n"}
+,{"stream_name":"stdout","time":503.787329414,"data":"[split] train=8756  val=973  test=2433 (target ratios 72:8:20)\n"}
+,{"stream_name":"stdout","time":503.787334879,"data":"[aug] policy=uniform (base paper)  originals=8756  augmented=2944  total=11700\n"}
+,{"stream_name":"stdout","time":503.787340403,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/train_uniform_2ee82c103fda6ee6.npz\n"}
+,{"stream_name":"stdout","time":504.484660707,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/val_3a68781e8c822fb9.npz\n"}
+,{"stream_name":"stdout","time":504.484718988,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/test_dc9f237867bc3c96.npz\n"}
+,{"stream_name":"stdout","time":505.450898819,"data":"Epoch 1/50\n"}
+,{"stream_name":"stdout","time":560.021599989,"data":"\n"}
+,{"stream_name":"stdout","time":560.021677469,"data":"Epoch 1: val_loss improved from None to 2.74783, saving model to /kaggle/working/runs/afw/best_model.keras\n"}
+,{"stream_name":"stdout","time":560.460055424,"data":"\n"}
+,{"stream_name":"stdout","time":560.460091239,"data":"Epoch 1: finished saving model to /kaggle/working/runs/afw/best_model.keras\n"}
+,{"stream_name":"stdout","time":560.527019642,"data":"366/366 - 55s - 150ms/step - accuracy: 0.4157 - loss: 1.7131 - val_accuracy: 0.1593 - val_loss: 2.7478 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":560.528284251,"data":"Epoch 2/50\n"}
+,{"stream_name":"stdout","time":590.593842476,"data":"\n"}
+,{"stream_name":"stdout","time":590.593879669,"data":"Epoch 2: val_loss improved from 2.74783 to 1.21818, saving model to /kaggle/working/runs/afw/best_model.keras\n"}
+,{"stream_name":"stdout","time":591.045054144,"data":"\n"}
+,{"stream_name":"stdout","time":591.04509621,"data":"Epoch 2: finished saving model to /kaggle/working/runs/afw/best_model.keras\n"}
+,{"stream_name":"stdout","time":591.078411995,"data":"366/366 - 31s - 83ms/step - accuracy: 0.5346 - loss: 1.2689 - val_accuracy: 0.5375 - val_loss: 1.2182 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":591.080072455,"data":"Epoch 3/50\n"}
+,{"stream_name":"stdout","time":621.158097526,"data":"\n"}
+,{"stream_name":"stdout","time":621.15812683,"data":"Epoch 3: val_loss improved from 1.21818 to 1.12937, saving model to /kaggle/working/runs/afw/best_model.keras\n"}
+,{"stream_name":"stdout","time":621.62167747,"data":"\n"}
+,{"stream_name":"stdout","time":621.62171024,"data":"Epoch 3: finished saving model to /kaggle/working/runs/afw/best_model.keras\n"}
+,{"stream_name":"stdout","time":621.65576937,"data":"366/366 - 31s - 84ms/step - accuracy: 0.5997 - loss: 1.0706 - val_accuracy: 0.5940 - val_loss: 1.1294 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":621.658030027,"data":"Epoch 4/50\n"}
+,{"stream_name":"stdout","time":651.695039869,"data":"\n"}
+,{"stream_name":"stdout","time":651.69509014,"data":"Epoch 4: val_loss did not improve from 1.12937\n"}
+,{"stream_name":"stdout","time":651.69617517,"data":"366/366 - 30s - 82ms/step - accuracy: 0.6541 - loss: 0.9280 - val_accuracy: 0.5807 - val_loss: 1.1950 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":651.697246852,"data":"Epoch 5/50\n"}
+,{"stream_name":"stdout","time":681.739367608,"data":"\n"}
+,{"stream_name":"stdout","time":681.739404233,"data":"Epoch 5: val_loss did not improve from 1.12937\n"}
+,{"stream_name":"stdout","time":681.740383279,"data":"366/366 - 30s - 82ms/step - accuracy: 0.7056 - loss: 0.7932 - val_accuracy: 0.5427 - val_loss: 1.4216 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":681.741266157,"data":"Epoch 6/50\n"}
+,{"stream_name":"stdout","time":711.78655193,"data":"\n"}
+,{"stream_name":"stdout","time":711.786591193,"data":"Epoch 6: val_loss did not improve from 1.12937\n"}
+,{"stream_name":"stdout","time":711.787658944,"data":"366/366 - 30s - 82ms/step - accuracy: 0.7409 - loss: 0.6958 - val_accuracy: 0.5766 - val_loss: 1.2796 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":711.78846851,"data":"Epoch 7/50\n"}
+,{"stream_name":"stdout","time":741.831649572,"data":"\n"}
+,{"stream_name":"stdout","time":741.831690819,"data":"Epoch 7: val_loss did not improve from 1.12937\n"}
+,{"stream_name":"stdout","time":741.832904791,"data":"\n"}
+,{"stream_name":"stdout","time":741.832944107,"data":"Epoch 7: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.\n"}
+,{"stream_name":"stdout","time":741.834048336,"data":"366/366 - 30s - 82ms/step - accuracy: 0.7979 - loss: 0.5570 - val_accuracy: 0.5519 - val_loss: 1.4750 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":741.835095589,"data":"Epoch 8/50\n"}
+,{"stream_name":"stdout","time":771.848670148,"data":"\n"}
+,{"stream_name":"stdout","time":771.848710316,"data":"Epoch 8: val_loss did not improve from 1.12937\n"}
+,{"stream_name":"stdout","time":771.849739702,"data":"366/366 - 30s - 82ms/step - accuracy: 0.8781 - loss: 0.3580 - val_accuracy: 0.5879 - val_loss: 1.3481 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":771.850521519,"data":"Epoch 9/50\n"}
+,{"stream_name":"stdout","time":801.847919586,"data":"\n"}
+,{"stream_name":"stdout","time":801.847989548,"data":"Epoch 9: val_loss did not improve from 1.12937\n"}
+,{"stream_name":"stdout","time":801.858573709,"data":"366/366 - 30s - 82ms/step - accuracy: 0.9323 - loss: 0.2216 - val_accuracy: 0.5920 - val_loss: 1.4265 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":801.85947464,"data":"Epoch 10/50\n"}
+,{"stream_name":"stdout","time":831.902326289,"data":"\n"}
+,{"stream_name":"stdout","time":831.902373943,"data":"Epoch 10: val_loss did not improve from 1.12937\n"}
+,{"stream_name":"stdout","time":831.903511902,"data":"366/366 - 30s - 82ms/step - accuracy: 0.9489 - loss: 0.1685 - val_accuracy: 0.5940 - val_loss: 1.3841 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":831.904635988,"data":"Epoch 11/50\n"}
+,{"stream_name":"stdout","time":861.958511509,"data":"\n"}
+,{"stream_name":"stdout","time":861.958559595,"data":"Epoch 11: val_loss did not improve from 1.12937\n"}
+,{"stream_name":"stdout","time":861.959641255,"data":"\n"}
+,{"stream_name":"stdout","time":861.959665995,"data":"Epoch 11: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.\n"}
+,{"stream_name":"stdout","time":861.96046517,"data":"366/366 - 30s - 82ms/step - accuracy: 0.9542 - loss: 0.1510 - val_accuracy: 0.5889 - val_loss: 1.4857 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":861.96138069,"data":"Epoch 12/50\n"}
+,{"stream_name":"stdout","time":891.997207104,"data":"\n"}
+,{"stream_name":"stdout","time":891.997254066,"data":"Epoch 12: val_loss did not improve from 1.12937\n"}
+,{"stream_name":"stdout","time":891.998403809,"data":"366/366 - 30s - 82ms/step - accuracy: 0.9745 - loss: 0.0934 - val_accuracy: 0.6115 - val_loss: 1.4750 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":891.999427779,"data":"Epoch 13/50\n"}
+,{"stream_name":"stdout","time":922.041904511,"data":"\n"}
+,{"stream_name":"stdout","time":922.041964149,"data":"Epoch 13: val_loss did not improve from 1.12937\n"}
+,{"stream_name":"stdout","time":922.043113173,"data":"366/366 - 30s - 82ms/step - accuracy: 0.9846 - loss: 0.0646 - val_accuracy: 0.6156 - val_loss: 1.4909 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":922.044169742,"data":"Epoch 13: early stopping\n"}
+,{"stream_name":"stdout","time":922.045199577,"data":"Restoring model weights from the end of the best epoch: 3.\n"}
+,{"stream_name":"stdout","time":923.05217455,"data":"[train] evaluating the checkpointed best model (/kaggle/working/runs/afw/best_model.keras)\n"}
+,{"stream_name":"stdout","time":926.910287816,"data":"[eval] accuracy=0.5836  macroF1=0.5929  MCC=0.5103  kappa=0.5078  AUC=0.8908\n"}
+,{"stream_name":"stdout","time":926.910334646,"data":"[eval] confusion-pair errors: {'sad\u003c-\u003eneutral': 114, 'angry\u003c-\u003efear': 39}\n"}
+,{"stream_name":"stdout","time":927.824910959,"data":"[eval] AFW mean stream weights per emotion:\n"}
+,{"stream_name":"stdout","time":927.82495383,"data":"           mfcc    zcr   rmse\n"}
+,{"stream_name":"stdout","time":927.824960242,"data":"emotion                      \n"}
+,{"stream_name":"stdout","time":927.824965188,"data":"angry     0.306  0.298  0.396\n"}
+,{"stream_name":"stdout","time":927.824970317,"data":"disgust   0.300  0.307  0.393\n"}
+,{"stream_name":"stdout","time":927.824993269,"data":"fear      0.305  0.310  0.384\n"}
+,{"stream_name":"stdout","time":927.824998617,"data":"happy     0.311  0.303  0.386\n"}
+,{"stream_name":"stdout","time":927.825002522,"data":"neutral   0.301  0.319  0.380\n"}
+,{"stream_name":"stdout","time":927.825006201,"data":"sad       0.293  0.330  0.376\n"}
+,{"stream_name":"stdout","time":927.825010043,"data":"surprise  0.298  0.295  0.407\n"}
+,{"stream_name":"stdout","time":927.825014085,"data":"[done] artefacts saved under /kaggle/working/runs/afw/\n"}
+,{"stream_name":"stdout","time":927.825018057,"data":"\n"}
+,{"stream_name":"stdout","time":927.825022003,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":927.825026199,"data":"[run] eaaa   (0.2 h elapsed)\n"}
+,{"stream_name":"stdout","time":927.825030605,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":927.82503572,"data":"\n"}
+,{"stream_name":"stdout","time":927.825040831,"data":"=== experiment 'eaaa'  AFW=False EAAA=True MSTC=False CADL=False ===\n"}
+,{"stream_name":"stdout","time":927.825046776,"data":"[split] train=8756  val=973  test=2433 (target ratios 72:8:20)\n"}
+,{"stream_name":"stdout","time":927.825051656,"data":"[aug] policy=EAAA (emotion-aware)  originals=8756  augmented=2944  total=11700\n"}
+,{"stream_name":"stdout","time":927.825056726,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/train_eaaa_f084c9d631dc998b.npz\n"}
+,{"stream_name":"stdout","time":928.525744997,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/val_3a68781e8c822fb9.npz\n"}
+,{"stream_name":"stdout","time":928.525797301,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/test_dc9f237867bc3c96.npz\n"}
+,{"stream_name":"stdout","time":929.425097701,"data":"Epoch 1/50\n"}
+,{"stream_name":"stdout","time":980.679402476,"data":"\n"}
+,{"stream_name":"stdout","time":980.679440648,"data":"Epoch 1: val_loss improved from None to 2.74394, saving model to /kaggle/working/runs/eaaa/best_model.keras\n"}
+,{"stream_name":"stdout","time":981.483118294,"data":"\n"}
+,{"stream_name":"stdout","time":981.483163752,"data":"Epoch 1: finished saving model to /kaggle/working/runs/eaaa/best_model.keras\n"}
+,{"stream_name":"stdout","time":981.544745451,"data":"366/366 - 52s - 142ms/step - accuracy: 0.4581 - loss: 1.5863 - val_accuracy: 0.1829 - val_loss: 2.7439 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":981.546611032,"data":"Epoch 2/50\n"}
+,{"stream_name":"stdout","time":1011.181250217,"data":"\n"}
+,{"stream_name":"stdout","time":1011.181287378,"data":"Epoch 2: val_loss improved from 2.74394 to 1.18370, saving model to /kaggle/working/runs/eaaa/best_model.keras\n"}
+,{"stream_name":"stdout","time":1011.598801349,"data":"\n"}
+,{"stream_name":"stdout","time":1011.598840944,"data":"Epoch 2: finished saving model to /kaggle/working/runs/eaaa/best_model.keras\n"}
+,{"stream_name":"stdout","time":1011.628067322,"data":"366/366 - 30s - 82ms/step - accuracy: 0.5679 - loss: 1.2136 - val_accuracy: 0.5550 - val_loss: 1.1837 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1011.63009175,"data":"Epoch 3/50\n"}
+,{"stream_name":"stdout","time":1041.28091182,"data":"\n"}
+,{"stream_name":"stdout","time":1041.280993977,"data":"Epoch 3: val_loss did not improve from 1.18370\n"}
+,{"stream_name":"stdout","time":1041.282194104,"data":"366/366 - 30s - 81ms/step - accuracy: 0.6177 - loss: 1.0321 - val_accuracy: 0.5283 - val_loss: 1.2655 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1041.283489934,"data":"Epoch 4/50\n"}
+,{"stream_name":"stdout","time":1070.881149701,"data":"\n"}
+,{"stream_name":"stdout","time":1070.881192351,"data":"Epoch 4: val_loss improved from 1.18370 to 1.12354, saving model to /kaggle/working/runs/eaaa/best_model.keras\n"}
+,{"stream_name":"stdout","time":1071.381459814,"data":"\n"}
+,{"stream_name":"stdout","time":1071.381499898,"data":"Epoch 4: finished saving model to /kaggle/working/runs/eaaa/best_model.keras\n"}
+,{"stream_name":"stdout","time":1071.400648527,"data":"366/366 - 30s - 82ms/step - accuracy: 0.6648 - loss: 0.8968 - val_accuracy: 0.5858 - val_loss: 1.1235 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1071.402826969,"data":"Epoch 5/50\n"}
+,{"stream_name":"stdout","time":1101.016506416,"data":"\n"}
+,{"stream_name":"stdout","time":1101.016564792,"data":"Epoch 5: val_loss did not improve from 1.12354\n"}
+,{"stream_name":"stdout","time":1101.019069244,"data":"366/366 - 30s - 81ms/step - accuracy: 0.6962 - loss: 0.8153 - val_accuracy: 0.5838 - val_loss: 1.1702 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1101.021113837,"data":"Epoch 6/50\n"}
+,{"stream_name":"stdout","time":1130.660422217,"data":"\n"}
+,{"stream_name":"stdout","time":1130.660471517,"data":"Epoch 6: val_loss did not improve from 1.12354\n"}
+,{"stream_name":"stdout","time":1130.66177099,"data":"366/366 - 30s - 81ms/step - accuracy: 0.7368 - loss: 0.7006 - val_accuracy: 0.5930 - val_loss: 1.1958 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1130.662794287,"data":"Epoch 7/50\n"}
+,{"stream_name":"stdout","time":1160.307116109,"data":"\n"}
+,{"stream_name":"stdout","time":1160.307163756,"data":"Epoch 7: val_loss did not improve from 1.12354\n"}
+,{"stream_name":"stdout","time":1160.309475291,"data":"366/366 - 30s - 81ms/step - accuracy: 0.7882 - loss: 0.5785 - val_accuracy: 0.5827 - val_loss: 1.2650 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1160.311709572,"data":"Epoch 8/50\n"}
+,{"stream_name":"stdout","time":1189.933043697,"data":"\n"}
+,{"stream_name":"stdout","time":1189.93308775,"data":"Epoch 8: val_loss did not improve from 1.12354\n"}
+,{"stream_name":"stdout","time":1189.934159425,"data":"\n"}
+,{"stream_name":"stdout","time":1189.934189773,"data":"Epoch 8: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.\n"}
+,{"stream_name":"stdout","time":1189.935024604,"data":"366/366 - 30s - 81ms/step - accuracy: 0.8126 - loss: 0.5129 - val_accuracy: 0.5180 - val_loss: 1.6422 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1189.93582486,"data":"Epoch 9/50\n"}
+,{"stream_name":"stdout","time":1219.505122444,"data":"\n"}
+,{"stream_name":"stdout","time":1219.505181298,"data":"Epoch 9: val_loss did not improve from 1.12354\n"}
+,{"stream_name":"stdout","time":1219.507538859,"data":"366/366 - 30s - 81ms/step - accuracy: 0.8905 - loss: 0.3238 - val_accuracy: 0.6125 - val_loss: 1.2987 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":1219.509733203,"data":"Epoch 10/50\n"}
+,{"stream_name":"stdout","time":1249.11736527,"data":"\n"}
+,{"stream_name":"stdout","time":1249.117427138,"data":"Epoch 10: val_loss did not improve from 1.12354\n"}
+,{"stream_name":"stdout","time":1249.118562003,"data":"366/366 - 30s - 81ms/step - accuracy: 0.9302 - loss: 0.2123 - val_accuracy: 0.6177 - val_loss: 1.3455 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":1249.119420167,"data":"Epoch 11/50\n"}
+,{"stream_name":"stdout","time":1278.695468874,"data":"\n"}
+,{"stream_name":"stdout","time":1278.695526991,"data":"Epoch 11: val_loss did not improve from 1.12354\n"}
+,{"stream_name":"stdout","time":1278.697729128,"data":"366/366 - 30s - 81ms/step - accuracy: 0.9565 - loss: 0.1431 - val_accuracy: 0.6146 - val_loss: 1.3749 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":1278.700087978,"data":"Epoch 12/50\n"}
+,{"stream_name":"stdout","time":1308.309608081,"data":"\n"}
+,{"stream_name":"stdout","time":1308.309662601,"data":"Epoch 12: val_loss did not improve from 1.12354\n"}
+,{"stream_name":"stdout","time":1308.310707798,"data":"\n"}
+,{"stream_name":"stdout","time":1308.310732595,"data":"Epoch 12: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.\n"}
+,{"stream_name":"stdout","time":1308.311588967,"data":"366/366 - 30s - 81ms/step - accuracy: 0.9649 - loss: 0.1146 - val_accuracy: 0.6064 - val_loss: 1.4074 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":1308.312354458,"data":"Epoch 13/50\n"}
+,{"stream_name":"stdout","time":1337.888202548,"data":"\n"}
+,{"stream_name":"stdout","time":1337.8882955,"data":"Epoch 13: val_loss did not improve from 1.12354\n"}
+,{"stream_name":"stdout","time":1337.890688723,"data":"366/366 - 30s - 81ms/step - accuracy: 0.9801 - loss: 0.0777 - val_accuracy: 0.6238 - val_loss: 1.3562 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":1337.892451033,"data":"Epoch 14/50\n"}
+,{"stream_name":"stdout","time":1367.485668248,"data":"\n"}
+,{"stream_name":"stdout","time":1367.485735545,"data":"Epoch 14: val_loss did not improve from 1.12354\n"}
+,{"stream_name":"stdout","time":1367.486841876,"data":"366/366 - 30s - 81ms/step - accuracy: 0.9868 - loss: 0.0552 - val_accuracy: 0.6208 - val_loss: 1.4793 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":1367.487807408,"data":"Epoch 14: early stopping\n"}
+,{"stream_name":"stdout","time":1367.488567781,"data":"Restoring model weights from the end of the best epoch: 4.\n"}
+,{"stream_name":"stdout","time":1368.460029212,"data":"[train] evaluating the checkpointed best model (/kaggle/working/runs/eaaa/best_model.keras)\n"}
+,{"stream_name":"stdout","time":1371.76191794,"data":"[eval] accuracy=0.5762  macroF1=0.5944  MCC=0.5017  kappa=0.4993  AUC=0.8903\n"}
+,{"stream_name":"stdout","time":1371.761961932,"data":"[eval] confusion-pair errors: {'sad\u003c-\u003eneutral': 128, 'angry\u003c-\u003efear': 34}\n"}
+,{"stream_name":"stdout","time":1371.761967559,"data":"[done] artefacts saved under /kaggle/working/runs/eaaa/\n"}
+,{"stream_name":"stdout","time":1371.761971646,"data":"\n"}
+,{"stream_name":"stdout","time":1371.761975021,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":1371.7619786,"data":"[run] mstc   (0.4 h elapsed)\n"}
+,{"stream_name":"stdout","time":1371.761982005,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":1371.761985344,"data":"\n"}
+,{"stream_name":"stdout","time":1371.761988523,"data":"=== experiment 'mstc'  AFW=False EAAA=False MSTC=True CADL=False ===\n"}
+,{"stream_name":"stdout","time":1371.76199186,"data":"[split] train=8756  val=973  test=2433 (target ratios 72:8:20)\n"}
+,{"stream_name":"stdout","time":1371.761995096,"data":"[aug] policy=uniform (base paper)  originals=8756  augmented=2944  total=11700\n"}
+,{"stream_name":"stdout","time":1371.761998556,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/train_uniform_2ee82c103fda6ee6.npz\n"}
+,{"stream_name":"stdout","time":1372.454377376,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/val_3a68781e8c822fb9.npz\n"}
+,{"stream_name":"stdout","time":1372.454432804,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/test_dc9f237867bc3c96.npz\n"}
+,{"stream_name":"stdout","time":1373.380803326,"data":"Epoch 1/50\n"}
+,{"stream_name":"stdout","time":1425.101495451,"data":"\n"}
+,{"stream_name":"stdout","time":1425.101561934,"data":"Epoch 1: val_loss improved from None to 2.47071, saving model to /kaggle/working/runs/mstc/best_model.keras\n"}
+,{"stream_name":"stdout","time":1425.523543583,"data":"\n"}
+,{"stream_name":"stdout","time":1425.523588628,"data":"Epoch 1: finished saving model to /kaggle/working/runs/mstc/best_model.keras\n"}
+,{"stream_name":"stdout","time":1425.596733861,"data":"366/366 - 52s - 143ms/step - accuracy: 0.4203 - loss: 1.6853 - val_accuracy: 0.1716 - val_loss: 2.4707 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1425.599145126,"data":"Epoch 2/50\n"}
+,{"stream_name":"stdout","time":1453.618537554,"data":"\n"}
+,{"stream_name":"stdout","time":1453.618589932,"data":"Epoch 2: val_loss improved from 2.47071 to 1.17650, saving model to /kaggle/working/runs/mstc/best_model.keras\n"}
+,{"stream_name":"stdout","time":1454.102500002,"data":"\n"}
+,{"stream_name":"stdout","time":1454.102531554,"data":"Epoch 2: finished saving model to /kaggle/working/runs/mstc/best_model.keras\n"}
+,{"stream_name":"stdout","time":1454.136422638,"data":"366/366 - 29s - 78ms/step - accuracy: 0.5285 - loss: 1.2885 - val_accuracy: 0.5560 - val_loss: 1.1765 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1454.138895848,"data":"Epoch 3/50\n"}
+,{"stream_name":"stdout","time":1482.196474848,"data":"\n"}
+,{"stream_name":"stdout","time":1482.196515652,"data":"Epoch 3: val_loss did not improve from 1.17650\n"}
+,{"stream_name":"stdout","time":1482.197567482,"data":"366/366 - 28s - 77ms/step - accuracy: 0.5852 - loss: 1.1148 - val_accuracy: 0.5570 - val_loss: 1.1822 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1482.198517962,"data":"Epoch 4/50\n"}
+,{"stream_name":"stdout","time":1510.18406573,"data":"\n"}
+,{"stream_name":"stdout","time":1510.184220529,"data":"Epoch 4: val_loss did not improve from 1.17650\n"}
+,{"stream_name":"stdout","time":1510.186675449,"data":"366/366 - 28s - 77ms/step - accuracy: 0.6242 - loss: 1.0005 - val_accuracy: 0.5437 - val_loss: 1.2505 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1510.18863897,"data":"Epoch 5/50\n"}
+,{"stream_name":"stdout","time":1538.209857829,"data":"\n"}
+,{"stream_name":"stdout","time":1538.20990808,"data":"Epoch 5: val_loss improved from 1.17650 to 1.10670, saving model to /kaggle/working/runs/mstc/best_model.keras\n"}
+,{"stream_name":"stdout","time":1538.655535121,"data":"\n"}
+,{"stream_name":"stdout","time":1538.65556753,"data":"Epoch 5: finished saving model to /kaggle/working/runs/mstc/best_model.keras\n"}
+,{"stream_name":"stdout","time":1538.686783765,"data":"366/366 - 28s - 78ms/step - accuracy: 0.6818 - loss: 0.8515 - val_accuracy: 0.5879 - val_loss: 1.1067 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1538.688755721,"data":"Epoch 6/50\n"}
+,{"stream_name":"stdout","time":1566.703784027,"data":"\n"}
+,{"stream_name":"stdout","time":1566.703833895,"data":"Epoch 6: val_loss did not improve from 1.10670\n"}
+,{"stream_name":"stdout","time":1566.706956865,"data":"366/366 - 28s - 77ms/step - accuracy: 0.7270 - loss: 0.7386 - val_accuracy: 0.5683 - val_loss: 1.1906 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1566.708715865,"data":"Epoch 7/50\n"}
+,{"stream_name":"stdout","time":1594.740909987,"data":"\n"}
+,{"stream_name":"stdout","time":1594.740953444,"data":"Epoch 7: val_loss did not improve from 1.10670\n"}
+,{"stream_name":"stdout","time":1594.742159803,"data":"366/366 - 28s - 77ms/step - accuracy: 0.7535 - loss: 0.6632 - val_accuracy: 0.5612 - val_loss: 1.3018 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1594.743145521,"data":"Epoch 8/50\n"}
+,{"stream_name":"stdout","time":1622.69033056,"data":"\n"}
+,{"stream_name":"stdout","time":1622.690393475,"data":"Epoch 8: val_loss did not improve from 1.10670\n"}
+,{"stream_name":"stdout","time":1622.692840248,"data":"366/366 - 28s - 76ms/step - accuracy: 0.7901 - loss: 0.5629 - val_accuracy: 0.5735 - val_loss: 1.4285 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1622.694589047,"data":"Epoch 9/50\n"}
+,{"stream_name":"stdout","time":1650.690942952,"data":"\n"}
+,{"stream_name":"stdout","time":1650.690978789,"data":"Epoch 9: val_loss did not improve from 1.10670\n"}
+,{"stream_name":"stdout","time":1650.691946647,"data":"\n"}
+,{"stream_name":"stdout","time":1650.691969626,"data":"Epoch 9: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.\n"}
+,{"stream_name":"stdout","time":1650.69268842,"data":"366/366 - 28s - 76ms/step - accuracy: 0.8374 - loss: 0.4475 - val_accuracy: 0.5612 - val_loss: 1.4261 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1650.693441777,"data":"Epoch 10/50\n"}
+,{"stream_name":"stdout","time":1678.656348322,"data":"\n"}
+,{"stream_name":"stdout","time":1678.656392112,"data":"Epoch 10: val_loss did not improve from 1.10670\n"}
+,{"stream_name":"stdout","time":1678.65825734,"data":"366/366 - 28s - 76ms/step - accuracy: 0.9031 - loss: 0.2750 - val_accuracy: 0.5971 - val_loss: 1.3640 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":1678.660846977,"data":"Epoch 11/50\n"}
+,{"stream_name":"stdout","time":1706.66959756,"data":"\n"}
+,{"stream_name":"stdout","time":1706.66965065,"data":"Epoch 11: val_loss did not improve from 1.10670\n"}
+,{"stream_name":"stdout","time":1706.670692499,"data":"366/366 - 28s - 76ms/step - accuracy: 0.9520 - loss: 0.1625 - val_accuracy: 0.6033 - val_loss: 1.3950 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":1706.671390652,"data":"Epoch 12/50\n"}
+,{"stream_name":"stdout","time":1734.609947487,"data":"\n"}
+,{"stream_name":"stdout","time":1734.609982832,"data":"Epoch 12: val_loss did not improve from 1.10670\n"}
+,{"stream_name":"stdout","time":1734.612326404,"data":"366/366 - 28s - 76ms/step - accuracy: 0.9718 - loss: 0.1043 - val_accuracy: 0.6043 - val_loss: 1.4395 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":1734.613984303,"data":"Epoch 13/50\n"}
+,{"stream_name":"stdout","time":1762.615834055,"data":"\n"}
+,{"stream_name":"stdout","time":1762.615869006,"data":"Epoch 13: val_loss did not improve from 1.10670\n"}
+,{"stream_name":"stdout","time":1762.616796244,"data":"\n"}
+,{"stream_name":"stdout","time":1762.616817891,"data":"Epoch 13: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.\n"}
+,{"stream_name":"stdout","time":1762.617733184,"data":"366/366 - 28s - 76ms/step - accuracy: 0.9763 - loss: 0.0832 - val_accuracy: 0.5930 - val_loss: 1.6278 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":1762.618491245,"data":"Epoch 14/50\n"}
+,{"stream_name":"stdout","time":1790.622599641,"data":"\n"}
+,{"stream_name":"stdout","time":1790.622677425,"data":"Epoch 14: val_loss did not improve from 1.10670\n"}
+,{"stream_name":"stdout","time":1790.624723988,"data":"366/366 - 28s - 77ms/step - accuracy: 0.9833 - loss: 0.0618 - val_accuracy: 0.6259 - val_loss: 1.4940 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":1790.626723275,"data":"Epoch 15/50\n"}
+,{"stream_name":"stdout","time":1818.610215811,"data":"\n"}
+,{"stream_name":"stdout","time":1818.61025709,"data":"Epoch 15: val_loss did not improve from 1.10670\n"}
+,{"stream_name":"stdout","time":1818.611357148,"data":"366/366 - 28s - 76ms/step - accuracy: 0.9886 - loss: 0.0466 - val_accuracy: 0.6228 - val_loss: 1.5826 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":1818.612227392,"data":"Epoch 15: early stopping\n"}
+,{"stream_name":"stdout","time":1818.613200187,"data":"Restoring model weights from the end of the best epoch: 5.\n"}
+,{"stream_name":"stdout","time":1819.613214463,"data":"[train] evaluating the checkpointed best model (/kaggle/working/runs/mstc/best_model.keras)\n"}
+,{"stream_name":"stdout","time":1823.245840309,"data":"[eval] accuracy=0.5927  macroF1=0.6087  MCC=0.5210  kappa=0.5192  AUC=0.8971\n"}
+,{"stream_name":"stdout","time":1823.245879215,"data":"[eval] confusion-pair errors: {'sad\u003c-\u003eneutral': 135, 'angry\u003c-\u003efear': 49}\n"}
+,{"stream_name":"stdout","time":1823.24588583,"data":"[done] artefacts saved under /kaggle/working/runs/mstc/\n"}
+,{"stream_name":"stdout","time":1823.245890185,"data":"\n"}
+,{"stream_name":"stdout","time":1823.245897542,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":1823.245901373,"data":"[run] cadl   (0.5 h elapsed)\n"}
+,{"stream_name":"stdout","time":1823.245904057,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":1823.245906842,"data":"\n"}
+,{"stream_name":"stdout","time":1823.245909364,"data":"=== experiment 'cadl'  AFW=False EAAA=False MSTC=False CADL=True ===\n"}
+,{"stream_name":"stdout","time":1823.245912252,"data":"[split] train=8756  val=973  test=2433 (target ratios 72:8:20)\n"}
+,{"stream_name":"stdout","time":1823.245914955,"data":"[aug] policy=uniform (base paper)  originals=8756  augmented=2944  total=11700\n"}
+,{"stream_name":"stdout","time":1823.24591762,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/train_uniform_2ee82c103fda6ee6.npz\n"}
+,{"stream_name":"stdout","time":1823.941974297,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/val_3a68781e8c822fb9.npz\n"}
+,{"stream_name":"stdout","time":1823.942036683,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/test_dc9f237867bc3c96.npz\n"}
+,{"stream_name":"stdout","time":1824.871624336,"data":"Epoch 1/50\n"}
+,{"stream_name":"stdout","time":1877.257431984,"data":"\n"}
+,{"stream_name":"stdout","time":1877.257467197,"data":"Epoch 1: val_loss improved from None to 1.92433, saving model to /kaggle/working/runs/cadl/best_model.keras\n"}
+,{"stream_name":"stdout","time":1877.660462004,"data":"\n"}
+,{"stream_name":"stdout","time":1877.660500287,"data":"Epoch 1: finished saving model to /kaggle/working/runs/cadl/best_model.keras\n"}
+,{"stream_name":"stdout","time":1877.72277128,"data":"366/366 - 53s - 144ms/step - accuracy: 0.4072 - loss: 1.3244 - val_accuracy: 0.2364 - val_loss: 1.9243 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1877.725062777,"data":"Epoch 2/50\n"}
+,{"stream_name":"stdout","time":1907.365303171,"data":"\n"}
+,{"stream_name":"stdout","time":1907.365339535,"data":"Epoch 2: val_loss improved from 1.92433 to 1.01281, saving model to /kaggle/working/runs/cadl/best_model.keras\n"}
+,{"stream_name":"stdout","time":1907.810368407,"data":"\n"}
+,{"stream_name":"stdout","time":1907.810440324,"data":"Epoch 2: finished saving model to /kaggle/working/runs/cadl/best_model.keras\n"}
+,{"stream_name":"stdout","time":1907.841439163,"data":"366/366 - 30s - 82ms/step - accuracy: 0.4975 - loss: 0.9510 - val_accuracy: 0.4697 - val_loss: 1.0128 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1907.843225779,"data":"Epoch 3/50\n"}
+,{"stream_name":"stdout","time":1937.482411646,"data":"\n"}
+,{"stream_name":"stdout","time":1937.482448487,"data":"Epoch 3: val_loss improved from 1.01281 to 0.77350, saving model to /kaggle/working/runs/cadl/best_model.keras\n"}
+,{"stream_name":"stdout","time":1937.929086046,"data":"\n"}
+,{"stream_name":"stdout","time":1937.929131869,"data":"Epoch 3: finished saving model to /kaggle/working/runs/cadl/best_model.keras\n"}
+,{"stream_name":"stdout","time":1937.957939885,"data":"366/366 - 30s - 82ms/step - accuracy: 0.5631 - loss: 0.7778 - val_accuracy: 0.5663 - val_loss: 0.7735 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1937.959333074,"data":"Epoch 4/50\n"}
+,{"stream_name":"stdout","time":1967.604737848,"data":"\n"}
+,{"stream_name":"stdout","time":1967.604779296,"data":"Epoch 4: val_loss did not improve from 0.77350\n"}
+,{"stream_name":"stdout","time":1967.605721629,"data":"366/366 - 30s - 81ms/step - accuracy: 0.6157 - loss: 0.6546 - val_accuracy: 0.5581 - val_loss: 0.8375 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1967.606657021,"data":"Epoch 5/50\n"}
+,{"stream_name":"stdout","time":1997.169341776,"data":"\n"}
+,{"stream_name":"stdout","time":1997.169378718,"data":"Epoch 5: val_loss improved from 0.77350 to 0.74251, saving model to /kaggle/working/runs/cadl/best_model.keras\n"}
+,{"stream_name":"stdout","time":1997.647318802,"data":"\n"}
+,{"stream_name":"stdout","time":1997.647403881,"data":"Epoch 5: finished saving model to /kaggle/working/runs/cadl/best_model.keras\n"}
+,{"stream_name":"stdout","time":1997.655692904,"data":"366/366 - 30s - 82ms/step - accuracy: 0.6535 - loss: 0.5610 - val_accuracy: 0.5735 - val_loss: 0.7425 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":1997.657552703,"data":"Epoch 6/50\n"}
+,{"stream_name":"stdout","time":2027.263433817,"data":"\n"}
+,{"stream_name":"stdout","time":2027.263497118,"data":"Epoch 6: val_loss did not improve from 0.74251\n"}
+,{"stream_name":"stdout","time":2027.2657472,"data":"366/366 - 30s - 81ms/step - accuracy: 0.6906 - loss: 0.4853 - val_accuracy: 0.5262 - val_loss: 1.0027 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2027.267594508,"data":"Epoch 7/50\n"}
+,{"stream_name":"stdout","time":2056.890523124,"data":"\n"}
+,{"stream_name":"stdout","time":2056.890560179,"data":"Epoch 7: val_loss did not improve from 0.74251\n"}
+,{"stream_name":"stdout","time":2056.891689281,"data":"366/366 - 30s - 81ms/step - accuracy: 0.7222 - loss: 0.4177 - val_accuracy: 0.5868 - val_loss: 0.8158 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2056.892445537,"data":"Epoch 8/50\n"}
+,{"stream_name":"stdout","time":2086.474885221,"data":"\n"}
+,{"stream_name":"stdout","time":2086.474959648,"data":"Epoch 8: val_loss did not improve from 0.74251\n"}
+,{"stream_name":"stdout","time":2086.477203951,"data":"366/366 - 30s - 81ms/step - accuracy: 0.7585 - loss: 0.3535 - val_accuracy: 0.5786 - val_loss: 0.8131 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2086.479442235,"data":"Epoch 9/50\n"}
+,{"stream_name":"stdout","time":2116.099495529,"data":"\n"}
+,{"stream_name":"stdout","time":2116.099543383,"data":"Epoch 9: val_loss did not improve from 0.74251\n"}
+,{"stream_name":"stdout","time":2116.100575867,"data":"\n"}
+,{"stream_name":"stdout","time":2116.100598972,"data":"Epoch 9: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.\n"}
+,{"stream_name":"stdout","time":2116.101418793,"data":"366/366 - 30s - 81ms/step - accuracy: 0.8242 - loss: 0.2395 - val_accuracy: 0.5714 - val_loss: 0.9292 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2116.102317636,"data":"Epoch 10/50\n"}
+,{"stream_name":"stdout","time":2145.654454194,"data":"\n"}
+,{"stream_name":"stdout","time":2145.654505429,"data":"Epoch 10: val_loss did not improve from 0.74251\n"}
+,{"stream_name":"stdout","time":2145.657031989,"data":"366/366 - 30s - 81ms/step - accuracy: 0.8976 - loss: 0.1400 - val_accuracy: 0.6218 - val_loss: 0.7945 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":2145.659373693,"data":"Epoch 11/50\n"}
+,{"stream_name":"stdout","time":2175.239038785,"data":"\n"}
+,{"stream_name":"stdout","time":2175.239075288,"data":"Epoch 11: val_loss did not improve from 0.74251\n"}
+,{"stream_name":"stdout","time":2175.24027059,"data":"366/366 - 30s - 81ms/step - accuracy: 0.9342 - loss: 0.0855 - val_accuracy: 0.6372 - val_loss: 0.8439 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":2175.241337112,"data":"Epoch 12/50\n"}
+,{"stream_name":"stdout","time":2204.746253025,"data":"\n"}
+,{"stream_name":"stdout","time":2204.746306858,"data":"Epoch 12: val_loss did not improve from 0.74251\n"}
+,{"stream_name":"stdout","time":2204.748716276,"data":"366/366 - 30s - 81ms/step - accuracy: 0.9497 - loss: 0.0649 - val_accuracy: 0.6023 - val_loss: 0.9610 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":2204.750577505,"data":"Epoch 13/50\n"}
+,{"stream_name":"stdout","time":2234.306102649,"data":"\n"}
+,{"stream_name":"stdout","time":2234.306140497,"data":"Epoch 13: val_loss did not improve from 0.74251\n"}
+,{"stream_name":"stdout","time":2234.307247269,"data":"\n"}
+,{"stream_name":"stdout","time":2234.307275047,"data":"Epoch 13: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.\n"}
+,{"stream_name":"stdout","time":2234.308178957,"data":"366/366 - 30s - 81ms/step - accuracy: 0.9611 - loss: 0.0505 - val_accuracy: 0.6228 - val_loss: 0.9408 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":2234.309070124,"data":"Epoch 14/50\n"}
+,{"stream_name":"stdout","time":2263.807205827,"data":"\n"}
+,{"stream_name":"stdout","time":2263.807255033,"data":"Epoch 14: val_loss did not improve from 0.74251\n"}
+,{"stream_name":"stdout","time":2263.809727952,"data":"366/366 - 30s - 81ms/step - accuracy: 0.9755 - loss: 0.0329 - val_accuracy: 0.6403 - val_loss: 0.8705 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":2263.811528605,"data":"Epoch 15/50\n"}
+,{"stream_name":"stdout","time":2293.322826638,"data":"\n"}
+,{"stream_name":"stdout","time":2293.322864563,"data":"Epoch 15: val_loss did not improve from 0.74251\n"}
+,{"stream_name":"stdout","time":2293.324270741,"data":"366/366 - 29s - 81ms/step - accuracy: 0.9838 - loss: 0.0219 - val_accuracy: 0.6351 - val_loss: 0.9426 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":2293.325376198,"data":"Epoch 15: early stopping\n"}
+,{"stream_name":"stdout","time":2293.326482471,"data":"Restoring model weights from the end of the best epoch: 5.\n"}
+,{"stream_name":"stdout","time":2294.286416871,"data":"[train] evaluating the checkpointed best model (/kaggle/working/runs/cadl/best_model.keras)\n"}
+,{"stream_name":"stdout","time":2297.572970029,"data":"[eval] accuracy=0.5910  macroF1=0.6038  MCC=0.5185  kappa=0.5168  AUC=0.8888\n"}
+,{"stream_name":"stdout","time":2297.573028917,"data":"[eval] confusion-pair errors: {'sad\u003c-\u003eneutral': 130, 'angry\u003c-\u003efear': 42}\n"}
+,{"stream_name":"stdout","time":2297.573037688,"data":"[done] artefacts saved under /kaggle/working/runs/cadl/\n"}
+,{"stream_name":"stdout","time":2297.573043932,"data":"\n"}
+,{"stream_name":"stdout","time":2297.573049589,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":2297.573054591,"data":"[run] full   (0.6 h elapsed)\n"}
+,{"stream_name":"stdout","time":2297.57305924,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":2297.573064055,"data":"\n"}
+,{"stream_name":"stdout","time":2297.573068757,"data":"=== experiment 'full'  AFW=True EAAA=True MSTC=True CADL=True ===\n"}
+,{"stream_name":"stdout","time":2297.573094797,"data":"[split] train=8756  val=973  test=2433 (target ratios 72:8:20)\n"}
+,{"stream_name":"stdout","time":2297.573097733,"data":"[aug] policy=EAAA (emotion-aware)  originals=8756  augmented=2944  total=11700\n"}
+,{"stream_name":"stdout","time":2297.573100292,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/train_eaaa_f084c9d631dc998b.npz\n"}
+,{"stream_name":"stdout","time":2298.267372177,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/val_3a68781e8c822fb9.npz\n"}
+,{"stream_name":"stdout","time":2298.267412336,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/test_dc9f237867bc3c96.npz\n"}
+,{"stream_name":"stdout","time":2299.273015325,"data":"Epoch 1/50\n"}
+,{"stream_name":"stdout","time":2353.765273216,"data":"\n"}
+,{"stream_name":"stdout","time":2353.76530924,"data":"Epoch 1: val_loss improved from None to 1.56498, saving model to /kaggle/working/runs/full/best_model.keras\n"}
+,{"stream_name":"stdout","time":2354.20890924,"data":"\n"}
+,{"stream_name":"stdout","time":2354.208938863,"data":"Epoch 1: finished saving model to /kaggle/working/runs/full/best_model.keras\n"}
+,{"stream_name":"stdout","time":2354.285597973,"data":"366/366 - 55s - 150ms/step - accuracy: 0.4280 - loss: 1.2768 - val_accuracy: 0.2066 - val_loss: 1.5650 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2354.287891913,"data":"Epoch 2/50\n"}
+,{"stream_name":"stdout","time":2382.697158675,"data":"\n"}
+,{"stream_name":"stdout","time":2382.697195697,"data":"Epoch 2: val_loss improved from 1.56498 to 0.94675, saving model to /kaggle/working/runs/full/best_model.keras\n"}
+,{"stream_name":"stdout","time":2383.196347069,"data":"\n"}
+,{"stream_name":"stdout","time":2383.196381388,"data":"Epoch 2: finished saving model to /kaggle/working/runs/full/best_model.keras\n"}
+,{"stream_name":"stdout","time":2383.227379024,"data":"366/366 - 29s - 79ms/step - accuracy: 0.5414 - loss: 0.8545 - val_accuracy: 0.5005 - val_loss: 0.9468 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2383.229220791,"data":"Epoch 3/50\n"}
+,{"stream_name":"stdout","time":2411.630235868,"data":"\n"}
+,{"stream_name":"stdout","time":2411.630267366,"data":"Epoch 3: val_loss improved from 0.94675 to 0.76496, saving model to /kaggle/working/runs/full/best_model.keras\n"}
+,{"stream_name":"stdout","time":2412.083601267,"data":"\n"}
+,{"stream_name":"stdout","time":2412.083652738,"data":"Epoch 3: finished saving model to /kaggle/working/runs/full/best_model.keras\n"}
+,{"stream_name":"stdout","time":2412.118139519,"data":"366/366 - 29s - 79ms/step - accuracy: 0.6055 - loss: 0.6861 - val_accuracy: 0.5560 - val_loss: 0.7650 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2412.120184347,"data":"Epoch 4/50\n"}
+,{"stream_name":"stdout","time":2440.436772094,"data":"\n"}
+,{"stream_name":"stdout","time":2440.436812004,"data":"Epoch 4: val_loss improved from 0.76496 to 0.76110, saving model to /kaggle/working/runs/full/best_model.keras\n"}
+,{"stream_name":"stdout","time":2440.926017613,"data":"\n"}
+,{"stream_name":"stdout","time":2440.926088411,"data":"Epoch 4: finished saving model to /kaggle/working/runs/full/best_model.keras\n"}
+,{"stream_name":"stdout","time":2440.96034747,"data":"366/366 - 29s - 79ms/step - accuracy: 0.6462 - loss: 0.5899 - val_accuracy: 0.5817 - val_loss: 0.7611 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2440.962899813,"data":"Epoch 5/50\n"}
+,{"stream_name":"stdout","time":2469.350778601,"data":"\n"}
+,{"stream_name":"stdout","time":2469.35081389,"data":"Epoch 5: val_loss did not improve from 0.76110\n"}
+,{"stream_name":"stdout","time":2469.352350752,"data":"366/366 - 28s - 77ms/step - accuracy: 0.6827 - loss: 0.5022 - val_accuracy: 0.5642 - val_loss: 0.7686 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2469.353366324,"data":"Epoch 6/50\n"}
+,{"stream_name":"stdout","time":2497.678243381,"data":"\n"}
+,{"stream_name":"stdout","time":2497.678290426,"data":"Epoch 6: val_loss did not improve from 0.76110\n"}
+,{"stream_name":"stdout","time":2497.680877893,"data":"366/366 - 28s - 77ms/step - accuracy: 0.7337 - loss: 0.4018 - val_accuracy: 0.5447 - val_loss: 0.8980 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2497.682748889,"data":"Epoch 7/50\n"}
+,{"stream_name":"stdout","time":2526.09662974,"data":"\n"}
+,{"stream_name":"stdout","time":2526.096695947,"data":"Epoch 7: val_loss did not improve from 0.76110\n"}
+,{"stream_name":"stdout","time":2526.097492178,"data":"366/366 - 28s - 78ms/step - accuracy: 0.7768 - loss: 0.3267 - val_accuracy: 0.5642 - val_loss: 0.8393 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2526.098731745,"data":"Epoch 8/50\n"}
+,{"stream_name":"stdout","time":2554.429115628,"data":"\n"}
+,{"stream_name":"stdout","time":2554.429163767,"data":"Epoch 8: val_loss did not improve from 0.76110\n"}
+,{"stream_name":"stdout","time":2554.432064233,"data":"\n"}
+,{"stream_name":"stdout","time":2554.432097055,"data":"Epoch 8: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.\n"}
+,{"stream_name":"stdout","time":2554.433151478,"data":"366/366 - 28s - 77ms/step - accuracy: 0.7822 - loss: 0.3267 - val_accuracy: 0.5519 - val_loss: 0.9372 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2554.435580722,"data":"Epoch 9/50\n"}
+,{"stream_name":"stdout","time":2582.844896412,"data":"\n"}
+,{"stream_name":"stdout","time":2582.844951472,"data":"Epoch 9: val_loss did not improve from 0.76110\n"}
+,{"stream_name":"stdout","time":2582.846249426,"data":"366/366 - 28s - 78ms/step - accuracy: 0.8498 - loss: 0.2081 - val_accuracy: 0.5940 - val_loss: 0.7732 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":2582.84710132,"data":"Epoch 10/50\n"}
+,{"stream_name":"stdout","time":2611.143382381,"data":"\n"}
+,{"stream_name":"stdout","time":2611.143450852,"data":"Epoch 10: val_loss did not improve from 0.76110\n"}
+,{"stream_name":"stdout","time":2611.146000455,"data":"366/366 - 28s - 77ms/step - accuracy: 0.9173 - loss: 0.1132 - val_accuracy: 0.5992 - val_loss: 0.8233 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":2611.148254692,"data":"Epoch 11/50\n"}
+,{"stream_name":"stdout","time":2639.537744771,"data":"\n"}
+,{"stream_name":"stdout","time":2639.537782114,"data":"Epoch 11: val_loss did not improve from 0.76110\n"}
+,{"stream_name":"stdout","time":2639.539039546,"data":"366/366 - 28s - 78ms/step - accuracy: 0.9426 - loss: 0.0741 - val_accuracy: 0.6012 - val_loss: 0.8888 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":2639.540064651,"data":"Epoch 12/50\n"}
+,{"stream_name":"stdout","time":2667.895030403,"data":"\n"}
+,{"stream_name":"stdout","time":2667.895078046,"data":"Epoch 12: val_loss did not improve from 0.76110\n"}
+,{"stream_name":"stdout","time":2667.897697137,"data":"\n"}
+,{"stream_name":"stdout","time":2667.897726686,"data":"Epoch 12: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.\n"}
+,{"stream_name":"stdout","time":2667.898452341,"data":"366/366 - 28s - 78ms/step - accuracy: 0.9573 - loss: 0.0561 - val_accuracy: 0.5920 - val_loss: 0.9444 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":2667.900299817,"data":"Epoch 13/50\n"}
+,{"stream_name":"stdout","time":2696.276841829,"data":"\n"}
+,{"stream_name":"stdout","time":2696.276881272,"data":"Epoch 13: val_loss did not improve from 0.76110\n"}
+,{"stream_name":"stdout","time":2696.277209099,"data":"366/366 - 28s - 77ms/step - accuracy: 0.9729 - loss: 0.0350 - val_accuracy: 0.6136 - val_loss: 0.8871 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":2696.278589403,"data":"Epoch 14/50\n"}
+,{"stream_name":"stdout","time":2724.670888891,"data":"\n"}
+,{"stream_name":"stdout","time":2724.670933559,"data":"Epoch 14: val_loss did not improve from 0.76110\n"}
+,{"stream_name":"stdout","time":2724.673284373,"data":"366/366 - 28s - 78ms/step - accuracy: 0.9776 - loss: 0.0266 - val_accuracy: 0.6177 - val_loss: 0.9308 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":2724.675027004,"data":"Epoch 14: early stopping\n"}
+,{"stream_name":"stdout","time":2724.676289685,"data":"Restoring model weights from the end of the best epoch: 4.\n"}
+,{"stream_name":"stdout","time":2725.81208568,"data":"[train] evaluating the checkpointed best model (/kaggle/working/runs/full/best_model.keras)\n"}
+,{"stream_name":"stdout","time":2729.96752618,"data":"[eval] accuracy=0.5582  macroF1=0.5695  MCC=0.4825  kappa=0.4782  AUC=0.8810\n"}
+,{"stream_name":"stdout","time":2729.967578727,"data":"[eval] confusion-pair errors: {'sad\u003c-\u003eneutral': 98, 'angry\u003c-\u003efear': 61}\n"}
+,{"stream_name":"stdout","time":2730.702882714,"data":"[eval] AFW mean stream weights per emotion:\n"}
+,{"stream_name":"stdout","time":2730.702924463,"data":"           mfcc    zcr   rmse\n"}
+,{"stream_name":"stdout","time":2730.702931272,"data":"emotion                      \n"}
+,{"stream_name":"stdout","time":2730.702936106,"data":"angry     0.282  0.346  0.372\n"}
+,{"stream_name":"stdout","time":2730.702941031,"data":"disgust   0.274  0.356  0.370\n"}
+,{"stream_name":"stdout","time":2730.702946215,"data":"fear      0.282  0.357  0.361\n"}
+,{"stream_name":"stdout","time":2730.702951614,"data":"happy     0.291  0.346  0.363\n"}
+,{"stream_name":"stdout","time":2730.702957271,"data":"neutral   0.275  0.367  0.358\n"}
+,{"stream_name":"stdout","time":2730.702961989,"data":"sad       0.268  0.379  0.354\n"}
+,{"stream_name":"stdout","time":2730.702966865,"data":"surprise  0.268  0.350  0.382\n"}
+,{"stream_name":"stdout","time":2730.702972367,"data":"[done] artefacts saved under /kaggle/working/runs/full/\n"}
+,{"stream_name":"stdout","time":2730.799453744,"data":" tag  accuracy  macro_f1      mcc  params\n"}
+,{"stream_name":"stdout","time":2730.799486694,"data":" afw  0.583642  0.592924 0.510271 7324458\n"}
+,{"stream_name":"stdout","time":2730.799494523,"data":"base  0.579531  0.599497 0.505922 7324295\n"}
+,{"stream_name":"stdout","time":2730.799502687,"data":"cadl  0.591040  0.603849 0.518523 7324295\n"}
+,{"stream_name":"stdout","time":2730.799508323,"data":"eaaa  0.576243  0.594408 0.501706 7324295\n"}
+,{"stream_name":"stdout","time":2730.799514012,"data":"full  0.558159  0.569473 0.482467 7324454\n"}
+,{"stream_name":"stdout","time":2730.799519629,"data":"mstc  0.592684  0.608701 0.520974 7324291\n"}
+,{"stream_name":"stdout","time":2730.799525294,"data":"\n"}
+,{"stream_name":"stdout","time":2730.799530885,"data":"  [PASS] All six configurations present: base, afw, eaaa, mstc, cadl, full\n"}
+,{"stream_name":"stdout","time":2730.79953679,"data":"  [FAIL] Base reproduces the base paper (\u003e=0.93): base accuracy = 0.5795 (paper: 0.9491)\n"}
+,{"stream_name":"stdout","time":2730.799543059,"data":"  [FAIL] Full beats the base paper: full accuracy = 0.5582 vs 0.9491\n"}
+,{"stream_name":"stdout","time":2730.799548913,"data":"  [FAIL] Full hits the 95.5-96.5% target: full accuracy = 0.5582\n"}
+,{"stream_name":"stdout","time":2730.799557073,"data":"  [FAIL] Full macro F1 \u003e 0.94: macro F1 = 0.5695\n"}
+,{"stream_name":"stdout","time":2730.799567702,"data":"  [PASS] CADL reduces confusion-pair errors: base = 188, +CADL = 172\n"}
+,{"stream_name":"stdout","time":2730.799585312,"data":"  [PASS] Parameter counts stay in the 6.5-8.5 M band: min = 7,324,291, max = 7,324,458\n"}
+,{"stream_name":"stdout","time":2730.799588655,"data":"  [PASS] AFW adds \u003c0.1% parameters: +163 parameters\n"}
+,{"stream_name":"stdout","time":2730.849459283,"data":"output contents: ['__notebook__.ipynb', 'features_cache', 'report', 'runs', 'ser']\n"}
+,{"stream_name":"stderr","time":2736.641085974,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":2736.641123195,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":2736.806693569,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":2736.806722995,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":2737.461551384,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":2737.86042848,"data":"[NbConvertApp] Writing 289056 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":2740.41979764,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":2741.408719352,"data":"[NbConvertApp] Writing 489440 bytes to __results__.html\n"}
+]

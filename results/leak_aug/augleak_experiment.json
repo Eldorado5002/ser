@@ -1,0 +1,8 @@
+{
+  "clean_base": 0.579531,
+  "dup_leak": 0.726608,
+  "augment_before_split": 0.8222800767333516,
+  "paper": 0.9491,
+  "n_rows": 36486,
+  "copies_per_utterance": 3
+}

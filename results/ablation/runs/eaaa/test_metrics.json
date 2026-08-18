@@ -1,0 +1,46 @@
+{
+  "accuracy": 0.5762433210028771,
+  "accuracy_95ci": [
+    0.5566076273680507,
+    0.5958790146377035
+  ],
+  "macro_precision": 0.6215849944963809,
+  "macro_recall": 0.5836786634963228,
+  "macro_f1": 0.5944079918046085,
+  "weighted_f1": 0.5778404517585436,
+  "specificity_per_class": {
+    "angry": 0.962890625,
+    "disgust": 0.9121522693997072,
+    "fear": 0.9365234375,
+    "happy": 0.90771484375,
+    "neutral": 0.9255111976630964,
+    "sad": 0.857421875,
+    "surprise": 0.995223621363439
+  },
+  "macro_specificity": 0.928205409953749,
+  "gmean_per_class": {
+    "angry": 0.7332926709259858,
+    "disgust": 0.6961184476212323,
+    "fear": 0.6505843090498096,
+    "happy": 0.7202042740976836,
+    "neutral": 0.7607560359904616,
+    "sad": 0.7711210268090302,
+    "surprise": 0.8066741207236819
+  },
+  "macro_gmean": 0.7341072693168407,
+  "mcc": 0.5017057404327468,
+  "cohen_kappa": 0.4993155672229155,
+  "auc_ovr_macro": 0.8902617214413507,
+  "confusion_pair_errors": {
+    "sad<->neutral": 128,
+    "angry<->fear": 34
+  },
+  "n_test": 2433,
+  "config": {
+    "use_afw": false,
+    "use_eaaa": true,
+    "use_mstc": false,
+    "use_cadl": false,
+    "params": 7324295
+  }
+}
