@@ -483,7 +483,7 @@ A(P(
 A(P("7.3  Leakage accounting", "h2"))
 A(tbl([["Pipeline", "Rows", "Contamination", "Accuracy", "Delta"],
        ["Correct: split then augment", "12,162", "0%",
-        f"{base_acc*100:.2f}%", "&mdash;"],
+        f"{base_acc*100:.2f}%", "-"],
        ["Duplicate mirrors", "16,402", "40.8%",
         f"{LD['leaky_base']*100:.2f}%", f"+{LD['delta']*100:.2f}"],
        ["Augment before split", "36,486", "96.2%",
