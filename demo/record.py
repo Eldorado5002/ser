@@ -55,14 +55,16 @@ def capture(seconds: float) -> np.ndarray:
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--seconds", type=float, default=4.0)
-    ap.add_argument("--model", default="full", choices=["full", "mstc"])
+    ap.add_argument("--model", default="best",
+                    choices=["best", "full", "mstc"])
     ap.add_argument("--loop", action="store_true",
                     help="keep recording until Ctrl+C")
     ap.add_argument("--save", metavar="DIR", default=None,
                     help="also write each take to DIR as a .wav")
     args = ap.parse_args()
 
-    print(f"{DIM}loading {args.model} model ...{RESET}")
+    from ser_demo import MODEL_INFO
+    print(f"{DIM}loading '{args.model}' - {MODEL_INFO[args.model]}{RESET}")
     model, weight_model, scalers = load(args.model)
     print(f"{DIM}{model.count_params():,} parameters — ready{RESET}")
 

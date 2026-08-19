@@ -20,8 +20,24 @@ import config  # noqa: E402
 MODELS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
 
 SPECS = {
+    # The report's headline configuration (Section 9): GlobalAveragePooling
+    # head + dropout 0.35/0.55 + L2 1e-4, trained with 3x augmentation.
+    # 60.79% test accuracy with 2,540,167 parameters. Novelties are off, so
+    # it has no AFW gate and cannot show stream weights.
+    "best": dict(use_afw=False, use_mstc=False, head="gap",
+                 dropout_conv=0.35, dropout_dense=0.55, l2=1e-4),
+    # All four novelties (55.82%). The only model with an AFW gate, so the
+    # only one that can show per-clip stream importance.
     "full": dict(use_afw=True, use_mstc=True),
+    # Best single novelty from the ablation (59.27%).
     "mstc": dict(use_afw=False, use_mstc=True),
+}
+
+#: Human-readable labels shown by the demo scripts.
+MODEL_INFO = {
+    "best": "report headline - 60.79% test, 2.54 M params",
+    "full": "all four novelties - 55.82% test, shows AFW weights",
+    "mstc": "multi-scale only - 59.27% test",
 }
 
 # ANSI colours, one per emotion, in config.EMOTIONS order.
@@ -44,8 +60,9 @@ def load(tag: str = "full"):
     if not os.path.exists(wpath):
         raise SystemExit(
             f"Missing {wpath}\n"
-            f"Run  python demo/fetch_model.py  to download the trained "
-            f"weights, or see demo/README.md.")
+            f"Run notebooks/09_export_winner.ipynb on Kaggle and place its "
+            f"demo_export/ files in demo/models/, or pick another model with "
+            f"--model full | mstc. See demo/README.md.")
 
     z = np.load(wpath)
     weights = [z[k] for k in sorted(z.files,

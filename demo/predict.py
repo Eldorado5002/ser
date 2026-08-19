@@ -39,16 +39,20 @@ def collect(paths):
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("paths", nargs="+", help=".wav files or a directory")
-    ap.add_argument("--model", default="full", choices=["full", "mstc"],
-                    help="full = all four novelties (shows AFW weights); "
-                         "mstc = highest accuracy")
+    ap.add_argument("--model", default="best",
+                    choices=["best", "full", "mstc"],
+                    help="best = the report's headline configuration "
+                         "(60.79%%, 2.54 M params); full = all four novelties, "
+                         "the only one that shows AFW stream weights; "
+                         "mstc = best single novelty")
     args = ap.parse_args()
 
     files = collect(args.paths)
     if not files:
         raise SystemExit("no .wav files found")
 
-    print(f"{DIM}loading {args.model} model ...{RESET}")
+    from ser_demo import MODEL_INFO
+    print(f"{DIM}loading '{args.model}' - {MODEL_INFO[args.model]}{RESET}")
     model, weight_model, scalers = load(args.model)
     print(f"{DIM}{model.count_params():,} parameters{RESET}")
 
