@@ -221,11 +221,65 @@ Against the closest comparable study — the same four corpora, also reporting a
 - Speaker-independent evaluation as a stricter secondary protocol.
 - Investigating why AFW reduces confusion-pair errors more than CADL.
 
-## 9. Conclusion
+## 9. Efficiency study
+
+Section 6.4 identified a 37-point train/validation gap. A follow-up study investigated whether regularisation could close it.
+
+### 9.1 A correction to the overfitting diagnosis
+
+The 37-point gap is measured at **epoch 14**. Training uses `EarlyStopping(restore_best_weights=True)` on validation loss, which restores **epoch 4**, where the gap is only 4.7 points. The *evaluated* model was therefore never badly overfit — early stopping was already performing most of the regularisation. This is why the interventions below produced a modest rather than a dramatic gain, and it corrects the interpretation offered in Section 6.4.
+
+### 9.2 Validation sweep
+
+Six configurations, novelties disabled, scored on **validation only**; the test set was not loaded during selection.
+
+| Configuration | Val accuracy | Params | Δ vs base |
+|---|---|---|---|
+| **`gap_reg_aug3`** | 60.84% | 2,540,167 | +2.26 |
+| `gap_reg` | 60.33% | 2,540,167 | +1.75 |
+| `reg` | 59.40% | 7,324,295 | +0.82 |
+| `gap` | 58.79% | 2,540,167 | +0.21 |
+| `base` | 58.58% | 7,324,295 | +0.00 |
+| `gap_reg_aug3_lr` | 58.58% | 2,540,167 | +0.00 |
+
+The winner, `gap_reg_aug3`, combines a GlobalAveragePooling head with dropout 0.35/0.55, L2 1e-4 and 3× augmentation. Notably, the pooling head **on its own** matched base accuracy (58.79% vs 58.58%) using 65% fewer parameters — the `Flatten(9,472) → Dense(512)` head carries 4.85 M parameters and contributes nothing measurable.
+
+### 9.3 Test result
+
+The winner was selected on validation and then evaluated on the test set **once**, alongside the base control.
+
+| Model | Accuracy | 95% CI | Macro F1 | MCC | Kappa | AUC | Params |
+|---|---|---|---|---|---|---|---|
+| Base | 57.95% | [55.99, 59.91] | 0.5995 | 0.5059 | 0.5040 | 0.8932 | 7,324,295 |
+| `gap_reg_aug3` | 60.79% | [58.85, 62.73] | 0.6271 | 0.5381 | 0.5372 | 0.9063 | 2,540,167 |
+
+**+2.84 points with 65% fewer parameters.** Every metric improves together — macro F1 0.5995 → 0.6271, MCC 0.5059 → 0.5381, AUC 0.8932 → 0.9063 — and the confusion-pair errors targeted by CADL fall from 188 to 137 (27.1% fewer) without CADL being enabled.
+
+For a project whose stated goal is a lightweight, edge-deployable model, a smaller *and* more accurate configuration is the more valuable of the two outcomes.
+
+### 9.4 Per-corpus breakdown
+
+| Corpus | n | Base | gap_reg_aug3 |
+|---|---|---|---|
+| TESS | 553 | 96.75% | **98.55%** |
+| RAVDESS | 263 | 47.53% | **55.13%** |
+| CREMA-D | 1,513 | 47.12% | **49.90%** |
+| SAVEE | 104 | 35.58% | **32.69%** |
+| **Combined** | 2,433 | 57.95% | **60.79%** |
+
+This is the most informative table in the report. The same model scores **98.55% on TESS** and **49.90% on CREMA-D**. TESS is two speakers recorded in a studio with deliberately stereotyped delivery, and under the utterance-level split (§8.2) the same speakers appear in training. CREMA-D is 91 crowd-sourced actors with natural delivery and constitutes 62% of the test set.
+
+Two consequences follow. First, the combined figure is essentially a CREMA-D figure. Second — and this bears directly on Section 7 — a single-corpus result on TESS is close to 99% for a model that manages barely 50% on CREMA-D. Published SER accuracies in the mid-90s are therefore explicable not only by the leakage mechanisms of Section 7 but also by **corpus composition**: evaluating on an easy, speaker-dependent corpus and reporting it as a general result.
+
+SAVEE is the weakest at 32.69%, but with only 104 test samples that estimate is noisy, and it is the one corpus where the improved model does not beat base.
+
+## 10. Conclusion
 
 We implemented and ablated four lightweight novelties on a fused four-corpus SER dataset, delivering the component-wise analysis the base paper listed as future work. Three of four novelties improve on the baseline directionally, though none significantly at this sample size; CADL reduces its targeted confusion pairs by 8.5% as designed.
 
 The project's principal contribution is methodological. The base paper's 94.91% could not be reproduced under a verified protocol, and we identify two concrete, independently measured leakage mechanisms — duplicated corpus mirrors and augment-before-split ordering — that inflate accuracy on this data by 14.7 and 24.3 points respectively. Both contamination rates were predicted before measurement and confirmed to within 0.2 points. We therefore report 57.95% as an honest baseline for this corpus combination, exceeding the closest comparable published result by 7.4 points.
+
+The efficiency study adds a third result: 60.79% at 65% of the parameter count, which serves the lightweight-deployment goal better than the accuracy gain alone. The per-corpus breakdown supplies the sharpest single observation in this work — one model, 98.6% on TESS and 49.9% on CREMA-D — and makes clear that any SER accuracy quoted without its corpus composition is close to uninterpretable.
 
 ## Appendix A — Artefacts
 

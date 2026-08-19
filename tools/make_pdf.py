@@ -54,6 +54,16 @@ LA = json.load(open(os.path.join(RES, "leak_aug", "augleak_experiment.json")))
 base_acc = M["base"]["accuracy"]
 n_test = M["base"]["n_test"]
 
+# Efficiency study (Section 9) - loaded up front so the conclusion can cite it.
+FIN = json.load(open(os.path.join(RES, "final", "final_results.json")))
+SW = json.load(open(os.path.join(RES, "sweep", "sweep_results.json")))
+WIN = FIN["winner"]
+fb, fw = FIN["test"]["base"], FIN["test"][WIN]
+pb, pw = FIN["params"]["base"], FIN["params"][WIN]
+pc = FIN["per_corpus"]
+by_tag = {r["tag"]: r for r in SW}
+base_val = by_tag["base"]["val_accuracy"]
+
 # ----------------------------------------------------------------- styles
 ss = getSampleStyleSheet()
 S = {
@@ -173,6 +183,15 @@ A(P(
     f"exceeds the closest comparable published multi-corpus result "
     f"({DASUDE*100:.1f}%, Dasude et al., 2024) by "
     f"{(base_acc-DASUDE)*100:.1f} points."))
+A(P(
+    "A follow-up efficiency study (Section 10) reaches <b>60.79%</b> using "
+    "<b>65% fewer parameters</b> than the base architecture, by replacing "
+    "the flatten head &mdash; which holds 4.85 M of 7.32 M parameters and "
+    "contributes nothing measurable &mdash; with global average pooling. A "
+    "per-corpus breakdown shows the same model scoring <b>98.55% on TESS</b> "
+    "and <b>49.90% on CREMA-D</b>, indicating that published mid-90s "
+    "accuracies are explicable by corpus composition as well as by "
+    "leakage."))
 
 # ----------------------------------------------------------- contributions
 A(P("1.  Contributions", "h1"))
@@ -538,8 +557,112 @@ A(P("&bull;&nbsp;&nbsp;Speaker-independent evaluation as a stricter secondary "
 A(P("&bull;&nbsp;&nbsp;Investigating why AFW reduces confusion-pair errors "
     "more than CADL."))
 
+# ------------------------------------------------------- efficiency study
+A(PageBreak())
+A(P("9.  Efficiency study", "h1"))
+A(P("Section 6.4 identified a 37-point train/validation gap. A follow-up "
+    "study investigated whether regularisation could close it."))
+
+A(P("9.1  A correction to the overfitting diagnosis", "h2"))
+A(Paragraph(
+    f"The 37-point gap is measured at <b>epoch 14</b>. Training uses "
+    f"EarlyStopping(restore_best_weights=True) on validation loss, which "
+    f"restores <b>epoch 4</b>, where the gap is only "
+    f"{by_tag['base']['gap']*100:.1f} points. The <i>evaluated</i> model was "
+    f"therefore never badly overfit &mdash; early stopping was already "
+    f"performing most of the regularisation. This is why the interventions "
+    f"below produced a modest rather than a dramatic gain, and it corrects "
+    f"the interpretation offered in Section 6.4.", S["note"]))
+
+A(P("9.2  Validation sweep", "h2"))
+A(P("Six configurations, novelties disabled, scored on <b>validation "
+    "only</b>; the test set was not loaded during selection."))
+rows = [["Configuration", "Val accuracy", "Params", "Delta vs base"]]
+for r in sorted(SW, key=lambda r: -r["val_accuracy"]):
+    rows.append([r["tag"], f"{r['val_accuracy']*100:.2f}%",
+                 f"{r['params']:,}",
+                 f"{(r['val_accuracy']-base_val)*100:+.2f}"])
+A(tbl(rows, [5.2 * cm, 3.4 * cm, 3.4 * cm, 3.0 * cm],
+      align={1: "RIGHT", 2: "RIGHT", 3: "RIGHT"}))
+A(Spacer(1, 0.35 * cm))
+A(P(
+    f"The winner, {WIN}, combines a GlobalAveragePooling head with dropout "
+    f"0.35/0.55, L2 1e-4 and 3x augmentation. Notably the pooling head "
+    f"<b>on its own</b> matched base accuracy "
+    f"({by_tag['gap']['val_accuracy']*100:.2f}% vs {base_val*100:.2f}%) "
+    f"using 65% fewer parameters &mdash; the Flatten(9,472) to Dense(512) "
+    f"head carries 4.85 M parameters and contributes nothing measurable."))
+
+A(P("9.3  Test result", "h2"))
+A(P("The winner was selected on validation and then evaluated on the test "
+    "set <b>once</b>, alongside the base control."))
+rows = [["Model", "Accuracy", "95% CI", "Macro F1", "MCC", "AUC", "Params"]]
+for tag, m, p in (("Base", fb, pb), (WIN, fw, pw)):
+    lo, hi = m["accuracy_95ci"]
+    rows.append([tag, f"{m['accuracy']*100:.2f}%",
+                 f"[{lo*100:.2f}, {hi*100:.2f}]", f"{m['macro_f1']:.4f}",
+                 f"{m['mcc']:.4f}", f"{m['auc_ovr_macro']:.4f}", f"{p:,}"])
+A(tbl(rows, [3.3 * cm, 2.0 * cm, 2.7 * cm, 1.9 * cm, 1.7 * cm, 1.7 * cm,
+             2.2 * cm],
+      align={1: "RIGHT", 2: "CENTER", 3: "RIGHT", 4: "RIGHT", 5: "RIGHT",
+             6: "RIGHT"}, size=8.3))
+A(Spacer(1, 0.4 * cm))
+bp = sum(fb["confusion_pair_errors"].values())
+wp = sum(fw["confusion_pair_errors"].values())
+A(P(
+    f"<b>{(fw['accuracy']-fb['accuracy'])*100:+.2f} points with "
+    f"{100*(1-pw/pb):.0f}% fewer parameters.</b> Every metric improves "
+    f"together &mdash; macro F1 {fb['macro_f1']:.4f} to "
+    f"{fw['macro_f1']:.4f}, MCC {fb['mcc']:.4f} to {fw['mcc']:.4f}, AUC "
+    f"{fb['auc_ovr_macro']:.4f} to {fw['auc_ovr_macro']:.4f} &mdash; and the "
+    f"confusion-pair errors targeted by CADL fall from {bp} to {wp} "
+    f"({100*(bp-wp)/bp:.1f}% fewer) without CADL being enabled."))
+A(figure(os.path.join(FIG, "accuracy_vs_size.png"), CONTENT_W * 0.66,
+         "Figure 6 &mdash; The improved configuration is both smaller and "
+         "more accurate."))
+A(P("For a project whose stated goal is a lightweight, edge-deployable "
+    "model, a smaller <i>and</i> more accurate configuration is the more "
+    "valuable of the two outcomes."))
+
+A(P("9.4  Per-corpus breakdown", "h2"))
+rows = [["Corpus", "n", "Base", WIN]]
+for c in ["TESS", "RAVDESS", "CREMA-D", "SAVEE"]:
+    if c in pc:
+        rows.append([c, f"{pc[c]['n']:,}", f"{pc[c]['base']*100:.2f}%",
+                     f"{pc[c][WIN]*100:.2f}%"])
+rows.append(["Combined", f"{fb['n_test']:,}", f"{fb['accuracy']*100:.2f}%",
+             f"{fw['accuracy']*100:.2f}%"])
+A(tbl(rows, [4.0 * cm, 2.6 * cm, 3.6 * cm, 4.3 * cm],
+      align={1: "RIGHT", 2: "RIGHT", 3: "RIGHT"}))
+A(Spacer(1, 0.4 * cm))
+A(figure(os.path.join(FIG, "per_corpus.png"), CONTENT_W,
+         "Figure 7 &mdash; Per-corpus test accuracy. The combined figure is "
+         "dominated by CREMA-D, which is 62% of the test set."))
+A(P(
+    f"This is the most informative table in the report. The same model "
+    f"scores <b>{pc['TESS'][WIN]*100:.2f}% on TESS</b> and "
+    f"<b>{pc['CREMA-D'][WIN]*100:.2f}% on CREMA-D</b>. TESS is two speakers "
+    f"recorded in a studio with deliberately stereotyped delivery, and under "
+    f"the utterance-level split (Section 8.2) the same speakers appear in "
+    f"training. CREMA-D is 91 crowd-sourced actors with natural delivery and "
+    f"constitutes {100*pc['CREMA-D']['n']/fb['n_test']:.0f}% of the test "
+    f"set."))
+A(Paragraph(
+    "Two consequences follow. First, the combined figure is essentially a "
+    "CREMA-D figure. Second, and bearing directly on Section 7, a "
+    "single-corpus result on TESS approaches 99% for a model managing barely "
+    "50% on CREMA-D. Published SER accuracies in the mid-90s are therefore "
+    "explicable not only by the leakage mechanisms of Section 7 but also by "
+    "<b>corpus composition</b> &mdash; evaluating on an easy, "
+    "speaker-dependent corpus and reporting it as a general result.",
+    S["note"]))
+A(P(
+    f"SAVEE is the weakest at {pc['SAVEE'][WIN]*100:.2f}%, but with only "
+    f"{pc['SAVEE']['n']} test samples that estimate is noisy, and it is the "
+    f"one corpus where the improved model does not beat base."))
+
 # -------------------------------------------------------------- conclusion
-A(P("9.  Conclusion", "h1"))
+A(P("10.  Conclusion", "h1"))
 A(P(
     f"We implemented and ablated four lightweight novelties on a fused "
     f"four-corpus SER dataset, delivering the component-wise analysis the "
@@ -560,8 +683,18 @@ A(P(
     f"{base_acc*100:.2f}% as an honest baseline for this corpus combination, "
     f"exceeding the closest comparable published result by "
     f"{(base_acc-DASUDE)*100:.1f} points."))
+A(P(
+    f"The efficiency study adds a third result: {fw['accuracy']*100:.2f}% at "
+    f"{100*(1-pw/pb):.0f}% of the parameter count, which serves the "
+    f"lightweight-deployment goal better than the accuracy gain alone. The "
+    f"per-corpus breakdown supplies the sharpest single observation in this "
+    f"work &mdash; one model, {pc['TESS'][WIN]*100:.1f}% on TESS and "
+    f"{pc['CREMA-D'][WIN]*100:.1f}% on CREMA-D &mdash; and makes clear that "
+    f"any SER accuracy quoted without its corpus composition is close to "
+    f"uninterpretable."))
 
 # ---------------------------------------------------------------- appendix
+A(PageBreak())
 A(P("Appendix A &mdash; Artefacts and reproduction", "h1"))
 A(Paragraph(
     "results/ablation/runs/{base,afw,eaaa,mstc,cadl,full}/<br/>"

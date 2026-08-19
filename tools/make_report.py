@@ -466,8 +466,118 @@ w("- Speaker-independent evaluation as a stricter secondary protocol.")
 w("- Investigating why AFW reduces confusion-pair errors more than CADL.")
 w("")
 
+# ------------------------------------------------------ efficiency study
+FIN = json.load(open(os.path.join(RES, "final", "final_results.json")))
+SW = json.load(open(os.path.join(RES, "sweep", "sweep_results.json")))
+WIN = FIN["winner"]
+fb, fw = FIN["test"]["base"], FIN["test"][WIN]
+pb, pw = FIN["params"]["base"], FIN["params"][WIN]
+pc = FIN["per_corpus"]
+by_tag = {r["tag"]: r for r in SW}
+
+w("## 9. Efficiency study")
+w("")
+w("Section 6.4 identified a 37-point train/validation gap. A follow-up study "
+  "investigated whether regularisation could close it.")
+w("")
+
+w("### 9.1 A correction to the overfitting diagnosis")
+w("")
+w(f"The 37-point gap is measured at **epoch 14**. Training uses "
+  f"`EarlyStopping(restore_best_weights=True)` on validation loss, which "
+  f"restores **epoch 4**, where the gap is only "
+  f"{by_tag['base']['gap']*100:.1f} points. The *evaluated* model was "
+  f"therefore never badly overfit — early stopping was already performing "
+  f"most of the regularisation. This is why the interventions below produced "
+  f"a modest rather than a dramatic gain, and it corrects the interpretation "
+  f"offered in Section 6.4.")
+w("")
+
+w("### 9.2 Validation sweep")
+w("")
+w("Six configurations, novelties disabled, scored on **validation only**; "
+  "the test set was not loaded during selection.")
+w("")
+w("| Configuration | Val accuracy | Params | Δ vs base |")
+w("|---|---|---|---|")
+base_val = by_tag["base"]["val_accuracy"]
+for r in sorted(SW, key=lambda r: -r["val_accuracy"]):
+    mark = "**" if r["tag"] == WIN else ""
+    w(f"| {mark}`{r['tag']}`{mark} | {r['val_accuracy']*100:.2f}% | "
+      f"{r['params']:,} | {(r['val_accuracy']-base_val)*100:+.2f} |")
+w("")
+w(f"The winner, `{WIN}`, combines a GlobalAveragePooling head with dropout "
+  f"0.35/0.55, L2 1e-4 and 3× augmentation. Notably, the pooling head **on "
+  f"its own** matched base accuracy "
+  f"({by_tag['gap']['val_accuracy']*100:.2f}% vs "
+  f"{base_val*100:.2f}%) using 65% fewer parameters — the "
+  f"`Flatten(9,472) → Dense(512)` head carries 4.85 M parameters and "
+  f"contributes nothing measurable.")
+w("")
+
+w("### 9.3 Test result")
+w("")
+w("The winner was selected on validation and then evaluated on the test set "
+  "**once**, alongside the base control.")
+w("")
+w("| Model | Accuracy | 95% CI | Macro F1 | MCC | Kappa | AUC | Params |")
+w("|---|---|---|---|---|---|---|---|")
+for tag, m, p in ((f"Base", fb, pb), (f"`{WIN}`", fw, pw)):
+    lo, hi = m["accuracy_95ci"]
+    w(f"| {tag} | {m['accuracy']*100:.2f}% | [{lo*100:.2f}, {hi*100:.2f}] | "
+      f"{m['macro_f1']:.4f} | {m['mcc']:.4f} | {m['cohen_kappa']:.4f} | "
+      f"{m['auc_ovr_macro']:.4f} | {p:,} |")
+w("")
+bp = sum(fb["confusion_pair_errors"].values())
+wp = sum(fw["confusion_pair_errors"].values())
+w(f"**{(fw['accuracy']-fb['accuracy'])*100:+.2f} points with "
+  f"{100*(1-pw/pb):.0f}% fewer parameters.** Every metric improves together "
+  f"— macro F1 {fb['macro_f1']:.4f} → {fw['macro_f1']:.4f}, MCC "
+  f"{fb['mcc']:.4f} → {fw['mcc']:.4f}, AUC {fb['auc_ovr_macro']:.4f} → "
+  f"{fw['auc_ovr_macro']:.4f} — and the confusion-pair errors targeted by "
+  f"CADL fall from {bp} to {wp} ({100*(bp-wp)/bp:.1f}% fewer) without CADL "
+  f"being enabled.")
+w("")
+w("For a project whose stated goal is a lightweight, edge-deployable model, "
+  "a smaller *and* more accurate configuration is the more valuable of the "
+  "two outcomes.")
+w("")
+
+w("### 9.4 Per-corpus breakdown")
+w("")
+w("| Corpus | n | Base | " + WIN + " |")
+w("|---|---|---|---|")
+for c in ["TESS", "RAVDESS", "CREMA-D", "SAVEE"]:
+    if c not in pc:
+        continue
+    w(f"| {c} | {pc[c]['n']:,} | {pc[c]['base']*100:.2f}% | "
+      f"**{pc[c][WIN]*100:.2f}%** |")
+w(f"| **Combined** | {fb['n_test']:,} | {fb['accuracy']*100:.2f}% | "
+  f"**{fw['accuracy']*100:.2f}%** |")
+w("")
+w(f"This is the most informative table in the report. The same model scores "
+  f"**{pc['TESS'][WIN]*100:.2f}% on TESS** and "
+  f"**{pc['CREMA-D'][WIN]*100:.2f}% on CREMA-D**. TESS is two speakers "
+  f"recorded in a studio with deliberately stereotyped delivery, and under "
+  f"the utterance-level split (§8.2) the same speakers appear in training. "
+  f"CREMA-D is 91 crowd-sourced actors with natural delivery and constitutes "
+  f"{100*pc['CREMA-D']['n']/fb['n_test']:.0f}% of the test set.")
+w("")
+w("Two consequences follow. First, the combined figure is essentially a "
+  "CREMA-D figure. Second — and this bears directly on Section 7 — a "
+  "single-corpus result on TESS is close to 99% for a model that manages "
+  "barely 50% on CREMA-D. Published SER accuracies in the mid-90s are "
+  "therefore explicable not only by the leakage mechanisms of Section 7 but "
+  "also by **corpus composition**: evaluating on an easy, speaker-dependent "
+  "corpus and reporting it as a general result.")
+w("")
+w(f"SAVEE is the weakest at {pc['SAVEE'][WIN]*100:.2f}%, but with only "
+  f"{pc['SAVEE']['n']} test samples that estimate is noisy, and it is the "
+  f"one corpus where the improved model does not beat base.")
+w("")
+
 # ------------------------------------------------------------- conclusion
-w("## 9. Conclusion")
+w("## 10. Conclusion")
 w("")
 w(f"We implemented and ablated four lightweight novelties on a fused "
   f"four-corpus SER dataset, delivering the component-wise analysis the base "
@@ -488,6 +598,15 @@ w(f"The project's principal contribution is methodological. The base "
   f"{base_acc*100:.2f}% as an honest baseline for this corpus combination, "
   f"exceeding the closest comparable published result by "
   f"{(base_acc-DASUDE)*100:.1f} points.")
+w("")
+w(f"The efficiency study adds a third result: {fw['accuracy']*100:.2f}% at "
+  f"{100*(1-pw/pb):.0f}% of the parameter count, which serves the "
+  f"lightweight-deployment goal better than the accuracy gain alone. The "
+  f"per-corpus breakdown supplies the sharpest single observation in this "
+  f"work — one model, {pc['TESS'][WIN]*100:.1f}% on TESS and "
+  f"{pc['CREMA-D'][WIN]*100:.1f}% on CREMA-D — and makes clear that any SER "
+  f"accuracy quoted without its corpus composition is close to "
+  f"uninterpretable.")
 w("")
 
 # --------------------------------------------------------------- appendix

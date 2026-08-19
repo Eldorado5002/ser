@@ -1,0 +1,99 @@
+[{"stream_name":"stderr","time":9.426780623,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":9.426886022,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":9.426893128,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":9.426897709,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":10.314748842,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":10.314802646,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":10.314811009,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":10.31481649,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":34.042281981,"data":"TF 2.20.0 | Keras 3.13.2\n"}
+,{"stream_name":"stdout","time":37.030631544,"data":"\u001b[33m35bec23\u001b[m\u001b[33m (\u001b[m\u001b[1;36mHEAD -\u003e \u001b[m\u001b[1;32mmain\u001b[m\u001b[33m, \u001b[m\u001b[1;31morigin/main\u001b[m\u001b[33m, \u001b[m\u001b[1;31morigin/HEAD\u001b[m\u001b[33m)\u001b[m feat: add early-stopping criterion experiment\r\n"}
+,{"stream_name":"stdout","time":75.346916689,"data":"RAVDESS   -\u003e /kaggle/input/datasets/uwrfkaggler/ravdess-emotional-speech-audio/audio_speech_actors_01-24\n"}
+,{"stream_name":"stdout","time":84.155713281,"data":"TESS      -\u003e /kaggle/input/datasets/ejlok1/toronto-emotional-speech-set-tess/TESS Toronto emotional speech set data\n"}
+,{"stream_name":"stdout","time":92.597180476,"data":"SAVEE     -\u003e /kaggle/input/datasets/ejlok1/surrey-audiovisual-expressed-emotion-savee/ALL\n"}
+,{"stream_name":"stdout","time":92.597245721,"data":"CREMA-D   -\u003e /kaggle/input/datasets/ejlok1/cremad/AudioWAV\n"}
+,{"stream_name":"stdout","time":92.988326192,"data":"loaded 6 candidates from /kaggle/input/notebooks/macbot000/notebook146f8a3bc7/sweep_results.json\n"}
+,{"stream_name":"stdout","time":92.98840177,"data":"\n"}
+,{"stream_name":"stdout","time":92.988410188,"data":"            tag  val_accuracy  train_accuracy       gap  params  best_epoch\n"}
+,{"stream_name":"stdout","time":92.98841643,"data":"   gap_reg_aug3      0.608428        0.625019  0.016591 2540167           5\n"}
+,{"stream_name":"stdout","time":92.98842245,"data":"        gap_reg      0.603289        0.645128  0.041839 2540167           9\n"}
+,{"stream_name":"stdout","time":92.988452626,"data":"            reg      0.594039        0.601282  0.007243 7324295           6\n"}
+,{"stream_name":"stdout","time":92.98845915,"data":"            gap      0.587873        0.584444 -0.003428 2540167           4\n"}
+,{"stream_name":"stdout","time":92.988469059,"data":"           base      0.585817        0.633248  0.047431 7324295           4\n"}
+,{"stream_name":"stdout","time":92.98847431,"data":"gap_reg_aug3_lr      0.585817        0.634308  0.048491 2540167           5\n"}
+,{"stream_name":"stdout","time":92.988479436,"data":"\n"}
+,{"stream_name":"stdout","time":92.988484545,"data":"WINNER (by validation): gap_reg_aug3\n"}
+,{"stream_name":"stdout","time":93.026496177,"data":"saved models found: ['base', 'gap', 'gap_reg', 'gap_reg_aug3', 'gap_reg_aug3_lr', 'reg']\n"}
+,{"stream_name":"stdout","time":93.026558117,"data":"will evaluate: ['base', 'gap_reg_aug3']\n"}
+,{"stream_name":"stdout","time":101.176484674,"data":"[data] RAVDESS : found  1440 wav files, kept  1440 labelled samples (root: data/RAVDESS)\n"}
+,{"stream_name":"stdout","time":103.054116174,"data":"[data] TESS    : found  2800 wav files, kept  2800 labelled samples (root: data/TESS)\n"}
+,{"stream_name":"stdout","time":103.422985119,"data":"[data] SAVEE   : found   480 wav files, kept   480 labelled samples (root: data/SAVEE)\n"}
+,{"stream_name":"stdout","time":106.722997704,"data":"[data] CREMA-D : found  7442 wav files, kept  7442 labelled samples (root: data/CREMA-D)\n"}
+,{"stream_name":"stdout","time":106.723046663,"data":"[data] combined dataset: 12162 samples\n"}
+,{"stream_name":"stdout","time":106.723054013,"data":"emotion\n"}
+,{"stream_name":"stdout","time":106.723059719,"data":"angry       1923\n"}
+,{"stream_name":"stdout","time":106.723065153,"data":"disgust     1923\n"}
+,{"stream_name":"stdout","time":106.72307091,"data":"fear        1923\n"}
+,{"stream_name":"stdout","time":106.723076475,"data":"happy       1923\n"}
+,{"stream_name":"stdout","time":106.723082608,"data":"neutral     1895\n"}
+,{"stream_name":"stdout","time":106.723088279,"data":"sad         1923\n"}
+,{"stream_name":"stdout","time":106.723093604,"data":"surprise     652\n"}
+,{"stream_name":"stdout","time":106.723099019,"data":"[split] train=8756  val=973  test=2433 (target ratios 72:8:20)\n"}
+,{"stream_name":"stdout","time":106.723104667,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/test_dc9f237867bc3c96.npz\n"}
+,{"stream_name":"stdout","time":106.872546968,"data":"\n"}
+,{"stream_name":"stdout","time":106.872617209,"data":"test set: 2,433 samples - being used for the FIRST and ONLY time\n"}
+,{"stream_name":"stdout","time":107.072894359,"data":"[aug] policy=uniform (base paper)  originals=8756  augmented=2944  total=11700\n"}
+,{"stream_name":"stdout","time":107.072933864,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/train_uniform_2ee82c103fda6ee6.npz\n"}
+,{"stream_name":"stderr","time":107.984403512,"data":"2026-08-19 00:29:31.055091: E external/local_xla/xla/stream_executor/cuda/cuda_platform.cc:51] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)\n"}
+,{"stream_name":"stderr","time":108.188090152,"data":"2026-08-19 00:29:31.055091: E external/local_xla/xla/stream_executor/cuda/cuda_platform.cc:51] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)\n"}
+,{"stream_name":"stderr","time":108.188146271,"data":"\n"}
+,{"stream_name":"stderr","time":108.18815145,"data":"2026-08-19 00:29:31.055091: E external/local_xla/xla/stream_executor/cuda/cuda_platform.cc:51] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)\n"}
+,{"stream_name":"stdout","time":210.485336446,"data":"\n"}
+,{"stream_name":"stdout","time":210.485397401,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":210.485409195,"data":"[test] base\n"}
+,{"stream_name":"stdout","time":210.485419109,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":211.283468186,"data":"[eval] accuracy=0.5795  macroF1=0.5995  MCC=0.5059  kappa=0.5040  AUC=0.8932\n"}
+,{"stream_name":"stdout","time":211.283523663,"data":"[eval] confusion-pair errors: {'sad\u003c-\u003eneutral': 124, 'angry\u003c-\u003efear': 64}\n"}
+,{"stream_name":"stdout","time":211.283532112,"data":"[aug] policy=uniform (base paper)  originals=8756  augmented=17512  total=26268\n"}
+,{"stream_name":"stdout","time":211.283548096,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/train_uniform3x_fecd1cfea155a33b.npz\n"}
+,{"stream_name":"stdout","time":320.175270884,"data":"\n"}
+,{"stream_name":"stdout","time":320.175362101,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":320.175413361,"data":"[test] gap_reg_aug3\n"}
+,{"stream_name":"stdout","time":320.175419561,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":320.592387513,"data":"[eval] accuracy=0.6079  macroF1=0.6271  MCC=0.5381  kappa=0.5372  AUC=0.9063\n"}
+,{"stream_name":"stdout","time":320.59243171,"data":"[eval] confusion-pair errors: {'sad\u003c-\u003eneutral': 86, 'angry\u003c-\u003efear': 51}\n"}
+,{"stream_name":"stdout","time":320.614746358,"data":"\n"}
+,{"stream_name":"stdout","time":320.614804287,"data":"==============================================================================\n"}
+,{"stream_name":"stdout","time":320.614812054,"data":"  PER-CORPUS ACCURACY (test set)\n"}
+,{"stream_name":"stdout","time":320.614817011,"data":"==============================================================================\n"}
+,{"stream_name":"stdout","time":320.614821988,"data":"  corpus          n             base     gap_reg_aug3\n"}
+,{"stream_name":"stdout","time":320.614826594,"data":"  --------------------------------------------------------------------------\n"}
+,{"stream_name":"stdout","time":320.614830986,"data":"  RAVDESS       263           47.53%           55.13%\n"}
+,{"stream_name":"stdout","time":320.614835239,"data":"  TESS          553           96.75%           98.55%\n"}
+,{"stream_name":"stdout","time":320.614840001,"data":"  SAVEE         104           35.58%           32.69%\n"}
+,{"stream_name":"stdout","time":320.614844446,"data":"  CREMA-D      1513           47.12%           49.90%\n"}
+,{"stream_name":"stdout","time":320.614848968,"data":"  --------------------------------------------------------------------------\n"}
+,{"stream_name":"stdout","time":320.614853265,"data":"  COMBINED     2433           57.95%           60.79%\n"}
+,{"stream_name":"stdout","time":320.614858433,"data":"==============================================================================\n"}
+,{"stream_name":"stdout","time":320.637307118,"data":"\n"}
+,{"stream_name":"stdout","time":320.637349611,"data":"==============================================================================\n"}
+,{"stream_name":"stdout","time":320.637356196,"data":"  FINAL RESULT\n"}
+,{"stream_name":"stdout","time":320.637360653,"data":"==============================================================================\n"}
+,{"stream_name":"stdout","time":320.637365243,"data":"  base                 acc  57.95%  [55.99, 59.91]  macroF1 0.5995  MCC 0.5059  7,324,295 params\n"}
+,{"stream_name":"stdout","time":320.637369687,"data":"  gap_reg_aug3         acc  60.79%  [58.85, 62.73]  macroF1 0.6271  MCC 0.5381  2,540,167 params\n"}
+,{"stream_name":"stdout","time":320.637374172,"data":"\n"}
+,{"stream_name":"stdout","time":320.637379939,"data":"  improvement over base: +2.84 points\n"}
+,{"stream_name":"stdout","time":320.637384057,"data":"  report's reproduction figure: 57.95%\n"}
+,{"stream_name":"stdout","time":320.637390214,"data":"==============================================================================\n"}
+,{"stream_name":"stdout","time":320.63739469,"data":"\n"}
+,{"stream_name":"stdout","time":320.637399356,"data":"wrote /kaggle/working/final_results.json\n"}
+,{"stream_name":"stdout","time":320.63740408,"data":"output: ['__notebook__.ipynb', 'features_cache', 'final', 'final_results.json', 'ser']\n"}
+,{"stream_name":"stderr","time":327.023382892,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":327.023455822,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":327.239471382,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":327.239518645,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":328.02717535,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":328.440927637,"data":"[NbConvertApp] Writing 23248 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":331.822138038,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":332.932536041,"data":"[NbConvertApp] Writing 327760 bytes to __results__.html\n"}
+]
