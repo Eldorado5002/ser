@@ -40,6 +40,9 @@ MODEL_INFO = {
     "mstc": "multi-scale only - 59.27% test",
 }
 
+#: Measured test-set accuracy (n=2,433) of each model, from the report.
+TEST_ACCURACY = {"best": 60.79, "full": 55.82, "mstc": 59.27}
+
 # ANSI colours, one per emotion, in config.EMOTIONS order.
 COLOUR = {
     "angry": "\033[91m", "disgust": "\033[95m", "fear": "\033[94m",

@@ -4,9 +4,9 @@
     python demo/predict.py demo/clips              # every clip in a folder
     python demo/predict.py demo/clips --model mstc
 
-Prints the full probability distribution rather than a single label: the
-model is ~58% accurate on this corpus, so the distribution is the honest
-output and the runner-up is often informative.
+Prints the full probability distribution rather than a single label: even
+the best model is ~61% accurate on this corpus, so the distribution is the
+honest output and the runner-up is often informative.
 """
 from __future__ import annotations
 
@@ -51,7 +51,7 @@ def main():
     if not files:
         raise SystemExit("no .wav files found")
 
-    from ser_demo import MODEL_INFO
+    from ser_demo import MODEL_INFO, TEST_ACCURACY
     print(f"{DIM}loading '{args.model}' - {MODEL_INFO[args.model]}{RESET}")
     model, weight_model, scalers = load(args.model)
     print(f"{DIM}{model.count_params():,} parameters{RESET}")
@@ -74,8 +74,9 @@ def main():
     if graded > 1:
         print(f"\n{BOLD}  {hits}/{graded} correct "
               f"({100*hits/graded:.0f}%) on this sample{RESET}")
-        print(f"  {DIM}Measured test-set accuracy is 57.95% (n=2,433); a "
-              f"handful of clips will vary widely around that.{RESET}\n")
+        print(f"  {DIM}Measured test-set accuracy of '{args.model}' is "
+              f"{TEST_ACCURACY[args.model]:.2f}% (n=2,433); a handful of "
+              f"clips will vary widely around that.{RESET}\n")
 
 
 def config_top(probs):
