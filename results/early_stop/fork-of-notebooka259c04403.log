@@ -1,0 +1,290 @@
+[{"stream_name":"stderr","time":7.252223402,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.252296084,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.252302273,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.252305841,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":7.868787257,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.86884587,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.868854436,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.868858687,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":32.027721265,"data":"TF 2.20.0 | Keras 3.13.2\n"}
+,{"stream_name":"stdout","time":32.027770829,"data":"GPUs: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU'), PhysicalDevice(name='/physical_device:GPU:1', device_type='GPU')]\n"}
+,{"stream_name":"stdout","time":35.863442841,"data":"\u001b[33md7954b5\u001b[m\u001b[33m (\u001b[m\u001b[1;36mHEAD\u001b[m\u001b[33m -\u003e \u001b[m\u001b[1;32mmain\u001b[m\u001b[33m, \u001b[m\u001b[1;31morigin/main\u001b[m\u001b[33m, \u001b[m\u001b[1;31morigin/HEAD\u001b[m\u001b[33m)\u001b[m feat: add the exported sweep-winner weights for the demo\r\n"}
+,{"stream_name":"stdout","time":89.273296283,"data":"RAVDESS   -\u003e /kaggle/input/datasets/uwrfkaggler/ravdess-emotional-speech-audio/audio_speech_actors_01-24\n"}
+,{"stream_name":"stdout","time":96.383554352,"data":"TESS      -\u003e /kaggle/input/datasets/ejlok1/toronto-emotional-speech-set-tess/TESS Toronto emotional speech set data\n"}
+,{"stream_name":"stdout","time":103.319747995,"data":"SAVEE     -\u003e /kaggle/input/datasets/ejlok1/surrey-audiovisual-expressed-emotion-savee/ALL\n"}
+,{"stream_name":"stdout","time":103.339569503,"data":"CREMA-D   -\u003e /kaggle/input/datasets/ejlok1/cremad/AudioWAV\n"}
+,{"stream_name":"stdout","time":134.732676489,"data":"staged 15 cache files\n"}
+,{"stream_name":"stdout","time":134.73271688,"data":"loaded 6 prior candidates\n"}
+,{"stream_name":"stdout","time":134.732723729,"data":"[data] RAVDESS : found  1440 wav files, kept  1440 labelled samples (root: data/RAVDESS)\n"}
+,{"stream_name":"stdout","time":134.732729673,"data":"[data] TESS    : found  2800 wav files, kept  2800 labelled samples (root: data/TESS)\n"}
+,{"stream_name":"stdout","time":134.732734866,"data":"[data] SAVEE   : found   480 wav files, kept   480 labelled samples (root: data/SAVEE)\n"}
+,{"stream_name":"stdout","time":134.732740551,"data":"[data] CREMA-D : found  7442 wav files, kept  7442 labelled samples (root: data/CREMA-D)\n"}
+,{"stream_name":"stdout","time":134.931944072,"data":"[data] combined dataset: 12162 samples\n"}
+,{"stream_name":"stdout","time":134.931984891,"data":"emotion\n"}
+,{"stream_name":"stdout","time":134.931990828,"data":"angry       1923\n"}
+,{"stream_name":"stdout","time":134.931995866,"data":"disgust     1923\n"}
+,{"stream_name":"stdout","time":134.932000726,"data":"fear        1923\n"}
+,{"stream_name":"stdout","time":134.932005551,"data":"happy       1923\n"}
+,{"stream_name":"stdout","time":134.932010392,"data":"neutral     1895\n"}
+,{"stream_name":"stdout","time":134.932015179,"data":"sad         1923\n"}
+,{"stream_name":"stdout","time":134.932019996,"data":"surprise     652\n"}
+,{"stream_name":"stdout","time":134.932039177,"data":"[split] train=8756  val=973  test=2433 (target ratios 72:8:20)\n"}
+,{"stream_name":"stdout","time":134.932043571,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/val_3a68781e8c822fb9.npz\n"}
+,{"stream_name":"stdout","time":135.197474891,"data":"[aug] policy=uniform (base paper)  originals=8756  augmented=2944  total=11700\n"}
+,{"stream_name":"stdout","time":135.197515008,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/train_uniform_2ee82c103fda6ee6.npz\n"}
+,{"stream_name":"stdout","time":136.185575909,"data":"[aug] policy=uniform (base paper)  originals=8756  augmented=17512  total=26268\n"}
+,{"stream_name":"stdout","time":136.185610462,"data":"[features] cache hit -\u003e /kaggle/working/features_cache/train_uniform3x_fecd1cfea155a33b.npz\n"}
+,{"stream_name":"stdout","time":138.091919876,"data":"\n"}
+,{"stream_name":"stdout","time":138.091966339,"data":"TEST SET NOT LOADED - still sealed.\n"}
+,{"stream_name":"stderr","time":138.857671056,"data":"WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\n"}
+,{"stream_name":"stderr","time":138.857709391,"data":"I0000 00:00:1791395630.017528      23 gpu_device.cc:2020] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 13756 MB memory:  -\u003e device: 0, name: Tesla T4, pci bus id: 0000:00:04.0, compute capability: 7.5\n"}
+,{"stream_name":"stderr","time":138.858020217,"data":"I0000 00:00:1791395630.021700      23 gpu_device.cc:2020] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 13756 MB memory:  -\u003e device: 1, name: Tesla T4, pci bus id: 0000:00:05.0, compute capability: 7.5\n"}
+,{"stream_name":"stderr","time":139.060159794,"data":"WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\n"}
+,{"stream_name":"stderr","time":139.060209127,"data":"I0000 00:00:1791395630.017528      23 gpu_device.cc:2020] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 13756 MB memory:  -\u003e device: 0, name: Tesla T4, pci bus id: 0000:00:04.0, compute capability: 7.5\n"}
+,{"stream_name":"stderr","time":139.06021596,"data":"I0000 00:00:1791395630.021700      23 gpu_device.cc:2020] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 13756 MB memory:  -\u003e device: 1, name: Tesla T4, pci bus id: 0000:00:05.0, compute capability: 7.5\n"}
+,{"stream_name":"stderr","time":139.060220518,"data":"\n"}
+,{"stream_name":"stderr","time":139.060224538,"data":"WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\n"}
+,{"stream_name":"stderr","time":139.060228792,"data":"I0000 00:00:1791395630.017528      23 gpu_device.cc:2020] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 13756 MB memory:  -\u003e device: 0, name: Tesla T4, pci bus id: 0000:00:04.0, compute capability: 7.5\n"}
+,{"stream_name":"stderr","time":139.060233826,"data":"I0000 00:00:1791395630.021700      23 gpu_device.cc:2020] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 13756 MB memory:  -\u003e device: 1, name: Tesla T4, pci bus id: 0000:00:05.0, compute capability: 7.5\n"}
+,{"stream_name":"stdout","time":141.050866014,"data":"\n"}
+,{"stream_name":"stdout","time":141.050914322,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":141.050925385,"data":"[run] base_va   7,324,295 params   monitor=val_accuracy   (0 min)\n"}
+,{"stream_name":"stdout","time":141.050930414,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":141.189386959,"data":"Epoch 1/50\n"}
+,{"stream_name":"stderr","time":153.012781681,"data":"2026-10-07 17:54:04.178641: E external/local_xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,32,1,1188]{3,2,1,0}, f32[512,32,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":153.215666078,"data":"2026-10-07 17:54:04.178641: E external/local_xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,32,1,1188]{3,2,1,0}, f32[512,32,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":153.215706807,"data":"\n"}
+,{"stream_name":"stderr","time":153.21572336,"data":"2026-10-07 17:54:04.178641: E external/local_xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,32,1,1188]{3,2,1,0}, f32[512,32,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":153.704650678,"data":"2026-10-07 17:54:04.871431: E external/local_xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.693007752s\n"}
+,{"stream_name":"stderr","time":153.704687568,"data":"Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,32,1,1188]{3,2,1,0}, f32[512,32,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":153.90746671,"data":"2026-10-07 17:54:04.871431: E external/local_xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.693007752s\n"}
+,{"stream_name":"stderr","time":153.907511768,"data":"Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,32,1,1188]{3,2,1,0}, f32[512,32,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":153.90751778999999,"data":"\n"}
+,{"stream_name":"stderr","time":153.907520652,"data":"2026-10-07 17:54:04.871431: E external/local_xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.693007752s\n"}
+,{"stream_name":"stderr","time":153.90753835,"data":"Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,32,1,1188]{3,2,1,0}, f32[512,32,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":161.010692528,"data":"I0000 00:00:1791395652.177506      79 device_compiler.h:196] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.\n"}
+,{"stream_name":"stderr","time":161.213031449,"data":"I0000 00:00:1791395652.177506      79 device_compiler.h:196] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.\n"}
+,{"stream_name":"stderr","time":161.213111252,"data":"\n"}
+,{"stream_name":"stderr","time":161.213116841,"data":"I0000 00:00:1791395652.177506      79 device_compiler.h:196] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.\n"}
+,{"stream_name":"stderr","time":215.09227752,"data":"2026-10-07 17:55:06.259209: E external/local_xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,20,1,1188]{3,2,1,0}, f32[512,20,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":215.103471463,"data":"2026-10-07 17:55:06.270334: E external/local_xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.011221593s\n"}
+,{"stream_name":"stderr","time":215.103521843,"data":"Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,20,1,1188]{3,2,1,0}, f32[512,20,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":215.298212844,"data":"2026-10-07 17:55:06.259209: E external/local_xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,20,1,1188]{3,2,1,0}, f32[512,20,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":215.298256222,"data":"2026-10-07 17:55:06.270334: E external/local_xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.011221593s\n"}
+,{"stream_name":"stderr","time":215.298263376,"data":"Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,20,1,1188]{3,2,1,0}, f32[512,20,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":215.298282985,"data":"\n"}
+,{"stream_name":"stderr","time":215.298287333,"data":"2026-10-07 17:55:06.259209: E external/local_xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,20,1,1188]{3,2,1,0}, f32[512,20,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":215.298294694,"data":"2026-10-07 17:55:06.270334: E external/local_xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.011221593s\n"}
+,{"stream_name":"stderr","time":215.298299728,"data":"Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,20,1,1188]{3,2,1,0}, f32[512,20,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stdout","time":228.470495035,"data":"366/366 - 87s - 238ms/step - accuracy: 0.4207 - loss: 1.6752 - val_accuracy: 0.1552 - val_loss: 2.9281 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":228.472127059,"data":"Epoch 2/50\n"}
+,{"stream_name":"stdout","time":281.30919582,"data":"366/366 - 53s - 144ms/step - accuracy: 0.5309 - loss: 1.2740 - val_accuracy: 0.5324 - val_loss: 1.2755 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":281.310199947,"data":"Epoch 3/50\n"}
+,{"stream_name":"stdout","time":333.361456382,"data":"366/366 - 52s - 142ms/step - accuracy: 0.5939 - loss: 1.0916 - val_accuracy: 0.5807 - val_loss: 1.1404 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":333.362472299,"data":"Epoch 4/50\n"}
+,{"stream_name":"stdout","time":386.233740816,"data":"366/366 - 53s - 144ms/step - accuracy: 0.6486 - loss: 0.9209 - val_accuracy: 0.5735 - val_loss: 1.1498 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":386.234711014,"data":"Epoch 5/50\n"}
+,{"stream_name":"stdout","time":438.690322272,"data":"366/366 - 52s - 143ms/step - accuracy: 0.6968 - loss: 0.8055 - val_accuracy: 0.5817 - val_loss: 1.1606 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":438.691287322,"data":"Epoch 6/50\n"}
+,{"stream_name":"stdout","time":491.375164813,"data":"366/366 - 53s - 144ms/step - accuracy: 0.7417 - loss: 0.6971 - val_accuracy: 0.5560 - val_loss: 1.3261 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":491.376188883,"data":"Epoch 7/50\n"}
+,{"stream_name":"stdout","time":543.884633236,"data":"366/366 - 53s - 143ms/step - accuracy: 0.8003 - loss: 0.5433 - val_accuracy: 0.5766 - val_loss: 1.3319 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":543.886007804,"data":"Epoch 8/50\n"}
+,{"stream_name":"stdout","time":596.450855158,"data":"366/366 - 53s - 144ms/step - accuracy: 0.8917 - loss: 0.3213 - val_accuracy: 0.5951 - val_loss: 1.2353 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":596.451927656,"data":"Epoch 9/50\n"}
+,{"stream_name":"stdout","time":649.259642221,"data":"366/366 - 53s - 144ms/step - accuracy: 0.9405 - loss: 0.1979 - val_accuracy: 0.6002 - val_loss: 1.2997 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":649.260730831,"data":"Epoch 10/50\n"}
+,{"stream_name":"stdout","time":701.948781632,"data":"366/366 - 53s - 144ms/step - accuracy: 0.9526 - loss: 0.1595 - val_accuracy: 0.5971 - val_loss: 1.3717 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":701.949714512,"data":"Epoch 11/50\n"}
+,{"stream_name":"stdout","time":754.563220036,"data":"366/366 - 53s - 144ms/step - accuracy: 0.9674 - loss: 0.1130 - val_accuracy: 0.5982 - val_loss: 1.4801 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":754.564182148,"data":"Epoch 12/50\n"}
+,{"stream_name":"stdout","time":807.156338613,"data":"366/366 - 53s - 144ms/step - accuracy: 0.9803 - loss: 0.0762 - val_accuracy: 0.6012 - val_loss: 1.4082 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":807.157544185,"data":"Epoch 13/50\n"}
+,{"stream_name":"stdout","time":859.444173058,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9882 - loss: 0.0510 - val_accuracy: 0.6053 - val_loss: 1.4608 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":859.445157262,"data":"Epoch 14/50\n"}
+,{"stream_name":"stdout","time":911.84553272,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9891 - loss: 0.0475 - val_accuracy: 0.6136 - val_loss: 1.4518 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":911.846420346,"data":"Epoch 15/50\n"}
+,{"stream_name":"stdout","time":964.407412219,"data":"366/366 - 53s - 144ms/step - accuracy: 0.9938 - loss: 0.0345 - val_accuracy: 0.6166 - val_loss: 1.5013 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":964.408376516,"data":"Epoch 16/50\n"}
+,{"stream_name":"stdout","time":1017.030604118,"data":"366/366 - 53s - 144ms/step - accuracy: 0.9947 - loss: 0.0277 - val_accuracy: 0.6280 - val_loss: 1.4648 - learning_rate: 1.2500e-04\n"}
+,{"stream_name":"stdout","time":1017.03146348,"data":"Epoch 17/50\n"}
+,{"stream_name":"stdout","time":1069.485669933,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9969 - loss: 0.0215 - val_accuracy: 0.6321 - val_loss: 1.4899 - learning_rate: 1.2500e-04\n"}
+,{"stream_name":"stdout","time":1069.486457168,"data":"Epoch 18/50\n"}
+,{"stream_name":"stdout","time":1121.966891974,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9974 - loss: 0.0188 - val_accuracy: 0.6269 - val_loss: 1.5391 - learning_rate: 1.2500e-04\n"}
+,{"stream_name":"stdout","time":1121.967867693,"data":"Epoch 19/50\n"}
+,{"stream_name":"stdout","time":1174.34453769,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9973 - loss: 0.0179 - val_accuracy: 0.6208 - val_loss: 1.5406 - learning_rate: 1.2500e-04\n"}
+,{"stream_name":"stdout","time":1174.345430226,"data":"Epoch 20/50\n"}
+,{"stream_name":"stdout","time":1226.737790556,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9978 - loss: 0.0141 - val_accuracy: 0.6280 - val_loss: 1.5277 - learning_rate: 6.2500e-05\n"}
+,{"stream_name":"stdout","time":1226.738776727,"data":"Epoch 21/50\n"}
+,{"stream_name":"stdout","time":1279.063284324,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9983 - loss: 0.0128 - val_accuracy: 0.6341 - val_loss: 1.5331 - learning_rate: 6.2500e-05\n"}
+,{"stream_name":"stdout","time":1279.064251586,"data":"Epoch 22/50\n"}
+,{"stream_name":"stdout","time":1331.321763826,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9987 - loss: 0.0111 - val_accuracy: 0.6280 - val_loss: 1.5452 - learning_rate: 6.2500e-05\n"}
+,{"stream_name":"stdout","time":1331.322723708,"data":"Epoch 23/50\n"}
+,{"stream_name":"stdout","time":1383.638552186,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9983 - loss: 0.0122 - val_accuracy: 0.6300 - val_loss: 1.5655 - learning_rate: 6.2500e-05\n"}
+,{"stream_name":"stdout","time":1383.639640268,"data":"Epoch 24/50\n"}
+,{"stream_name":"stdout","time":1436.004029707,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9991 - loss: 0.0098 - val_accuracy: 0.6310 - val_loss: 1.5534 - learning_rate: 3.1250e-05\n"}
+,{"stream_name":"stdout","time":1436.005174441,"data":"Epoch 25/50\n"}
+,{"stream_name":"stdout","time":1488.279419132,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9991 - loss: 0.0089 - val_accuracy: 0.6341 - val_loss: 1.5692 - learning_rate: 3.1250e-05\n"}
+,{"stream_name":"stdout","time":1488.280477055,"data":"Epoch 26/50\n"}
+,{"stream_name":"stdout","time":1540.596622503,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9990 - loss: 0.0092 - val_accuracy: 0.6249 - val_loss: 1.5853 - learning_rate: 3.1250e-05\n"}
+,{"stream_name":"stdout","time":1540.597670477,"data":"Epoch 27/50\n"}
+,{"stream_name":"stdout","time":1592.852044457,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9992 - loss: 0.0082 - val_accuracy: 0.6290 - val_loss: 1.5864 - learning_rate: 3.1250e-05\n"}
+,{"stream_name":"stdout","time":1592.852990674,"data":"Epoch 28/50\n"}
+,{"stream_name":"stdout","time":1645.187743949,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9992 - loss: 0.0077 - val_accuracy: 0.6259 - val_loss: 1.5868 - learning_rate: 1.5625e-05\n"}
+,{"stream_name":"stdout","time":1645.188687994,"data":"Epoch 29/50\n"}
+,{"stream_name":"stdout","time":1697.489937007,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9993 - loss: 0.0079 - val_accuracy: 0.6249 - val_loss: 1.5891 - learning_rate: 1.5625e-05\n"}
+,{"stream_name":"stdout","time":1697.490880954,"data":"Epoch 30/50\n"}
+,{"stream_name":"stdout","time":1749.836331406,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9992 - loss: 0.0075 - val_accuracy: 0.6321 - val_loss: 1.5953 - learning_rate: 1.5625e-05\n"}
+,{"stream_name":"stdout","time":1749.837314736,"data":"Epoch 31/50\n"}
+,{"stream_name":"stdout","time":1802.167893119,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9991 - loss: 0.0076 - val_accuracy: 0.6372 - val_loss: 1.5964 - learning_rate: 1.5625e-05\n"}
+,{"stream_name":"stdout","time":1802.1682213,"data":"Epoch 32/50\n"}
+,{"stream_name":"stdout","time":1854.432284424,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9992 - loss: 0.0072 - val_accuracy: 0.6341 - val_loss: 1.6029 - learning_rate: 7.8125e-06\n"}
+,{"stream_name":"stdout","time":1854.433403676,"data":"Epoch 33/50\n"}
+,{"stream_name":"stdout","time":1906.661381185,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9991 - loss: 0.0071 - val_accuracy: 0.6362 - val_loss: 1.6015 - learning_rate: 7.8125e-06\n"}
+,{"stream_name":"stdout","time":1906.662432947,"data":"Epoch 34/50\n"}
+,{"stream_name":"stdout","time":1958.900219712,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9993 - loss: 0.0072 - val_accuracy: 0.6321 - val_loss: 1.6084 - learning_rate: 7.8125e-06\n"}
+,{"stream_name":"stdout","time":1958.901106958,"data":"Epoch 35/50\n"}
+,{"stream_name":"stdout","time":2011.278526276,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9993 - loss: 0.0072 - val_accuracy: 0.6269 - val_loss: 1.6083 - learning_rate: 7.8125e-06\n"}
+,{"stream_name":"stdout","time":2011.279903036,"data":"Epoch 36/50\n"}
+,{"stream_name":"stdout","time":2063.600412143,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9995 - loss: 0.0061 - val_accuracy: 0.6310 - val_loss: 1.6102 - learning_rate: 3.9063e-06\n"}
+,{"stream_name":"stdout","time":2063.601494631,"data":"Epoch 37/50\n"}
+,{"stream_name":"stdout","time":2116.003403931,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9996 - loss: 0.0062 - val_accuracy: 0.6321 - val_loss: 1.6068 - learning_rate: 3.9063e-06\n"}
+,{"stream_name":"stdout","time":2116.004432248,"data":"Epoch 38/50\n"}
+,{"stream_name":"stdout","time":2168.494840908,"data":"366/366 - 52s - 143ms/step - accuracy: 0.9995 - loss: 0.0062 - val_accuracy: 0.6280 - val_loss: 1.6067 - learning_rate: 3.9063e-06\n"}
+,{"stream_name":"stdout","time":2168.495722651,"data":"Epoch 39/50\n"}
+,{"stream_name":"stdout","time":2221.13625426,"data":"366/366 - 53s - 144ms/step - accuracy: 0.9996 - loss: 0.0063 - val_accuracy: 0.6300 - val_loss: 1.6093 - learning_rate: 3.9063e-06\n"}
+,{"stream_name":"stdout","time":2221.137434574,"data":"Epoch 40/50\n"}
+,{"stream_name":"stdout","time":2273.722951358,"data":"366/366 - 53s - 144ms/step - accuracy: 0.9995 - loss: 0.0065 - val_accuracy: 0.6300 - val_loss: 1.6104 - learning_rate: 1.9531e-06\n"}
+,{"stream_name":"stdout","time":2273.724104089,"data":"Epoch 41/50\n"}
+,{"stream_name":"stdout","time":2326.361604306,"data":"366/366 - 53s - 144ms/step - accuracy: 0.9995 - loss: 0.0066 - val_accuracy: 0.6310 - val_loss: 1.6112 - learning_rate: 1.9531e-06\n"}
+,{"stream_name":"stdout","time":2326.362634646,"data":"Epoch 42/50\n"}
+,{"stream_name":"stdout","time":2379.071431606,"data":"366/366 - 53s - 144ms/step - accuracy: 0.9993 - loss: 0.0062 - val_accuracy: 0.6300 - val_loss: 1.6130 - learning_rate: 1.9531e-06\n"}
+,{"stream_name":"stdout","time":2379.072407281,"data":"Epoch 43/50\n"}
+,{"stream_name":"stdout","time":2431.636668769,"data":"366/366 - 53s - 144ms/step - accuracy: 0.9993 - loss: 0.0065 - val_accuracy: 0.6300 - val_loss: 1.6121 - learning_rate: 1.9531e-06\n"}
+,{"stream_name":"stdout","time":2431.63766986,"data":"Epoch 43: early stopping\n"}
+,{"stream_name":"stdout","time":2431.638443538,"data":"Restoring model weights from the end of the best epoch: 31.\n"}
+,{"stream_name":"stdout","time":2432.346194817,"data":"\n"}
+,{"stream_name":"stdout","time":2432.346231947,"data":"  -\u003e val_acc 63.72%   best epoch 31   ran 43\n"}
+,{"stream_name":"stdout","time":2432.823494049,"data":"\n"}
+,{"stream_name":"stdout","time":2432.823544531,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":2432.823553564,"data":"[run] gap_reg_aug3_va   2,540,167 params   monitor=val_accuracy   (38 min)\n"}
+,{"stream_name":"stdout","time":2432.823561583,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":2433.057087829,"data":"Epoch 1/50\n"}
+,{"stream_name":"stderr","time":2567.271917197,"data":"2026-10-07 18:34:18.438664: E external/local_xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,28,1,1188]{3,2,1,0}, f32[512,28,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":2567.482930542,"data":"2026-10-07 18:34:18.438664: E external/local_xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,28,1,1188]{3,2,1,0}, f32[512,28,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":2567.482962599,"data":"\n"}
+,{"stream_name":"stderr","time":2567.482966615,"data":"2026-10-07 18:34:18.438664: E external/local_xla/xla/service/slow_operation_alarm.cc:73] Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,28,1,1188]{3,2,1,0}, f32[512,28,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":2567.766033218,"data":"2026-10-07 18:34:18.932838: E external/local_xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.494287853s\n"}
+,{"stream_name":"stderr","time":2567.76607466,"data":"Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,28,1,1188]{3,2,1,0}, f32[512,28,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":2567.96881098,"data":"2026-10-07 18:34:18.932838: E external/local_xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.494287853s\n"}
+,{"stream_name":"stderr","time":2567.968849459,"data":"Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,28,1,1188]{3,2,1,0}, f32[512,28,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stderr","time":2567.96885756,"data":"\n"}
+,{"stream_name":"stderr","time":2567.968860129,"data":"2026-10-07 18:34:18.932838: E external/local_xla/xla/service/slow_operation_alarm.cc:140] The operation took 1.494287853s\n"}
+,{"stream_name":"stderr","time":2567.968862821,"data":"Trying algorithm eng0{} for conv (f32[512,512,1,5]{3,2,1,0}, u8[0]{0}) custom-call(f32[512,28,1,1188]{3,2,1,0}, f32[512,28,1,1188]{3,2,1,0}), window={size=1x1188 pad=0_0x2_2}, dim_labels=bf01_oi01-\u003ebf01, custom_call_target=\"__cudnn$convForward\", backend_config={\"operation_queue_id\":\"0\",\"wait_on_operation_queues\":[],\"cudnn_conv_backend_config\":{\"activation_mode\":\"kNone\",\"conv_result_scale\":1,\"side_input_scale\":0,\"leakyrelu_alpha\":0},\"force_earliest_schedule\":false,\"reification_cost\":[]} is taking a while...\n"}
+,{"stream_name":"stdout","time":2579.037050931,"data":"821/821 - 146s - 178ms/step - accuracy: 0.3730 - loss: 1.9903 - val_accuracy: 0.4460 - val_loss: 1.8212 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2579.039308439,"data":"Epoch 2/50\n"}
+,{"stream_name":"stdout","time":2694.099097901,"data":"821/821 - 115s - 140ms/step - accuracy: 0.5198 - loss: 1.4550 - val_accuracy: 0.5550 - val_loss: 1.3088 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2694.099902043,"data":"Epoch 3/50\n"}
+,{"stream_name":"stdout","time":2808.496318881,"data":"821/821 - 114s - 139ms/step - accuracy: 0.5689 - loss: 1.3227 - val_accuracy: 0.5879 - val_loss: 1.3227 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2808.49737598,"data":"Epoch 4/50\n"}
+,{"stream_name":"stdout","time":2922.513170928,"data":"821/821 - 114s - 139ms/step - accuracy: 0.6002 - loss: 1.2747 - val_accuracy: 0.5714 - val_loss: 1.3805 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":2922.514403234,"data":"Epoch 5/50\n"}
+,{"stream_name":"stdout","time":3036.48162444,"data":"821/821 - 114s - 139ms/step - accuracy: 0.6273 - loss: 1.2636 - val_accuracy: 0.5540 - val_loss: 1.5498 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":3036.482596632,"data":"Epoch 6/50\n"}
+,{"stream_name":"stdout","time":3150.18778961,"data":"821/821 - 114s - 138ms/step - accuracy: 0.6550 - loss: 1.2585 - val_accuracy: 0.5797 - val_loss: 1.5550 - learning_rate: 0.0010\n"}
+,{"stream_name":"stdout","time":3150.188735308,"data":"Epoch 7/50\n"}
+,{"stream_name":"stdout","time":3263.799951066,"data":"821/821 - 114s - 138ms/step - accuracy: 0.7170 - loss: 1.1100 - val_accuracy: 0.5899 - val_loss: 1.6156 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":3263.800793298,"data":"Epoch 8/50\n"}
+,{"stream_name":"stdout","time":3377.428437678,"data":"821/821 - 114s - 138ms/step - accuracy: 0.7498 - loss: 1.0299 - val_accuracy: 0.6290 - val_loss: 1.5610 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":3377.429467049,"data":"Epoch 9/50\n"}
+,{"stream_name":"stdout","time":3491.070604915,"data":"821/821 - 114s - 138ms/step - accuracy: 0.7738 - loss: 0.9795 - val_accuracy: 0.6125 - val_loss: 1.8096 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":3491.072092526,"data":"Epoch 10/50\n"}
+,{"stream_name":"stdout","time":3604.737608612,"data":"821/821 - 114s - 138ms/step - accuracy: 0.7943 - loss: 0.9368 - val_accuracy: 0.6023 - val_loss: 1.8357 - learning_rate: 5.0000e-04\n"}
+,{"stream_name":"stdout","time":3604.738730387,"data":"Epoch 11/50\n"}
+,{"stream_name":"stdout","time":3718.265301828,"data":"821/821 - 114s - 138ms/step - accuracy: 0.8389 - loss: 0.8181 - val_accuracy: 0.6269 - val_loss: 1.8186 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":3718.26625862,"data":"Epoch 12/50\n"}
+,{"stream_name":"stdout","time":3831.862335663,"data":"821/821 - 114s - 138ms/step - accuracy: 0.8606 - loss: 0.7537 - val_accuracy: 0.6372 - val_loss: 1.7540 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":3831.863264984,"data":"Epoch 13/50\n"}
+,{"stream_name":"stdout","time":3945.425389514,"data":"821/821 - 114s - 138ms/step - accuracy: 0.8743 - loss: 0.7135 - val_accuracy: 0.6280 - val_loss: 1.7891 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":3945.426488474,"data":"Epoch 14/50\n"}
+,{"stream_name":"stdout","time":4059.089906635,"data":"821/821 - 114s - 138ms/step - accuracy: 0.8848 - loss: 0.6847 - val_accuracy: 0.6444 - val_loss: 1.9258 - learning_rate: 2.5000e-04\n"}
+,{"stream_name":"stdout","time":4059.090696696,"data":"Epoch 15/50\n"}
+,{"stream_name":"stdout","time":4172.62723538,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9069 - loss: 0.6118 - val_accuracy: 0.6547 - val_loss: 1.8703 - learning_rate: 1.2500e-04\n"}
+,{"stream_name":"stdout","time":4172.628164897,"data":"Epoch 16/50\n"}
+,{"stream_name":"stdout","time":4286.157492761,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9173 - loss: 0.5827 - val_accuracy: 0.6454 - val_loss: 1.9029 - learning_rate: 1.2500e-04\n"}
+,{"stream_name":"stdout","time":4286.158508318,"data":"Epoch 17/50\n"}
+,{"stream_name":"stdout","time":4399.80038375,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9224 - loss: 0.5641 - val_accuracy: 0.6465 - val_loss: 1.9826 - learning_rate: 1.2500e-04\n"}
+,{"stream_name":"stdout","time":4399.801309734,"data":"Epoch 18/50\n"}
+,{"stream_name":"stdout","time":4513.479499773,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9291 - loss: 0.5430 - val_accuracy: 0.6465 - val_loss: 2.0025 - learning_rate: 1.2500e-04\n"}
+,{"stream_name":"stdout","time":4513.480498477,"data":"Epoch 19/50\n"}
+,{"stream_name":"stdout","time":4626.891342811,"data":"821/821 - 113s - 138ms/step - accuracy: 0.9388 - loss: 0.5108 - val_accuracy: 0.6516 - val_loss: 2.0012 - learning_rate: 6.2500e-05\n"}
+,{"stream_name":"stdout","time":4626.892224427,"data":"Epoch 20/50\n"}
+,{"stream_name":"stdout","time":4740.529042025,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9446 - loss: 0.4929 - val_accuracy: 0.6516 - val_loss: 2.0587 - learning_rate: 6.2500e-05\n"}
+,{"stream_name":"stdout","time":4740.530474591,"data":"Epoch 21/50\n"}
+,{"stream_name":"stdout","time":4854.18077131,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9455 - loss: 0.4838 - val_accuracy: 0.6578 - val_loss: 2.1031 - learning_rate: 6.2500e-05\n"}
+,{"stream_name":"stdout","time":4854.181697276,"data":"Epoch 22/50\n"}
+,{"stream_name":"stdout","time":4967.872164851,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9485 - loss: 0.4728 - val_accuracy: 0.6639 - val_loss: 2.1711 - learning_rate: 6.2500e-05\n"}
+,{"stream_name":"stdout","time":4967.873124487,"data":"Epoch 23/50\n"}
+,{"stream_name":"stdout","time":5081.512861956,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9530 - loss: 0.4604 - val_accuracy: 0.6619 - val_loss: 2.0705 - learning_rate: 3.1250e-05\n"}
+,{"stream_name":"stdout","time":5081.514218298,"data":"Epoch 24/50\n"}
+,{"stream_name":"stdout","time":5195.099968626,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9542 - loss: 0.4569 - val_accuracy: 0.6608 - val_loss: 2.1180 - learning_rate: 3.1250e-05\n"}
+,{"stream_name":"stdout","time":5195.100871935,"data":"Epoch 25/50\n"}
+,{"stream_name":"stdout","time":5308.583072578,"data":"821/821 - 113s - 138ms/step - accuracy: 0.9562 - loss: 0.4482 - val_accuracy: 0.6670 - val_loss: 2.1388 - learning_rate: 3.1250e-05\n"}
+,{"stream_name":"stdout","time":5308.583944749,"data":"Epoch 26/50\n"}
+,{"stream_name":"stdout","time":5422.134745453,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9573 - loss: 0.4427 - val_accuracy: 0.6588 - val_loss: 2.1672 - learning_rate: 3.1250e-05\n"}
+,{"stream_name":"stdout","time":5422.135734451,"data":"Epoch 27/50\n"}
+,{"stream_name":"stdout","time":5535.555024224,"data":"821/821 - 113s - 138ms/step - accuracy: 0.9608 - loss: 0.4372 - val_accuracy: 0.6629 - val_loss: 2.1607 - learning_rate: 1.5625e-05\n"}
+,{"stream_name":"stdout","time":5535.555925467,"data":"Epoch 28/50\n"}
+,{"stream_name":"stdout","time":5649.078094463,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9598 - loss: 0.4347 - val_accuracy: 0.6536 - val_loss: 2.1886 - learning_rate: 1.5625e-05\n"}
+,{"stream_name":"stdout","time":5649.079937387,"data":"Epoch 29/50\n"}
+,{"stream_name":"stdout","time":5762.426453984,"data":"821/821 - 113s - 138ms/step - accuracy: 0.9616 - loss: 0.4309 - val_accuracy: 0.6578 - val_loss: 2.1402 - learning_rate: 1.5625e-05\n"}
+,{"stream_name":"stdout","time":5762.427505827,"data":"Epoch 30/50\n"}
+,{"stream_name":"stdout","time":5876.009714316,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9620 - loss: 0.4270 - val_accuracy: 0.6578 - val_loss: 2.1578 - learning_rate: 1.5625e-05\n"}
+,{"stream_name":"stdout","time":5876.010986693,"data":"Epoch 31/50\n"}
+,{"stream_name":"stdout","time":5989.505371298,"data":"821/821 - 113s - 138ms/step - accuracy: 0.9627 - loss: 0.4246 - val_accuracy: 0.6526 - val_loss: 2.1682 - learning_rate: 7.8125e-06\n"}
+,{"stream_name":"stdout","time":5989.506205099,"data":"Epoch 32/50\n"}
+,{"stream_name":"stdout","time":6103.062069591,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9635 - loss: 0.4238 - val_accuracy: 0.6598 - val_loss: 2.1661 - learning_rate: 7.8125e-06\n"}
+,{"stream_name":"stdout","time":6103.063282535,"data":"Epoch 33/50\n"}
+,{"stream_name":"stdout","time":6216.536954767,"data":"821/821 - 113s - 138ms/step - accuracy: 0.9633 - loss: 0.4218 - val_accuracy: 0.6547 - val_loss: 2.1791 - learning_rate: 7.8125e-06\n"}
+,{"stream_name":"stdout","time":6216.538272589,"data":"Epoch 34/50\n"}
+,{"stream_name":"stdout","time":6330.086018801,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9647 - loss: 0.4204 - val_accuracy: 0.6598 - val_loss: 2.1931 - learning_rate: 7.8125e-06\n"}
+,{"stream_name":"stdout","time":6330.087395401,"data":"Epoch 35/50\n"}
+,{"stream_name":"stdout","time":6443.472334739,"data":"821/821 - 113s - 138ms/step - accuracy: 0.9642 - loss: 0.4195 - val_accuracy: 0.6598 - val_loss: 2.1993 - learning_rate: 3.9063e-06\n"}
+,{"stream_name":"stdout","time":6443.473474295,"data":"Epoch 36/50\n"}
+,{"stream_name":"stdout","time":6556.964776673,"data":"821/821 - 113s - 138ms/step - accuracy: 0.9647 - loss: 0.4168 - val_accuracy: 0.6557 - val_loss: 2.2018 - learning_rate: 3.9063e-06\n"}
+,{"stream_name":"stdout","time":6556.965676124,"data":"Epoch 37/50\n"}
+,{"stream_name":"stdout","time":6670.672645201,"data":"821/821 - 114s - 138ms/step - accuracy: 0.9642 - loss: 0.4164 - val_accuracy: 0.6567 - val_loss: 2.1866 - learning_rate: 3.9063e-06\n"}
+,{"stream_name":"stdout","time":6670.673761815,"data":"Epoch 37: early stopping\n"}
+,{"stream_name":"stdout","time":6670.674576942,"data":"Restoring model weights from the end of the best epoch: 25.\n"}
+,{"stream_name":"stdout","time":6670.906856815,"data":"\n"}
+,{"stream_name":"stdout","time":6670.906891175,"data":"  -\u003e val_acc 66.70%   best epoch 25   ran 37\n"}
+,{"stream_name":"stdout","time":6670.931511577,"data":"======================================================================================\n"}
+,{"stream_name":"stdout","time":6670.931538668,"data":"  ALL CANDIDATES - VALIDATION ONLY (test set untouched)\n"}
+,{"stream_name":"stdout","time":6670.931548335,"data":"======================================================================================\n"}
+,{"stream_name":"stdout","time":6670.931551477,"data":"  candidate                monitor        val acc    gap      params  epoch\n"}
+,{"stream_name":"stdout","time":6670.931554459,"data":"  ----------------------------------------------------------------------------------\n"}
+,{"stream_name":"stdout","time":6670.931557476,"data":"  gap_reg_aug3_va          val_accuracy    66.70%  28.9   2,540,167     25\n"}
+,{"stream_name":"stdout","time":6670.931560289,"data":"  base_va                  val_accuracy    63.72%  36.2   7,324,295     31\n"}
+,{"stream_name":"stdout","time":6670.931563109,"data":"  gap_reg_aug3             val_loss        60.84%   1.7   2,540,167      5\n"}
+,{"stream_name":"stdout","time":6670.931565832,"data":"  gap_reg                  val_loss        60.33%   4.2   2,540,167      9\n"}
+,{"stream_name":"stdout","time":6670.931568637,"data":"  reg                      val_loss        59.40%   0.7   7,324,295      6\n"}
+,{"stream_name":"stdout","time":6670.931571371,"data":"  gap                      val_loss        58.79%  -0.3   2,540,167      4\n"}
+,{"stream_name":"stdout","time":6670.931574172,"data":"  base                     val_loss        58.58%   4.7   7,324,295      4\n"}
+,{"stream_name":"stdout","time":6670.931576923,"data":"  gap_reg_aug3_lr          val_loss        58.58%   4.8   2,540,167      5\n"}
+,{"stream_name":"stdout","time":6670.931579735,"data":"======================================================================================\n"}
+,{"stream_name":"stdout","time":6670.931582513,"data":"\n"}
+,{"stream_name":"stdout","time":6670.931585117,"data":"  criterion effect on base: +5.14 points (val_loss 58.58% -\u003e val_accuracy 63.72%)\n"}
+,{"stream_name":"stdout","time":6670.931588274,"data":"\n"}
+,{"stream_name":"stdout","time":6670.931590982,"data":"  overall winner: gap_reg_aug3_va at 66.70% validation\n"}
+,{"stream_name":"stdout","time":6670.931593692,"data":"  Run notebook 07 next; it reads this merged sweep_results.json.\n"}
+,{"stream_name":"stdout","time":6670.931605521,"data":"\n"}
+,{"stream_name":"stdout","time":6670.931607882,"data":"output: ['__notebook__.ipynb', 'features_cache', 'runs', 'ser', 'sweep_results.json']\n"}
+,{"stream_name":"stderr","time":6676.338830399,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":6676.338861514,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":6676.518575191,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":6676.518600455,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":6677.312573628,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":6677.411759108,"data":"[NbConvertApp] Writing 39262 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":6679.979223033,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":6680.539895517,"data":"[NbConvertApp] Writing 343358 bytes to __results__.html\n"}
+]

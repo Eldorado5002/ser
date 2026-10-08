@@ -20,10 +20,11 @@ import config  # noqa: E402
 MODELS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
 
 SPECS = {
-    # The report's headline configuration (Section 9): GlobalAveragePooling
-    # head + dropout 0.35/0.55 + L2 1e-4, trained with 3x augmentation.
-    # 60.79% test accuracy with 2,540,167 parameters. Novelties are off, so
-    # it has no AFW gate and cannot show stream weights.
+    # The report's headline configuration (Section 9.5): GlobalAveragePooling
+    # head + dropout 0.35/0.55 + L2 1e-4, trained with 3x augmentation and
+    # early stopping on validation accuracy. 66.58% test accuracy with
+    # 2,540,167 parameters. Novelties are off, so it has no AFW gate and
+    # cannot show stream weights.
     "best": dict(use_afw=False, use_mstc=False, head="gap",
                  dropout_conv=0.35, dropout_dense=0.55, l2=1e-4),
     # All four novelties (55.82%). The only model with an AFW gate, so the
@@ -35,13 +36,13 @@ SPECS = {
 
 #: Human-readable labels shown by the demo scripts.
 MODEL_INFO = {
-    "best": "report headline - 60.79% test, 2.54 M params",
+    "best": "report headline - 66.58% test, 2.54 M params",
     "full": "all four novelties - 55.82% test, shows AFW weights",
     "mstc": "multi-scale only - 59.27% test",
 }
 
 #: Measured test-set accuracy (n=2,433) of each model, from the report.
-TEST_ACCURACY = {"best": 60.79, "full": 55.82, "mstc": 59.27}
+TEST_ACCURACY = {"best": 66.58, "full": 55.82, "mstc": 59.27}
 
 # ANSI colours, one per emotion, in config.EMOTIONS order.
 COLOUR = {

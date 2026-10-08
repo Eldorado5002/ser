@@ -5,7 +5,7 @@
     python demo/predict.py demo/clips --model mstc
 
 Prints the full probability distribution rather than a single label: even
-the best model is ~61% accurate on this corpus, so the distribution is the
+the best model is ~67% accurate on this corpus, so the distribution is the
 honest output and the runner-up is often informative.
 """
 from __future__ import annotations

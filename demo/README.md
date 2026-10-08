@@ -45,8 +45,8 @@ Correct clips and confidence range, per model:
 
 | Folder | Corpus | `best` (default) | `full` | `mstc` |
 |---|---|---|---|---|
-| `clips/` | TESS | 7/7 · 87–100% | 7/7 · 53–98% | 7/7 · 97–100% |
-| `clips_hard/` | CREMA-D | 3/8 · 32–81% | 5/8 · 25–69% | 4/8 · 28–67% |
+| `clips/` | TESS | 7/7 · 99.6–100% | 7/7 · 53–98% | 7/7 · 97–100% |
+| `clips_hard/` | CREMA-D | 6/8 · 42–100% | 5/8 · 25–69% | 4/8 · 28–67% |
 
 This contrast is the point, and it is worth demonstrating deliberately.
 
@@ -56,16 +56,19 @@ stereotyped delivery, and because the split is speaker-dependent (report
 
 **CREMA-D** is 91 crowd-sourced actors with natural delivery, and it is 61% of
 the fused dataset, so the combined test accuracy is essentially a CREMA-D
-figure: `best` scores 98.55% on TESS but 49.90% on CREMA-D (report §9.4).
+figure: `best` scores 99.46% on TESS but 53.67% on CREMA-D (report §9.5).
 
 Eight clips are far too few to rank the models — one clip moves the score by
-12.5 points. On the full test set `best` is the most accurate of the three
-(60.79%) even though it gets fewer of these eight right.
+12.5 points. The full test set is the real comparison: `best` 66.58%, `mstc`
+59.27%, `full` 55.82%.
 
-Note that confidence tracks difficulty: `best` is right on every TESS clip at
-87%+, while on CREMA-D its confidence drops to 32–81% and three of its five
-mistakes beat the runner-up by under 8 points. The distribution is
-informative, not just the argmax.
+Read `best`'s confidence with care. It was selected at the epoch with the
+highest validation *accuracy*, where it is markedly over-confident (report
+§9.5): it scores almost every clip at 99–100%, and it gets the disgust clip
+wrong at 85%. Every demo clip also had a 72% chance of landing in the
+training split, which the model fits at 96% accuracy. The `full` and `mstc`
+models, stopped earlier, give more graded distributions — on CREMA-D their
+confidence falls to 25–69%.
 
 Recording your own voice is the strictest test of the three — an entirely
 unseen speaker, unseen recording conditions. Expect lower confidence.
@@ -74,7 +77,7 @@ unseen speaker, unseen recording conditions. Expect lower confidence.
 
 | File | Configuration | Test accuracy |
 |---|---|---|
-| `best.weights.npz` | GlobalAveragePooling head + dropout 0.35/0.55 + L2 1e-4 + 3× augmentation — the report's headline (§9), 2.54 M params | **60.79%** |
+| `best.weights.npz` | GlobalAveragePooling head + dropout 0.35/0.55 + L2 1e-4 + 3× augmentation, early stopping on validation accuracy — the report's headline (§9.5), 2.54 M params | **66.58%** |
 | `full.weights.npz` | all four novelties (the only one that shows AFW weights) | 55.82% |
 | `mstc.weights.npz` | multi-scale convolution only, best of the six ablation runs | 59.27% |
 
@@ -89,7 +92,8 @@ loaded into the architecture that `model.py` rebuilds. This was verified to
 reproduce the original predictions to within `3e-07`, and has the useful side
 effect of being 27 MB instead of 88 MB.
 
-`best` was exported the same way by `notebooks/09_export_winner.ipynb`, which
-also refits its scalers from the cached 3× training features. Loaded locally
-it reproduces Kaggle's predictions to within `2e-07` and its reported test
-accuracy exactly (1,479 / 2,433 = 60.79%).
+`best` was exported the same way by `notebooks/09_export_winner.ipynb`
+(with `TAG = "gap_reg_aug3_va"`), which also refits its scalers from the
+cached 3× training features. Loaded locally it reproduces Kaggle's
+predictions to within `2e-08` and its reported test accuracy exactly
+(1,620 / 2,433 = 66.58%).

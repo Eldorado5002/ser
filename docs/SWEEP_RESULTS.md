@@ -70,3 +70,11 @@ Caveat: `val_loss` is the more conservative criterion, and selecting on accuracy
 ## Next step
 
 Run **`notebooks/07_final_evaluation.ipynb`** on Kaggle. It selects the winner by validation accuracy, evaluates it and the `base` control on the test set exactly once, and produces the per-corpus breakdown. Roughly 5 minutes; inference only.
+
+---
+
+## Follow-up (2026-10-08)
+
+- Notebook 07 tested `gap_reg_aug3` once: **60.79%** (report §9.3).
+- The early-stopping hypothesis above was tested in notebook 08. Monitoring `val_accuracy` gave **+5.14** (base) and **+5.86** (`gap_reg_aug3`) on validation — larger than the ~3 points estimated here, because the runs kept improving well past epoch 13.
+- The new winner, `gap_reg_aug3_va`, scored **66.58%** on test, above the 63–65% guessed here, with a 95% interval that does not overlap `gap_reg_aug3`'s (report §9.5; `results/early_stop/`, `results/final_va/`).

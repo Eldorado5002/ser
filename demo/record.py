@@ -10,7 +10,7 @@ speak from the moment recording starts and keep going for the whole take.
 This is the honest test. The trained model never heard your voice, whereas the
 TESS demo clips come from a speaker that appears in the training split - so
 expect noticeably lower confidence here. Measured test accuracy on the full
-corpus is 60.79% for the default model.
+corpus is 66.58% for the default model.
 """
 from __future__ import annotations
 

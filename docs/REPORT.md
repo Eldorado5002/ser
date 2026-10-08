@@ -12,12 +12,15 @@ We implement a lightweight Conv1D speech-emotion-recognition framework extending
 
 On a correctly constructed evaluation protocol the base configuration reaches **57.95%** test accuracy, against the **94.91%** reported by the base paper. Investigating that gap became the project's principal finding. We identify and quantify two data-leakage mechanisms that inflate accuracy on this corpus: duplicated dataset mirrors (**+14.71** points) and augmenting before splitting (**+24.27** points). Each was predicted in advance and confirmed by direct measurement of the contamination rate. Our honest figure exceeds the closest comparable published multi-corpus result (50.6%, Dasude et al., 2024) by 7.4 points.
 
+Two follow-up studies, each selecting on validation and testing once, push the same lightweight architecture further. Replacing the flatten head with global average pooling and adding regularisation cuts the parameter count by 65%; selecting the training epoch by validation *accuracy* instead of validation loss then raises test accuracy to **66.58%** (95% CI [64.71, 68.46]) with **2.54 M** parameters — +8.63 points over the base reproduction at about a third of its size (Section 9). The same model scores 99.46% on TESS but 53.67% on CREMA-D, so the combined figure is above all a CREMA-D figure.
+
 ## 1. Contributions
 
 1. **A complete, tested implementation** of the base architecture plus four novelties, with a 117-test suite verifying every claim the report makes (Section 4).
 2. **The component-wise ablation** the base paper identified as missing future work (Section 6).
 3. **A reproducibility investigation** that quantifies two leakage mechanisms responsible for inflated multi-corpus SER accuracies (Section 7) — the principal finding.
 4. **An honest multi-corpus baseline** that exceeds the closest comparable published result on the same four corpora.
+5. **A lightweight final model** — 66.58% test accuracy with 2.54 M parameters, 65% fewer than the base architecture (Section 9).
 
 ## 2. Method
 
@@ -202,28 +205,30 @@ Both contamination rates were predicted from first principles before measurement
 |---|---|---|
 | Dasude et al. (2024) | TESS+RAVDESS+SAVEE+CREMA-D | 50.6% |
 | **This work (base, verified protocol)** | same four | **57.95%** |
-| **This work (MSTC, best)** | same four | **59.27%** |
+| This work (MSTC, best single novelty) | same four | 59.27% |
+| **This work (final model, Section 9.5)** | same four | **66.58%** |
 | Chourasia et al. (2026), base paper | same four | 94.91% |
 
-Against the closest comparable study — the same four corpora, also reporting a combined-corpus figure — our verified result is 7.4 points higher. CREMA-D constitutes 61% of the fused dataset and is the hardest of the four; published audio-only results on it typically fall in the 60-75% band, which is difficult to reconcile with a 94.91% average across the combination.
+Against the closest comparable study — the same four corpora, also reporting a combined-corpus figure — our verified base result is 7.4 points higher, and the final model 16.0 points higher. CREMA-D constitutes 61% of the fused dataset and is the hardest of the four; published audio-only results on it typically fall in the 60-75% band, which is difficult to reconcile with a 94.91% average across the combination.
 
 ### 8.2 Limitations
 
-1. **Statistical power.** Single-seed runs; no novelty gain is significant at n = 2,433. Repeated runs across seeds are required.
+1. **Statistical power.** Single-seed runs. No novelty gain is significant at n = 2,433; the Section 9.5 gain is, but it too rests on one seed. Repeated runs across seeds are required.
 2. **Speaker-dependent splitting.** The 72:8:20 split is over utterances, not speakers, so the same speaker appears in train and test. This *inflates* all reported figures. It is retained deliberately for comparability with the base paper; a speaker-independent protocol would be stricter and would lower every number here.
-3. **Overfitting is unaddressed.** The 37-point train/validation gap indicates substantial headroom from regularisation alone, which this study did not pursue.
+3. **Calibration.** The final model is taken at the epoch of highest validation accuracy, where validation loss is 2.14 against 1.36 for the loss-selected model: it ranks emotions better but its probabilities are over-confident (Section 9.5).
 4. **The combined-leakage experiment was not completed**, so the compounded estimate (~88%) remains an extrapolation.
 
 ### 8.3 Future work
 
 - Repeated-seed runs with significance testing.
-- Regularisation study: the Dense head holds 66% of all parameters.
+- A temporal input layout. The flattened MFCC vector makes the first convolutions slide across the 20 coefficients of a frame rather than across time; reshaping the input to 108 frames × 22 channels is the most promising lightweight change, since Section 9 shows validation accuracy plateauing across capacity and regularisation settings.
+- Probability calibration (e.g. temperature scaling) for the final model.
 - Speaker-independent evaluation as a stricter secondary protocol.
 - Investigating why AFW reduces confusion-pair errors more than CADL.
 
 ## 9. Efficiency study
 
-Section 6.4 identified a 37-point train/validation gap. A follow-up study investigated whether regularisation could close it.
+Section 6.4 identified a 37-point train/validation gap. A follow-up study investigated whether regularisation could close it (Sections 9.1-9.4); a second revisited the early-stopping criterion itself (Section 9.5).
 
 ### 9.1 A correction to the overfitting diagnosis
 
@@ -273,13 +278,50 @@ Two consequences follow. First, the combined figure is essentially a CREMA-D fig
 
 SAVEE is the weakest at 32.69%, but with only 104 test samples that estimate is noisy, and it is the one corpus where the improved model does not beat base.
 
+### 9.5 Early-stopping criterion
+
+Every run so far stops training on validation *loss*. The base run's history shows why that may be the wrong criterion for a classifier: validation loss is lowest at epoch 4 (58.58% validation accuracy), but validation accuracy keeps rising until epoch 13 (**61.87%**). Cross-entropy penalises growing over-confidence even while the arg-max keeps improving. A further run (notebook 08) repeated `base` and `gap_reg_aug3` with one change — early stopping and epoch selection on validation accuracy (patience 12) — still scored on validation only.
+
+| Configuration | Stops on | Val accuracy | Best epoch | Val loss | Train–val gap |
+|---|---|---|---|---|---|
+| `base` | val_loss | 58.58% | 4 of 14 | 1.114 | 4.7 pts |
+| `base_va` | val_accuracy | 63.72% | 31 of 43 | 1.596 | 36.2 pts |
+| `gap_reg_aug3` | val_loss | 60.84% | 5 of 17 | 1.364 | 1.7 pts |
+| **`gap_reg_aug3_va`** | val_accuracy | **66.70%** | 25 of 37 | 2.139 | 28.9 pts |
+
+The criterion alone is worth **+5.14 points** for `base` and **+5.86** for `gap_reg_aug3` on validation — more than the entire regularisation sweep delivered.
+
+The new winner, `gap_reg_aug3_va`, was then evaluated on the test set **once**.
+
+| Model | Accuracy | 95% CI | Macro F1 | MCC | Kappa | AUC | Params |
+|---|---|---|---|---|---|---|---|
+| Base | 57.95% | [55.99, 59.91] | 0.5995 | 0.5059 | 0.5040 | 0.8932 | 7,324,295 |
+| `gap_reg_aug3` | 60.79% | [58.85, 62.73] | 0.6271 | 0.5381 | 0.5372 | 0.9063 | 2,540,167 |
+| **`gap_reg_aug3_va`** | 66.58% | [64.71, 68.46] | 0.6847 | 0.6118 | 0.6057 | 0.9263 | 2,540,167 |
+
+**+5.80 points over `gap_reg_aug3` and +8.63 over base, at 2.54 M parameters.** The 95% intervals of `gap_reg_aug3_va` [64.71, 68.46] and `gap_reg_aug3` [58.85, 62.73] do not overlap — the first statistically clear improvement in this study. The validation estimate held up: 66.70% on validation, 66.58% on test, so selecting on validation accuracy introduced no measurable optimism here.
+
+| Corpus | n | Base | gap_reg_aug3 | gap_reg_aug3_va |
+|---|---|---|---|---|
+| TESS | 553 | 96.75% | 98.55% | **99.46%** |
+| RAVDESS | 263 | 47.53% | 55.13% | **76.43%** |
+| CREMA-D | 1,513 | 47.12% | 49.90% | **53.67%** |
+| SAVEE | 104 | 35.58% | 32.69% | **54.81%** |
+| **Combined** | 2,433 | 57.95% | 60.79% | **66.58%** |
+
+The longer training mostly helps the corpora the early-stopped model had not yet learned: RAVDESS +21.3 and SAVEE +22.1 points (the latter on only 104 clips), against +3.8 on CREMA-D, which at 53.67% remains the bottleneck.
+
+The gain has two costs. First, the model over-predicts `neutral`: its recall rises from 0.596 to 0.894 while its precision falls from 0.640 to 0.518, and sad↔neutral confusions rise from 86 to 112 (angry↔fear fall from 51 to 34). Second, calibration: at the selected epoch validation loss is 2.139 against 1.364 for `gap_reg_aug3`, and the train–validation gap is 28.9 points. The model ranks emotions better, but its softmax outputs are over-confident and should not be read as calibrated probabilities.
+
+> **Interpretation.** Section 9.1 showed that early stopping, not the architecture, was doing the regularising. This experiment shows it was doing too much: stopping at the validation-loss minimum discarded a model 5.8 points more accurate. Stopping on loss is a sound default when calibrated probabilities matter; for a classifier judged on accuracy, the stopping criterion should match the metric.
+
 ## 10. Conclusion
 
 We implemented and ablated four lightweight novelties on a fused four-corpus SER dataset, delivering the component-wise analysis the base paper listed as future work. Three of four novelties improve on the baseline directionally, though none significantly at this sample size; CADL reduces its targeted confusion pairs by 8.5% as designed.
 
 The project's principal contribution is methodological. The base paper's 94.91% could not be reproduced under a verified protocol, and we identify two concrete, independently measured leakage mechanisms — duplicated corpus mirrors and augment-before-split ordering — that inflate accuracy on this data by 14.7 and 24.3 points respectively. Both contamination rates were predicted before measurement and confirmed to within 0.2 points. We therefore report 57.95% as an honest baseline for this corpus combination, exceeding the closest comparable published result by 7.4 points.
 
-The efficiency study adds a third result: 60.79% at 65% of the parameter count, which serves the lightweight-deployment goal better than the accuracy gain alone. The per-corpus breakdown supplies the sharpest single observation in this work — one model, 98.6% on TESS and 49.9% on CREMA-D — and makes clear that any SER accuracy quoted without its corpus composition is close to uninterpretable.
+The efficiency study adds a third result. Global average pooling and regularisation cut the parameter count by 65%, and selecting the epoch by validation accuracy rather than loss then lifts test accuracy to **66.58%** — +8.63 points over the base reproduction with 35% of its parameters, and a statistically clear improvement on the sweep winner. The per-corpus breakdown supplies the sharpest single observation in this work — one model, 99.5% on TESS and 53.7% on CREMA-D — and makes clear that any SER accuracy quoted without its corpus composition is close to uninterpretable.
 
 ## Appendix A — Artefacts
 
@@ -293,6 +335,11 @@ results/ablation/runs/{base,afw,eaaa,mstc,cadl,full}/
     afw_weights_per_emotion.csv       AFW runs only
 results/leak_dup/    duplicate-mirror experiment
 results/leak_aug/    augment-before-split experiment
+results/sweep/       regularisation sweep (validation only)
+results/final/       sweep winner, tested once, with per-corpus breakdown
+results/early_stop/  early-stopping criterion (validation only)
+results/final_va/    final model, tested once, with per-corpus breakdown
+results/figures/     report figures
 ```
 
 Code, tests and notebooks: <https://github.com/Eldorado5002/ser>
@@ -305,5 +352,5 @@ py -3.10 -m venv .venv
 .venv/Scripts/python.exe -m pytest tests/ -v      # 117 tests, ~70 s
 ```
 
-Kaggle notebooks, in order: `01_features.ipynb` (CPU, feature extraction), `02_train.ipynb` (GPU, six configurations), `03_leakage_test.ipynb`, `04_augment_before_split.ipynb`.
+Kaggle notebooks, in order: `01_features.ipynb` (CPU, feature extraction), `02_train.ipynb` (GPU, six configurations), `03_leakage_test.ipynb`, `04_augment_before_split.ipynb`, `05_both_leaks.ipynb` (written, not yet run), `06_regularisation_sweep.ipynb`, `07_final_evaluation.ipynb` (one test evaluation of the validation winner), `08_early_stopping_criterion.ipynb`, and `09_export_winner.ipynb` (exports the final model for `demo/`).
 

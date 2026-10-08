@@ -64,6 +64,25 @@ pc = FIN["per_corpus"]
 by_tag = {r["tag"]: r for r in SW}
 base_val = by_tag["base"]["val_accuracy"]
 
+# Early-stopping criterion (Section 9.5): the final model.
+FVA = json.load(open(os.path.join(RES, "final_va", "final_results.json")))
+ES = json.load(open(os.path.join(RES, "early_stop", "sweep_results.json")))
+FINAL = FVA["winner"]
+LOSS_TWIN = FINAL.removesuffix("_va")   # same config, stopped on val loss
+ff, pf = FVA["test"][FINAL], FVA["params"][FINAL]
+pcf = FVA["per_corpus"]
+es_tag = {r["tag"]: r for r in ES}
+with open(os.path.join(RES, "ablation", "runs", "base", "training_log.csv"),
+          newline="") as f:
+    BASE_HIST = list(csv.DictReader(f))
+
+
+def final_report(tag, sub):
+    path = os.path.join(RES, sub, "final", tag,
+                        "test_classification_report.csv")
+    with open(path, newline="") as f:
+        return {row[""] or "": row for row in csv.DictReader(f)}
+
 # ----------------------------------------------------------------- styles
 ss = getSampleStyleSheet()
 S = {
@@ -151,7 +170,10 @@ A(Spacer(1, 0.9 * cm))
 A(tbl([["Base paper", "Chourasia, Lamba & Gupta (2026), Scientific Reports"],
        ["Corpora", "RAVDESS + TESS + SAVEE + CREMA-D (12,162 utterances)"],
        ["Classes", "7 (angry, disgust, fear, happy, neutral, sad, surprise)"],
-       ["Verified result", "57.95% test accuracy (base configuration)"],
+       ["Verified result", f"{base_acc*100:.2f}% test accuracy (base "
+                           f"configuration)"],
+       ["Final model", f"{ff['accuracy']*100:.2f}% test accuracy, "
+                       f"{pf/1e6:.2f} M parameters (Section 9.5)"],
        ["Principal finding", "Two quantified data-leakage mechanisms"]],
       [3.6 * cm, 11.4 * cm], head=False, size=9))
 A(Spacer(1, 1.4 * cm))
@@ -184,14 +206,19 @@ A(P(
     f"({DASUDE*100:.1f}%, Dasude et al., 2024) by "
     f"{(base_acc-DASUDE)*100:.1f} points."))
 A(P(
-    "A follow-up efficiency study (Section 10) reaches <b>60.79%</b> using "
-    "<b>65% fewer parameters</b> than the base architecture, by replacing "
-    "the flatten head &mdash; which holds 4.85 M of 7.32 M parameters and "
-    "contributes nothing measurable &mdash; with global average pooling. A "
-    "per-corpus breakdown shows the same model scoring <b>98.55% on TESS</b> "
-    "and <b>49.90% on CREMA-D</b>, indicating that published mid-90s "
-    "accuracies are explicable by corpus composition as well as by "
-    "leakage."))
+    f"A follow-up efficiency study (Section 9), selecting on validation and "
+    f"testing once, replaces the flatten head &mdash; which holds 4.85 M of "
+    f"7.32 M parameters and contributes nothing measurable &mdash; with "
+    f"global average pooling, then selects the training epoch by validation "
+    f"<i>accuracy</i> instead of validation loss. The final model reaches "
+    f"<b>{ff['accuracy']*100:.2f}%</b> (95% CI "
+    f"{ff['accuracy_95ci'][0]*100:.2f}&ndash;"
+    f"{ff['accuracy_95ci'][1]*100:.2f}) with <b>{pf/1e6:.2f} M</b> "
+    f"parameters, {100*(1-pf/pb):.0f}% fewer than base. A per-corpus "
+    f"breakdown shows it scoring <b>{pcf['TESS'][FINAL]*100:.2f}% on "
+    f"TESS</b> and <b>{pcf['CREMA-D'][FINAL]*100:.2f}% on CREMA-D</b>, "
+    f"indicating that published mid-90s accuracies are explicable by corpus "
+    f"composition as well as by leakage."))
 
 # ----------------------------------------------------------- contributions
 A(P("1.  Contributions", "h1"))
@@ -205,7 +232,10 @@ for i, t in enumerate([
     "responsible for inflated multi-corpus SER accuracies (Section 7) "
     "&mdash; the principal contribution.",
     "An honest multi-corpus baseline exceeding the closest comparable "
-    "published result on the same four corpora."], 1):
+    "published result on the same four corpora.",
+    f"A lightweight final model: {ff['accuracy']*100:.2f}% test accuracy "
+    f"with {pf/1e6:.2f} M parameters, {100*(1-pf/pb):.0f}% fewer than the "
+    f"base architecture (Section 9)."], 1):
     A(P(f"<b>{i}.</b>&nbsp;&nbsp;{t}"))
 
 # ------------------------------------------------------------------ method
@@ -519,39 +549,53 @@ A(tbl([["Study", "Corpora", "Accuracy"],
         f"{DASUDE*100:.1f}%"],
        ["This work (base, verified)", "same four",
         f"{base_acc*100:.2f}%"],
-       ["This work (MSTC, best)", "same four",
+       ["This work (MSTC, best single novelty)", "same four",
         f"{M['mstc']['accuracy']*100:.2f}%"],
+       ["This work (final model, Sec. 9.5)", "same four",
+        f"{ff['accuracy']*100:.2f}%"],
        ["Chourasia et al. (2026)", "same four", f"{PAPER*100:.2f}%"]],
-      [5.6 * cm, 6.6 * cm, 2.8 * cm], align={2: "RIGHT"}))
+      [6.4 * cm, 6.0 * cm, 2.6 * cm], align={2: "RIGHT"}))
 A(Spacer(1, 0.35 * cm))
 A(P(
     f"Against the closest comparable study &mdash; the same four corpora, "
-    f"also reporting a combined-corpus figure &mdash; our verified result is "
-    f"{(base_acc-DASUDE)*100:.1f} points higher. CREMA-D constitutes 61% of "
+    f"also reporting a combined-corpus figure &mdash; our verified base "
+    f"result is {(base_acc-DASUDE)*100:.1f} points higher, and the final "
+    f"model {(ff['accuracy']-DASUDE)*100:.1f} points higher. CREMA-D constitutes 61% of "
     f"the fused dataset and is the hardest of the four; published audio-only "
     f"results on it typically fall in the 60&ndash;75% band, which is "
     f"difficult to reconcile with a 94.91% average across the combination."))
 
 A(P("8.2  Limitations", "h2"))
 for t in [
-    "<b>Statistical power.</b> Single-seed runs; no novelty gain is "
-    f"significant at n = {n_test:,}. Repeated runs across seeds are required.",
+    "<b>Statistical power.</b> Single-seed runs. No novelty gain is "
+    f"significant at n = {n_test:,}; the Section 9.5 gain is, but it too "
+    "rests on one seed. Repeated runs across seeds are required.",
     "<b>Speaker-dependent splitting.</b> The split is over utterances, not "
     "speakers, so the same speaker appears in train and test. This "
     "<i>inflates</i> all reported figures, ours included. It is retained "
     "deliberately for comparability with the base paper; a "
     "speaker-independent protocol would be stricter and would lower every "
     "number here.",
-    "<b>Overfitting is unaddressed.</b> The 37-point train/validation gap "
-    "indicates substantial headroom from regularisation alone.",
+    f"<b>Calibration.</b> The final model is taken at the epoch of highest "
+    f"validation accuracy, where validation loss is "
+    f"{es_tag[FINAL]['val_loss']:.2f} against "
+    f"{es_tag[LOSS_TWIN]['val_loss']:.2f} for the loss-selected model: it "
+    f"ranks emotions better but its probabilities are over-confident "
+    f"(Section 9.5).",
     "<b>The combined-leakage experiment was not completed</b>, so the "
     "compounded estimate (~88%) remains an extrapolation."]:
     A(P("&bull;&nbsp;&nbsp;" + t))
 
 A(P("8.3  Future work", "h2"))
 A(P("&bull;&nbsp;&nbsp;Repeated-seed runs with significance testing."))
-A(P("&bull;&nbsp;&nbsp;Regularisation study: the Dense head holds 66% of all "
-    "parameters."))
+A(P("&bull;&nbsp;&nbsp;A temporal input layout. The flattened MFCC vector "
+    "makes the first convolutions slide across the 20 coefficients of a "
+    "frame rather than across time; reshaping the input to 108 frames x 22 "
+    "channels is the most promising lightweight change, since Section 9 "
+    "shows validation accuracy plateauing across capacity and "
+    "regularisation settings."))
+A(P("&bull;&nbsp;&nbsp;Probability calibration (e.g. temperature scaling) for "
+    "the final model."))
 A(P("&bull;&nbsp;&nbsp;Speaker-independent evaluation as a stricter secondary "
     "protocol."))
 A(P("&bull;&nbsp;&nbsp;Investigating why AFW reduces confusion-pair errors "
@@ -561,7 +605,9 @@ A(P("&bull;&nbsp;&nbsp;Investigating why AFW reduces confusion-pair errors "
 A(PageBreak())
 A(P("9.  Efficiency study", "h1"))
 A(P("Section 6.4 identified a 37-point train/validation gap. A follow-up "
-    "study investigated whether regularisation could close it."))
+    "study investigated whether regularisation could close it (Sections "
+    "9.1&ndash;9.4); a second revisited the early-stopping criterion itself "
+    "(Section 9.5)."))
 
 A(P("9.1  A correction to the overfitting diagnosis", "h2"))
 A(Paragraph(
@@ -618,8 +664,10 @@ A(P(
     f"confusion-pair errors targeted by CADL fall from {bp} to {wp} "
     f"({100*(bp-wp)/bp:.1f}% fewer) without CADL being enabled."))
 A(figure(os.path.join(FIG, "accuracy_vs_size.png"), CONTENT_W * 0.66,
-         "Figure 6 &mdash; The improved configuration is both smaller and "
-         "more accurate."))
+         f"Figure 6 &mdash; Accuracy against model size. {WIN} is both "
+         f"smaller and more accurate than base; the final model of Section "
+         f"9.5 adds {(ff['accuracy']-fw['accuracy'])*100:.1f} points at the "
+         f"same size."))
 A(P("For a project whose stated goal is a lightweight, edge-deployable "
     "model, a smaller <i>and</i> more accurate configuration is the more "
     "valuable of the two outcomes."))
@@ -636,8 +684,9 @@ A(tbl(rows, [4.0 * cm, 2.6 * cm, 3.6 * cm, 4.3 * cm],
       align={1: "RIGHT", 2: "RIGHT", 3: "RIGHT"}))
 A(Spacer(1, 0.4 * cm))
 A(figure(os.path.join(FIG, "per_corpus.png"), CONTENT_W,
-         "Figure 7 &mdash; Per-corpus test accuracy. The combined figure is "
-         "dominated by CREMA-D, which is 62% of the test set."))
+         "Figure 7 &mdash; Per-corpus test accuracy, including the final "
+         "model of Section 9.5. The combined figure is dominated by CREMA-D, "
+         "which is 62% of the test set."))
 A(P(
     f"This is the most informative table in the report. The same model "
     f"scores <b>{pc['TESS'][WIN]*100:.2f}% on TESS</b> and "
@@ -660,6 +709,117 @@ A(P(
     f"SAVEE is the weakest at {pc['SAVEE'][WIN]*100:.2f}%, but with only "
     f"{pc['SAVEE']['n']} test samples that estimate is noisy, and it is the "
     f"one corpus where the improved model does not beat base."))
+
+# ------------------------------------------------ early-stopping criterion
+bh_va = [float(r["val_accuracy"]) for r in BASE_HIST]
+bh_vl = [float(r["val_loss"]) for r in BASE_HIST]
+e_loss = bh_vl.index(min(bh_vl)) + 1
+e_acc = bh_va.index(max(bh_va)) + 1
+twin, fin = es_tag[LOSS_TWIN], es_tag[FINAL]
+b_twin, b_va = es_tag["base"], es_tag["base_va"]
+lo_f, hi_f = ff["accuracy_95ci"]
+lo_w, hi_w = fw["accuracy_95ci"]
+R_FIN, R_WIN = final_report(FINAL, "final_va"), final_report(WIN, "final")
+
+A(P("9.5  Early-stopping criterion", "h2"))
+A(P(
+    f"Every run so far stops training on validation <i>loss</i>. The base "
+    f"run's history shows why that may be the wrong criterion for a "
+    f"classifier: validation loss is lowest at epoch {e_loss} "
+    f"({bh_va[e_loss-1]*100:.2f}% validation accuracy), but validation "
+    f"accuracy keeps rising until epoch {e_acc} "
+    f"(<b>{bh_va[e_acc-1]*100:.2f}%</b>). Cross-entropy penalises growing "
+    f"over-confidence even while the arg-max keeps improving. A further run "
+    f"(notebook 08) repeated base and {LOSS_TWIN} with one change &mdash; "
+    f"early stopping and epoch selection on validation accuracy (patience "
+    f"12) &mdash; still scored on validation only."))
+rows = [["Configuration", "Stops on", "Val acc", "Best epoch", "Val loss",
+         "Train-val gap"]]
+for r in (b_twin, b_va, twin, fin):
+    rows.append([r["tag"], r.get("monitor", "val_loss"),
+                 f"{r['val_accuracy']*100:.2f}%",
+                 f"{r['best_epoch']} of {r['epochs_run']}",
+                 f"{r['val_loss']:.3f}", f"{r['gap']*100:.1f} pts"])
+A(tbl(rows, [3.9 * cm, 2.6 * cm, 2.1 * cm, 2.3 * cm, 2.0 * cm, 2.6 * cm],
+      align={2: "RIGHT", 3: "CENTER", 4: "RIGHT", 5: "RIGHT"}, size=8.3))
+A(Spacer(1, 0.35 * cm))
+A(P(
+    f"The criterion alone is worth "
+    f"<b>{(b_va['val_accuracy']-b_twin['val_accuracy'])*100:+.2f} points</b> "
+    f"for base and "
+    f"<b>{(fin['val_accuracy']-twin['val_accuracy'])*100:+.2f}</b> for "
+    f"{LOSS_TWIN} on validation &mdash; more than the entire regularisation "
+    f"sweep delivered."))
+A(figure(os.path.join(FIG, "early_stopping.png"), CONTENT_W * 0.8,
+         f"Figure 8 &mdash; Per-epoch history of {FINAL}. Validation loss "
+         f"bottoms out within the first few epochs while validation accuracy "
+         f"keeps rising; the two criteria select very different models."))
+A(P(f"The new winner, {FINAL}, was then evaluated on the test set "
+    f"<b>once</b>."))
+rows = [["Model", "Accuracy", "95% CI", "Macro F1", "MCC", "AUC", "Params"]]
+for tag, m, p in (("Base", fb, pb), (WIN, fw, pw), (FINAL, ff, pf)):
+    lo, hi = m["accuracy_95ci"]
+    rows.append([tag, f"{m['accuracy']*100:.2f}%",
+                 f"[{lo*100:.2f}, {hi*100:.2f}]", f"{m['macro_f1']:.4f}",
+                 f"{m['mcc']:.4f}", f"{m['auc_ovr_macro']:.4f}", f"{p:,}"])
+A(tbl(rows, [3.5 * cm, 2.0 * cm, 2.7 * cm, 1.9 * cm, 1.7 * cm, 1.7 * cm,
+             2.2 * cm],
+      align={1: "RIGHT", 2: "CENTER", 3: "RIGHT", 4: "RIGHT", 5: "RIGHT",
+             6: "RIGHT"}, size=8.3))
+A(Spacer(1, 0.35 * cm))
+sig = ("do not overlap &mdash; the first statistically clear improvement in "
+       "this study" if lo_f > hi_w else
+       "overlap, so the gain is not significant")
+A(P(
+    f"<b>{(ff['accuracy']-fw['accuracy'])*100:+.2f} points over {WIN} and "
+    f"{(ff['accuracy']-fb['accuracy'])*100:+.2f} over base, at "
+    f"{pf/1e6:.2f} M parameters.</b> The 95% intervals of {FINAL} "
+    f"[{lo_f*100:.2f}, {hi_f*100:.2f}] and {WIN} [{lo_w*100:.2f}, "
+    f"{hi_w*100:.2f}] {sig}. The validation estimate held up: "
+    f"{fin['val_accuracy']*100:.2f}% on validation, "
+    f"{ff['accuracy']*100:.2f}% on test, so selecting on validation accuracy "
+    f"introduced no measurable optimism here."))
+rows = [["Corpus", "n", "Base", WIN, FINAL]]
+for c in ["TESS", "RAVDESS", "CREMA-D", "SAVEE"]:
+    if c in pcf:
+        rows.append([c, f"{pcf[c]['n']:,}", f"{pc[c]['base']*100:.2f}%",
+                     f"{pc[c][WIN]*100:.2f}%", f"{pcf[c][FINAL]*100:.2f}%"])
+rows.append(["Combined", f"{ff['n_test']:,}", f"{fb['accuracy']*100:.2f}%",
+             f"{fw['accuracy']*100:.2f}%", f"{ff['accuracy']*100:.2f}%"])
+A(tbl(rows, [3.4 * cm, 2.2 * cm, 3.0 * cm, 3.4 * cm, 3.8 * cm],
+      align={1: "RIGHT", 2: "RIGHT", 3: "RIGHT", 4: "RIGHT"}))
+A(Spacer(1, 0.35 * cm))
+A(P(
+    f"The longer training mostly helps the corpora the early-stopped model "
+    f"had not yet learned: RAVDESS "
+    f"{(pcf['RAVDESS'][FINAL]-pc['RAVDESS'][WIN])*100:+.1f} and SAVEE "
+    f"{(pcf['SAVEE'][FINAL]-pc['SAVEE'][WIN])*100:+.1f} points (the latter "
+    f"on only {pcf['SAVEE']['n']} clips), against "
+    f"{(pcf['CREMA-D'][FINAL]-pc['CREMA-D'][WIN])*100:+.1f} on CREMA-D, "
+    f"which at {pcf['CREMA-D'][FINAL]*100:.2f}% remains the bottleneck."))
+pf_pairs, pw_pairs = ff["confusion_pair_errors"], fw["confusion_pair_errors"]
+A(P(
+    f"The gain has two costs. First, the model over-predicts neutral: its "
+    f"recall rises from {float(R_WIN['neutral']['recall']):.3f} to "
+    f"{float(R_FIN['neutral']['recall']):.3f} while its precision falls "
+    f"from {float(R_WIN['neutral']['precision']):.3f} to "
+    f"{float(R_FIN['neutral']['precision']):.3f}, and sad-neutral "
+    f"confusions rise from {pw_pairs['sad<->neutral']} to "
+    f"{pf_pairs['sad<->neutral']} (angry-fear fall from "
+    f"{pw_pairs['angry<->fear']} to {pf_pairs['angry<->fear']}). Second, "
+    f"calibration: at the selected epoch validation loss is "
+    f"{fin['val_loss']:.3f} against {twin['val_loss']:.3f} for "
+    f"{LOSS_TWIN}, and the train-validation gap is {fin['gap']*100:.1f} "
+    f"points. The model ranks emotions better, but its softmax outputs are "
+    f"over-confident and should not be read as calibrated probabilities."))
+A(Paragraph(
+    f"<b>Interpretation.</b> Section 9.1 showed that early stopping, not the "
+    f"architecture, was doing the regularising. This experiment shows it "
+    f"was doing too much: stopping at the validation-loss minimum discarded "
+    f"a model {(ff['accuracy']-fw['accuracy'])*100:.1f} points more "
+    f"accurate. Stopping on loss is a sound default when calibrated "
+    f"probabilities matter; for a classifier judged on accuracy, the "
+    f"stopping criterion should match the metric.", S["note"]))
 
 # -------------------------------------------------------------- conclusion
 A(P("10.  Conclusion", "h1"))
@@ -684,14 +844,18 @@ A(P(
     f"exceeding the closest comparable published result by "
     f"{(base_acc-DASUDE)*100:.1f} points."))
 A(P(
-    f"The efficiency study adds a third result: {fw['accuracy']*100:.2f}% at "
-    f"{100*(1-pw/pb):.0f}% of the parameter count, which serves the "
-    f"lightweight-deployment goal better than the accuracy gain alone. The "
-    f"per-corpus breakdown supplies the sharpest single observation in this "
-    f"work &mdash; one model, {pc['TESS'][WIN]*100:.1f}% on TESS and "
-    f"{pc['CREMA-D'][WIN]*100:.1f}% on CREMA-D &mdash; and makes clear that "
-    f"any SER accuracy quoted without its corpus composition is close to "
-    f"uninterpretable."))
+    f"The efficiency study adds a third result. Global average pooling and "
+    f"regularisation cut the parameter count by {100*(1-pf/pb):.0f}%, and "
+    f"selecting the epoch by validation accuracy rather than loss then lifts "
+    f"test accuracy to <b>{ff['accuracy']*100:.2f}%</b> &mdash; "
+    f"{(ff['accuracy']-fb['accuracy'])*100:+.2f} points over the base "
+    f"reproduction with {100*pf/pb:.0f}% of its parameters, and a "
+    f"statistically clear improvement on the sweep winner. The per-corpus "
+    f"breakdown supplies the sharpest single observation in this work "
+    f"&mdash; one model, {pcf['TESS'][FINAL]*100:.1f}% on TESS and "
+    f"{pcf['CREMA-D'][FINAL]*100:.1f}% on CREMA-D &mdash; and makes clear "
+    f"that any SER accuracy quoted without its corpus composition is close "
+    f"to uninterpretable."))
 
 # ---------------------------------------------------------------- appendix
 A(PageBreak())
@@ -705,7 +869,14 @@ A(Paragraph(
     "&nbsp;&nbsp;&nbsp;&nbsp;training_curves.png, training_log.csv<br/>"
     "&nbsp;&nbsp;&nbsp;&nbsp;afw_weights_per_emotion.csv (AFW runs)<br/>"
     "results/leak_dup/&nbsp;&nbsp;duplicate-mirror experiment<br/>"
-    "results/leak_aug/&nbsp;&nbsp;augment-before-split experiment",
+    "results/leak_aug/&nbsp;&nbsp;augment-before-split experiment<br/>"
+    "results/sweep/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;regularisation sweep "
+    "(validation only)<br/>"
+    "results/final/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sweep winner, tested once<br/>"
+    "results/early_stop/&nbsp;&nbsp;early-stopping criterion (validation "
+    "only)<br/>"
+    "results/final_va/&nbsp;&nbsp;final model, tested once<br/>"
+    "results/figures/&nbsp;&nbsp;&nbsp;report figures",
     S["code"]))
 A(P("Reproduction:"))
 A(Paragraph(
@@ -716,7 +887,10 @@ A(Paragraph(
 A(P(
     "Kaggle notebooks, in order: 01_features (CPU, feature extraction), "
     "02_train (GPU, six configurations), 03_leakage_test, "
-    "04_augment_before_split, 05_both_leaks."))
+    "04_augment_before_split, 05_both_leaks (written, not yet run), "
+    "06_regularisation_sweep, 07_final_evaluation (one test evaluation of "
+    "the validation winner), 08_early_stopping_criterion, and "
+    "09_export_winner (exports the final model for demo/)."))
 A(P("Code, tests, notebooks and all artefacts: "
     "<b>github.com/Eldorado5002/ser</b>"))
 
